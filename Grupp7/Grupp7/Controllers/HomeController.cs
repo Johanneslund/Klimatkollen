@@ -13,7 +13,6 @@ namespace Grupp7.Controllers
         public IActionResult Index()
         {
             return View();
-            //test
         }
 
         public IActionResult About()
