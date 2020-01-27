@@ -1,0 +1,104 @@
+﻿@model Grupp7.Models.ErrorViewModel
+@*Ändra denna till Person Model alternativt skicka in en ViewModel*@
+@{
+    ViewData["Title"] = "RegisterView";
+}
+
+<h2>Registrera nytt konto</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group col-md-6">
+        <div class="row">
+            @*
+        @Html.LabelFor(m => m.FirstName, "Förnamn", new { @class = "col-md-6 control-label" })
+        @Html.LabelFor(m => m.LastName, "Efternamn", new { @class = "col-md-2 control-label" })
+
+                Labels till input för Förnamn och Efternamn.
+            *@
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        <div class="row">
+            @*
+        <div class="col-md-3">
+            @Html.TextBoxFor(m => m.Freelancer.firstname, new { @class = "form-control" })
+        </div>
+        <div class="col-md-3">
+            @Html.TextBoxFor(m => m.Freelancer.lastname, new { @class = "form-control" })
+        </div>
+
+                Input för Förnamn och Efternamn
+            *@
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-3">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+
+            Label och input för Email
+        *@
+    </div>
+    @*
+    <div class="form-group">
+        @Html.LabelFor(m => m.TelephoneNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-3">
+            @Html.TextBoxFor(m => m.TelephoneNumber, new { @class = "form-control" })
+        </div>
+    </div>
+
+        Label och input för email
+        *@
+    <div class="form-group col-md-6">
+        @*
+        <div class="row">
+            @Html.LabelFor(m => m.DateOfBirth, "Date of Birth (YYYY-MM-DD)", new { @class = "col-md-6 control-label" })
+        </div>
+
+            Label för FödelseDatum
+            *@
+    </div>
+    <div class="form-group col-md-12">
+        <div class="row">
+            @*
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control" })
+            </div>
+
+            Input för födelsdatum
+            *@
+        </div>
+    </div>
+    @*
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-3">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-3">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+
+        labels för Password och Confirmpassword samt Inputs.
+        *@
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary mt-5 mr-2" value="Register" />
+        </div>
+    </div>
+}
+
