@@ -90,5 +90,34 @@ namespace Grupp7.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpPost]
+        public IActionResult Validate(/*User userModel*/) // Logga in
+        {
+            //using (FreelanceMeDBEntities db = new FreelanceMeDBEntities())
+            //{
+            //    var userDetails = db.userDetails.Where(x => x.email == userModel.email && x.password == userModel.password).FirstOrDefault();
+            //    if (userDetails == null)
+            //    {
+            //        userModel.UserLoginErrorMessage = "Wrong Username or Password";
+            //        return View("Home", userModel);
+            //    }
+            //    else
+            //    {
+            //        Session["user_id"] = userDetails.user_id;
+            //        // Session["UserName"] = userDetails.UserName; (Keeps track of Username while logged in)
+            //        return RedirectToAction("Home", "Index");
+            //    }
+            //}
+            return null;
+        }
+        public IActionResult LogOut() // Logga ut
+        {
+            // int userId = (int)Session["UserID"]; (Keeps track of the UserID, saves it if needed).
+            //Session.Abandon();
+            // Redirect to Home/Index instead, when that exists. Home page no Login Index page.
+            //return RedirectToAction("Index", "Home");
+            return null;
+        }
     }
 }
