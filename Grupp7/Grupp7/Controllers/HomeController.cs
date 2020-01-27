@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Grupp7.Models;
 
 namespace Grupp7.Controllers
-{
+{ //sabrinas test 
     public class HomeController : Controller
     {
         public IActionResult Index()
