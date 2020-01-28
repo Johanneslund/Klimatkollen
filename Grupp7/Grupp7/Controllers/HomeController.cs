@@ -7,11 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Grupp7.Models;
 
 namespace Grupp7.Controllers
-{
+{ //sabrinas test 
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult Observation()
+        {
+            ViewData["Message"] = "Här visas alla observationer.";
+
             return View();
         }
 

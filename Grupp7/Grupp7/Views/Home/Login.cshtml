@@ -10,7 +10,7 @@
 @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-
+    // Comment
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
@@ -36,4 +36,5 @@
             <input type="submit" class="btn btn-primary mt-5 mr-2" value="Login" />
         </div>
     </div>
+</div>
 }
