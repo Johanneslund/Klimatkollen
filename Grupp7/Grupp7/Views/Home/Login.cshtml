@@ -10,7 +10,7 @@
 @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-
+    // Comment
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
