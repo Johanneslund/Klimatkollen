@@ -12,14 +12,21 @@ namespace Grupp7.Classes
         public int UserId { get; set; }
 
         public string Firstname { get; set; }
+        [Required(ErrorMessage = "Ange förnamn")]
 
         public string Lastname { get; set; }
+        [Required(ErrorMessage = "Ange efternamn")]
+
 
         public string Username { get; set; }
+        [Required(ErrorMessage = "Ange användarnamn")]
 
         public string Email { get; set; }
+        [Required(ErrorMessage = "Ange Email-adress")]
+
 
         public string Password { get; set; }
+        [Required(ErrorMessage = "Ange ett lösenord")]
 
         public string Phone { get; set; }
 

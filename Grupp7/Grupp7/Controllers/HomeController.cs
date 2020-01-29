@@ -5,11 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Grupp7.Models;
+using Grupp7.Classes;
+using Grupp7.Data;
+using Grupp7.ViewModels;
+using Grupp7.Interfaces;
 
 namespace Grupp7.Controllers
 { //sabrinas test 
     public class HomeController : Controller
     {
+        private readonly IRepository dbContext;
+
+        public HomeController(IRepository repository)
+        {
+            dbContext = repository;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -38,54 +49,26 @@ namespace Grupp7.Controllers
 
         public IActionResult Register ()
         {
-            // Skicka en en person modell här, alternativt en vymodel.
+            RegisterUserViewModel model = new RegisterUserViewModel();
 
-            return View();
+            return View(model);
         }
-        /*
-        public async Task<ActionResult> RegisterFreelancer(RegisterViewModel model)
+        
+        public async Task<ActionResult> RegisterUser(RegisterUserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var freelancer = new Freelancer();
-                Person = model.Person;
-                freelancer.aspnetusers_id = user.Id;
-                
-                Ändra kod ovan till att vara en användare, om identity inte används ta bort.
-                
+               
+                var user = new User();
+                user = model.User;
+                dbContext.AddUser(user);
 
-                var dbContext = new dbContext();
+                return RedirectToAction("Index", "Home");
 
-                Db context hamnar här
-
-                var result = await UserManager.CreateAsync(user, model.Password);
-
-                
-                if (result.Succeeded) - om model state är valid
-                {
-                    UserManager.AddToRole(user.Id, "Freelancer");
-                    dbContext.Person.Add(Person);
-                    dbContext.SaveChanges();
-
-                    Lägg till person till databas.
-
-                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, model.Person.Firstname));
-
-                    Cachea användarens namn
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    return RedirectToAction("Index", "Home");
-                    Retunera ny vy.
-                }
-                AddErrors(result);
             }
-            return View(model);
+            return RedirectToAction("Register", "Home");
         }
 
-
-            Mycket möjligt att allt detta ska göras utanför controlern. 
-    */
 
         public IActionResult Privacy()
         {

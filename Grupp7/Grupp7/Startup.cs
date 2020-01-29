@@ -30,9 +30,10 @@ namespace Grupp7
         {
             
             services.AddDbContext<ApplicationDbContext>(options=> options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
             //Här bestäms vilken DB som ska användas
-            services.AddTransient<IRepository, MockRepository>();
+            services.AddTransient<IRepository, Repository>();
+            // services.AddTransient<IRepository, MockRepository>();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
