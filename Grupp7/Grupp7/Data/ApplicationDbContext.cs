@@ -28,6 +28,7 @@ namespace Grupp7.Data
                 Email = "Marreparre@live.se",
                 Password = "lllll",
                 Phone = "07228321"
+                
 
             },
 
@@ -44,8 +45,61 @@ namespace Grupp7.Data
             }
 
             );
+            
+            modelBuilder.Entity<Animal>().HasData(
+
+            new Animal()
+            {
+                AnimalId = 1,
+                Name = "Hare",
+                Datetime = DateTime.Now,
+                Longitude = "63.247951",
+                Latitude = "14.662298",
+                UserId = 1
 
 
+            },
+
+            new Animal()
+            {
+                AnimalId = 2,
+                Name = "Fjällräv",
+                Datetime = DateTime.Now,
+                Longitude = "63.247231",
+                Latitude = "14.662298",
+                UserId = 1
+
+            }
+
+            );
+
+            modelBuilder.Entity<Weather>().HasData(
+
+                new Weather()
+                {
+                    WeatherId = 1,
+                    Type = "Regn",
+                    Datetime = DateTime.Now,
+                    Longitude = "63.247231",
+                    Latitude = "14.662298",
+                    Humidity = "87,2",
+                    UserId = 2
+
+                },
+                new Weather()
+                {
+                    WeatherId = 2,
+                    Type = "Storsjön, badhusparken",
+                    Datetime = DateTime.Now,
+                    Longitude = "63.247231",
+                    Latitude = "14.662298",
+                    Humidity = "87,2",
+                    Temperature = "16",
+                    Carbon = "10 mg",
+                    UserId = 2
+
+                }
+                );
         }
 
     }
