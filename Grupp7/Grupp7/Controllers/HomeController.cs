@@ -5,11 +5,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Grupp7.Models;
+using Grupp7.Interfaces;
+using Grupp7.Classes;
+using Grupp7.Data;
+using System.Web;
+using Amazon.OpsWorks.Model;
+using Microsoft.AspNetCore.Identity;
+using Grupp7.ViewModels;
 
 namespace Grupp7.Controllers
 { //sabrinas test 
     public class HomeController : Controller
     {
+        private readonly IRepository dbContext;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
+
+        public HomeController(IRepository repository)
+        {
+            this.dbContext = repository;
+        }
+        public HomeController(UserManager<IdentityUser> userManager, 
+            SignInManager<IdentityUser> signInManager)
+        {
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+        }
         public IActionResult Index()
         {
             return View();
@@ -36,56 +57,12 @@ namespace Grupp7.Controllers
             return View();
         }
 
-        public IActionResult Register ()
+        public IActionResult Register()
         {
             // Skicka en en person modell här, alternativt en vymodel.
 
             return View();
         }
-        /*
-        public async Task<ActionResult> RegisterFreelancer(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var freelancer = new Freelancer();
-                Person = model.Person;
-                freelancer.aspnetusers_id = user.Id;
-                
-                Ändra kod ovan till att vara en användare, om identity inte används ta bort.
-                
-
-                var dbContext = new dbContext();
-
-                Db context hamnar här
-
-                var result = await UserManager.CreateAsync(user, model.Password);
-
-                
-                if (result.Succeeded) - om model state är valid
-                {
-                    UserManager.AddToRole(user.Id, "Freelancer");
-                    dbContext.Person.Add(Person);
-                    dbContext.SaveChanges();
-
-                    Lägg till person till databas.
-
-                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, model.Person.Firstname));
-
-                    Cachea användarens namn
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    return RedirectToAction("Index", "Home");
-                    Retunera ny vy.
-                }
-                AddErrors(result);
-            }
-            return View(model);
-        }
-
-
-            Mycket möjligt att allt detta ska göras utanför controlern. 
-    */
 
         public IActionResult Privacy()
         {
@@ -99,32 +76,20 @@ namespace Grupp7.Controllers
         }
 
         [HttpPost]
-        public IActionResult Validate(/*User userModel*/) // Logga in
+        public async Task<IActionResult> Login(LoginViewModel loginModel) // Can use User loginModel instead. However I want Bool "RememberMe" to get a Persistent Cookie instead of Session Cookie.
         {
-            //using (FreelanceMeDBEntities db = new FreelanceMeDBEntities())
-            //{
-            //    var userDetails = db.userDetails.Where(x => x.email == userModel.email && x.password == userModel.password).FirstOrDefault();
-            //    if (userDetails == null)
-            //    {
-            //        userModel.UserLoginErrorMessage = "Wrong Username or Password";
-            //        return View("Home", userModel);
-            //    }
-            //    else
-            //    {
-            //        Session["user_id"] = userDetails.user_id;
-            //        // Session["UserName"] = userDetails.UserName; (Keeps track of Username while logged in)
-            //        return RedirectToAction("Home", "Index");
-            //    }
-            //}
-            return null;
-        }
-        public IActionResult LogOut() // Logga ut
-        {
-            // int userId = (int)Session["UserID"]; (Keeps track of the UserID, saves it if needed).
-            //Session.Abandon();
-            // Redirect to Home/Index instead, when that exists. Home page no Login Index page.
-            //return RedirectToAction("Index", "Home");
-            return null;
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(loginModel.Email, loginModel.Password, loginModel.RememberMe, false); 
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError(string.Empty, "Incorrect Email or Password");
+            }
+
+            return View(loginModel);
         }
     }
 }

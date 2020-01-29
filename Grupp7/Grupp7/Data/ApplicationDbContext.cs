@@ -1,4 +1,5 @@
 ﻿using Grupp7.Classes;
+using Grupp7.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

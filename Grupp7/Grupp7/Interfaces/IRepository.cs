@@ -11,6 +11,5 @@ namespace Grupp7.Interfaces
         User GetUser(int id);
         List<User> GetUsers();
 
-
     }
 }
