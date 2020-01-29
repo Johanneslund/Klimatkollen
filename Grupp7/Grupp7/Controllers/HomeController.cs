@@ -75,6 +75,12 @@ namespace Grupp7.Controllers
             return View();
         }
 
+        public IActionResult Map()
+        {
+            Animal animal = new Animal();
+            return View(animal);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
