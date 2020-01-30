@@ -21,7 +21,7 @@ namespace Grupp7.Classes
         {
             return context.Users.Where(x => x.UserId == id).FirstOrDefault();
         }
-        public Animal Animal(int id)
+        public Animal getAnimal(int id)
         {
             return context.Animals.Where(x => x.AnimalId.Equals(id)).FirstOrDefault();
         }

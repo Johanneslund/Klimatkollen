@@ -37,7 +37,7 @@
                 });
             }
                 @foreach (var item in Model.Animals) {
-                <text>addMarker(@item.Longitude, @item.Latitude, '@item.Name', '@item.UserId', map);</text>
+                <text>addMarker(@item.Longitude, @item.Latitude, '@item.Name', '@Html.ActionLink("Läs mer","AnimalObservation","Home", new { id = item.AnimalId })', map);</text>
         }
     }
 

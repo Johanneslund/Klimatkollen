@@ -54,7 +54,9 @@ namespace Grupp7.Controllers
         }
         public IActionResult AnimalObservation(int id)
         {
-            return View(id);
+            List<Animal> animals = dbContext.GetAnimals();
+            
+            return View(animals.Where(a => a.AnimalId.Equals(id)).FirstOrDefault());
         }
 
         public IActionResult Map()
