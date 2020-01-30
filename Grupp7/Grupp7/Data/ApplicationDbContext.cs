@@ -94,6 +94,17 @@ namespace Grupp7.Data
                 Latitude = "14.662298",
                 UserId = 1,
                 SpeciesId = 2
+            },
+
+            new Animal()
+            {
+                AnimalId = 3,
+                Datetime = DateTime.Now,
+                Longitude = "63.119802",
+                Latitude = "14.445399",
+                Coat = "Vinter",
+                UserId = 2,
+                SpeciesId = 3
             }
 
             );
