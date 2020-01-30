@@ -14,13 +14,20 @@ namespace Grupp7.Classes
 
         public string Name { get; set; }
 
+        public string Coat { get; set; }
+
         public string Longitude { get; set; }
 
         public string Latitude { get; set; }
+
+        [ForeignKey("SpeciesId")]
+        public int SpeciesId { get; set; }
 
         [ForeignKey("UserId")]
         public int UserId { get; set; }
 
         public User User { get; set; }
+
+        public Species Species { get; set; }
     }
 }
