@@ -52,6 +52,10 @@ namespace Grupp7.Controllers
             RegisterUserViewModel model = new RegisterUserViewModel();
             return View(model);
         }
+        public IActionResult AnimalObservation(int id)
+        {
+            return View(id);
+        }
 
         public IActionResult Map()
         {
