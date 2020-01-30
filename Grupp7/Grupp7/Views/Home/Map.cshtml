@@ -13,8 +13,8 @@
 
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 10,
-                center: { lat: 59.325, lng: 18.070 }
+                zoom: 7,
+                center: { lat: @Model.CenterLongitude, lng: @Model.CenterLatitude}
             });
 
             function addMarker(latitude, longitude, title, description, map) {

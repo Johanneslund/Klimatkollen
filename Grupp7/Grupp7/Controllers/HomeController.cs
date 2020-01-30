@@ -57,6 +57,16 @@ namespace Grupp7.Controllers
         {
             MapViewModel model = new MapViewModel();
             model.Animals = dbContext.GetAnimals();
+            double latSum = 0;
+            double longSum = 0;
+            foreach (var item in model.Animals)
+            { 
+                latSum += Convert.ToDouble(item.Latitude.Replace('.', ','));
+                longSum += Convert.ToDouble(item.Longitude.Replace('.', ','));
+            }
+            model.CenterLatitude = (latSum / model.Animals.Count).ToString().Replace(',','.');
+            model.CenterLongitude = (longSum / model.Animals.Count).ToString().Replace(',','.');
+
             return View(model);
         }
         
