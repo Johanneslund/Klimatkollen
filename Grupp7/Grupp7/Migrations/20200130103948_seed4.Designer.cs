@@ -4,14 +4,16 @@ using Grupp7.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Grupp7.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200130103948_seed4")]
+    partial class seed4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,8 +50,8 @@ namespace Grupp7.Migrations
                     b.ToTable("Animals");
 
                     b.HasData(
-                        new { AnimalId = 1, Datetime = new DateTime(2020, 1, 30, 11, 49, 35, 655, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247951", SpeciesId = 1, UserId = 1 },
-                        new { AnimalId = 2, Datetime = new DateTime(2020, 1, 30, 11, 49, 35, 657, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247231", SpeciesId = 2, UserId = 1 }
+                        new { AnimalId = 1, Datetime = new DateTime(2020, 1, 30, 11, 39, 48, 2, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247951", SpeciesId = 1, UserId = 1 },
+                        new { AnimalId = 2, Datetime = new DateTime(2020, 1, 30, 11, 39, 48, 3, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247231", Name = "Fjällräv", SpeciesId = 2, UserId = 1 }
                     );
                 });
 
@@ -102,8 +104,8 @@ namespace Grupp7.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { UserId = 1, Email = "Marreparre@live.se", Firstname = "Martin", Lastname = "Timell", Password = "llll", Phone = "0724445522", Username = "MT" },
-                        new { UserId = 2, Email = "Björne@live.se", Firstname = "Björn", Lastname = "Bertilsson", Password = "2222", Phone = "07212312344", Username = "BB" }
+                        new { UserId = 1, Email = "Marreparre@live.se", Firstname = "Martin", Lastname = "Timell", Password = "lllll", Phone = "07228321", Username = "Bajsmannen" },
+                        new { UserId = 2, Email = "Marreparre12@live.se", Firstname = "Björn", Lastname = "Bajs", Password = "2222", Phone = "07228333", Username = "Bajsmannen12" }
                     );
                 });
 
@@ -138,8 +140,8 @@ namespace Grupp7.Migrations
                     b.ToTable("Weathers");
 
                     b.HasData(
-                        new { WeatherId = 1, Datetime = new DateTime(2020, 1, 30, 11, 49, 35, 657, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Type = "Regn", UserId = 2 },
-                        new { WeatherId = 2, Carbon = "10 mg", Datetime = new DateTime(2020, 1, 30, 11, 49, 35, 658, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "16", Type = "Storsjön", UserId = 2 }
+                        new { WeatherId = 1, Datetime = new DateTime(2020, 1, 30, 11, 39, 48, 3, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Type = "Regn", UserId = 2 },
+                        new { WeatherId = 2, Carbon = "10 mg", Datetime = new DateTime(2020, 1, 30, 11, 39, 48, 4, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "16", Type = "Storsjön", UserId = 2 }
                     );
                 });
 
