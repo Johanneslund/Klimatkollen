@@ -22,6 +22,23 @@ namespace Grupp7.Classes
             return context.Users.Where(x => x.UserId == id).FirstOrDefault();
         }
 
+        public void  AddUser(User user)
+        {
+            context.Add(user);
+            context.SaveChanges();
+        }
+        public List<Animal> GetAnimals()
+        {
+            List<Animal> Animals = new List<Animal>();
+
+            foreach (var animal in context.Animals)
+            {
+                Animals.Add(animal);
+                
+            }
+            return Animals;
+        }
+
         public List<User> GetUsers() 
         {
             return null;
