@@ -27,6 +27,17 @@ namespace Grupp7.Classes
             context.Add(user);
             context.SaveChanges();
         }
+        public List<Animal> GetAnimals()
+        {
+            List<Animal> Animals = new List<Animal>();
+
+            foreach (var animal in context.Animals)
+            {
+                Animals.Add(animal);
+                
+            }
+            return Animals;
+        }
 
         public List<User> GetUsers() 
         {

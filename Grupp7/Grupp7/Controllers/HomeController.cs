@@ -50,7 +50,13 @@ namespace Grupp7.Controllers
         public IActionResult Register ()
         {
             RegisterUserViewModel model = new RegisterUserViewModel();
+            return View(model);
+        }
 
+        public IActionResult Map()
+        {
+            MapViewModel model = new MapViewModel();
+            model.Animals = dbContext.GetAnimals();
             return View(model);
         }
         
@@ -73,12 +79,6 @@ namespace Grupp7.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        public IActionResult Map()
-        {
-            Animal animal = new Animal();
-            return View(animal);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

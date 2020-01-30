@@ -39,8 +39,11 @@ namespace Grupp7.Classes
             throw new NotImplementedException();
         }
 
-
-
         public List <User> GetUsers() => users;
+
+        public List<Animal> GetAnimals()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -12,6 +12,6 @@ namespace Grupp7.Interfaces
         List<User> GetUsers();
         void AddUser(User user);
 
-
+        List<Animal> GetAnimals();
     }
 }
