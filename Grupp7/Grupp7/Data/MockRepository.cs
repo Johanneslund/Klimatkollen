@@ -45,10 +45,5 @@ namespace Grupp7.Classes
         {
             throw new NotImplementedException();
         }
-
-        public List<Weather> GetWeathers()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
