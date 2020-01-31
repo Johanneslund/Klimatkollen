@@ -23,6 +23,11 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="AnimalId" class="control-label"></label>
+                <input asp-for="AnimalId" class="form-control" />
+                <span asp-validation-for="AnimalId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Coat" class="control-label"></label>
                 <input asp-for="Coat" class="form-control" />
                 <span asp-validation-for="Coat" class="text-danger"></span>
@@ -48,9 +53,10 @@
                 <span asp-validation-for="Coat" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SpeciesId" class="control-label"></label>
-                <input asp-for="SpeciesId" class="form-control" />
-                <span asp-validation-for="SpeciesId" class="text-danger"></span>
+                <label asp-for="Species.Speciesname" class="control-label"></label>
+                <input asp-for="Species.Speciesname" class="form-control" />
+                <span asp-validation-for="Species.Speciesname" class="text-danger"></span>
+                <span asp-validation-for="Species.SpeciesId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

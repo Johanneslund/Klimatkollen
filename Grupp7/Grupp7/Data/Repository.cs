@@ -1,5 +1,6 @@
 ﻿using Grupp7.Data;
 using Grupp7.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,8 @@ namespace Grupp7.Classes
         }
         public void updateAimal(Animal animal)
         {
-            context.Update(animal);
+            context.Animals.Update(animal);
+            context.Entry(animal).State = EntityState.Modified;
             context.SaveChanges();
         }
 
