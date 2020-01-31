@@ -10,6 +10,7 @@ using Grupp7.Classes;
 using Grupp7.Data;
 using System.Web;
 using Microsoft.AspNetCore.Identity;
+using Grupp7.ViewModels;
 
 namespace Grupp7.Controllers
 { 
@@ -47,6 +48,40 @@ namespace Grupp7.Controllers
             ViewData["Message"] = "Your contact page.";
 
             return View();
+        }
+        public IActionResult AnimalObservation(int id)
+        {
+            List<Animal> animals = dbContext.GetAnimals();
+            
+            return View(animals.Where(a => a.AnimalId.Equals(id)).FirstOrDefault());
+        }
+        public IActionResult EditAnimal(int id)
+        {
+            List<Animal> animals = dbContext.GetAnimals();
+            return View(animals.Where(a => a.AnimalId.Equals(id)).FirstOrDefault());
+        }
+        public IActionResult EditAnimalFromId(Animal animal)
+        {
+
+            dbContext.updateAimal(animal);
+            return RedirectToAction("Map");
+        }
+
+        public IActionResult Map()
+        {
+            MapViewModel model = new MapViewModel();
+            model.Animals = dbContext.GetAnimals();
+            double latSum = 0;
+            double longSum = 0;
+            foreach (var item in model.Animals)
+            { 
+                latSum += Convert.ToDouble(item.Latitude.Replace('.', ','));
+                longSum += Convert.ToDouble(item.Longitude.Replace('.', ','));
+            }
+            model.CenterLatitude = (latSum / model.Animals.Count).ToString().Replace(',','.');
+            model.CenterLongitude = (longSum / model.Animals.Count).ToString().Replace(',','.');
+
+            return View(model);
         }
 
         public IActionResult Privacy()
