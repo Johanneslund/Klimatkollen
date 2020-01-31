@@ -43,5 +43,17 @@ namespace Grupp7.Classes
         {
             return null;
         }
+
+        public List<Weather> GetWeathers()
+        {
+            List<Weather> Weathers = new List<Weather>();
+
+            foreach (var Weather in context.Weathers)
+            {
+                Weathers.Add(Weather);
+
+            }
+            return Weathers;
+        }
     }
 }

@@ -1,7 +1,95 @@
-﻿
+﻿@model Grupp7.ViewModels.ObservationViewModel;
 @{
     ViewData["Title"] = "Observationer";
 
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+<h3>Observationer</h3>
+
+<div id="results">
+    <div class="row">
+        @foreach (var item in Model.AnimalList)
+        {
+            <div class="col-lg-8 results" style="display:flex;">
+                <div class="card bg-light mb-3 " style="margin-bottom:20px;">
+                    <img src="~/images/three-brown-bunnies.jpg" class="card-img-left" alt="image" style="width:30%; ">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text" style="flex:1;">
+                            time: @item.Datetime <br>
+                            place: longitude @item.Longitude Latitude: @item.Latitude <br>
+                            @item.UserId
+
+                        </p>
+                            <input class="btn btn-primary" type="submit" value="Läs mer" style="width: 10%; float: right;"  />                       
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div id="results">
+    <div class="row">
+        @foreach (var item in Model.AnimalList)
+        {
+            <div class="col-lg-8 results" style="display:flex;">
+                <div class="card bg-light mb-3 " style="margin-bottom:20px;">
+                    <img src="~/images/three-brown-bunnies.jpg" class="card-img-left" alt="image" style="width:30%; ">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text" style="flex:1;">
+                            time: @item.Datetime <br>
+                            place: longitude @item.Longitude Latitude: @item.Latitude <br>
+                            @item.UserId
+
+                        </p>
+                        <input class="btn btn-primary" type="submit" value="Läs mer" style="width: 10%; float: right;" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@*
+
+
+<div>
+    @foreach (var item in Model.AnimalList)
+    {
+        <div style=" background-color:lightblue">
+
+                <img src="~/images/three-brown-bunnies.jpg" alt="image"; style="width:20%; height:auto; text-align:left;">
+            <div>
+                <h4>Namn: @item.Name</h4>
+                <p>
+                    name: @item.Name <br>
+                    time: @item.Datetime <br>
+                    place: longitude @item.Longitude Latitude: @item.Latitude <br>
+                    @item.UserId
+
+                </p>
+            </div>        
+        </div>
+    }
+
+    @foreach (var item in Model.WeatherList)
+    {
+        <div style=" background-color:lightblue">
+            <h4>Namn: @item.Type</h4>
+            <p>
+                Time: @item.Datetime <br>
+                PH: @item.PH
+                Carbon: @item.Carbon
+                Humidity: @item.Humidity <br>
+                place: longitude @item.Longitude Latitude: @item.Latitude <br>
+                @item.UserId
+            </p>
+        </div>
+    }
+</div>
+
+
+
+
+*@

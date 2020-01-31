@@ -28,9 +28,10 @@ namespace Grupp7.Controllers
 
         public IActionResult Observation()
         {
-            ViewData["Message"] = "Här visas alla observationer.";
-
-            return View();
+            ObservationViewModel model = new ObservationViewModel();
+            model.AnimalList = dbContext.GetAnimals();
+            model.WeatherList = dbContext.GetWeathers();
+            return View(model);
         }
 
         public IActionResult About()
