@@ -58,6 +58,17 @@ namespace Grupp7.Controllers
             
             return View(animals.Where(a => a.AnimalId.Equals(id)).FirstOrDefault());
         }
+        public IActionResult EditAnimal(int id)
+        {
+            List<Animal> animals = dbContext.GetAnimals();
+            return View(animals.Where(a => a.AnimalId.Equals(id)).FirstOrDefault());
+        }
+        public IActionResult EditAnimalFromId(Animal animal)
+        {
+
+            dbContext.updateAimal(animal);
+            return RedirectToAction("Map");
+        }
 
         public IActionResult Map()
         {

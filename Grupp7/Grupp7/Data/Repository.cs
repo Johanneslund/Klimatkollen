@@ -42,10 +42,16 @@ namespace Grupp7.Classes
             }
             return Animals;
         }
+        public void updateAimal(Animal animal)
+        {
+            context.Update(animal);
+            context.SaveChanges();
+        }
 
         public List<User> GetUsers() 
         {
             return null;
         }
+
     }
 }
