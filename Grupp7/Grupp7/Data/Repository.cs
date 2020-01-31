@@ -26,5 +26,10 @@ namespace Grupp7.Classes
         {
             return null;
         }
+
+        public void Save(User user)
+        {
+
+        }
     }
 }

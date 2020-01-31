@@ -1,5 +1,6 @@
 ﻿using Grupp7.Classes;
 using Grupp7.Interfaces;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Grupp7.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -18,6 +19,7 @@ namespace Grupp7.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasData(
 
             new User()
@@ -29,8 +31,6 @@ namespace Grupp7.Data
                 Email = "Marreparre@live.se",
                 Password = "lllll",
                 Phone = "07228321"
-                
-
             },
 
             new User()
@@ -42,7 +42,6 @@ namespace Grupp7.Data
                 Email = "Marreparre12@live.se",
                 Password = "2222",
                 Phone = "07228333"
-
             }
 
             );
@@ -57,8 +56,6 @@ namespace Grupp7.Data
                 Longitude = "63.247951",
                 Latitude = "14.662298",
                 UserId = 1
-
-
             },
 
             new Animal()
@@ -69,7 +66,6 @@ namespace Grupp7.Data
                 Longitude = "63.247231",
                 Latitude = "14.662298",
                 UserId = 1
-
             }
 
             );
@@ -85,7 +81,6 @@ namespace Grupp7.Data
                     Latitude = "14.662298",
                     Humidity = "87,2",
                     UserId = 2
-
                 },
                 new Weather()
                 {
@@ -98,7 +93,6 @@ namespace Grupp7.Data
                     Temperature = "16",
                     Carbon = "10 mg",
                     UserId = 2
-
                 }
                 );
         }

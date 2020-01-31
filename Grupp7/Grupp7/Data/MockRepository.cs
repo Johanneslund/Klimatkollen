@@ -35,5 +35,10 @@ namespace Grupp7.Classes
         }
 
         public List <User> GetUsers() => users;
+
+        public void Save(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
