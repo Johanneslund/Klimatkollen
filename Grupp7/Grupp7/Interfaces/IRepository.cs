@@ -9,6 +9,7 @@ namespace Grupp7.Interfaces
     public interface IRepository
     {
         User GetUser(int id);
+        void Save(User user);
         List<User> GetUsers();
         void AddUser(User user);
 

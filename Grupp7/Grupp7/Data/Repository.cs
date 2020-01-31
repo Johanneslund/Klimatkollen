@@ -66,5 +66,10 @@ namespace Grupp7.Classes
             }
             return Weathers;
         }
+
+        public void Save(User user)
+        {
+
+        }
     }
 }

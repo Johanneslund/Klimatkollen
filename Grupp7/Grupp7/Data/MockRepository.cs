@@ -45,5 +45,10 @@ namespace Grupp7.Classes
         {
             throw new NotImplementedException();
         }
+
+        public void Save(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
