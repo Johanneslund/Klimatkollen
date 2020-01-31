@@ -10,6 +10,7 @@ using Grupp7.Classes;
 using Grupp7.Data;
 using System.Web;
 using Microsoft.AspNetCore.Identity;
+using Grupp7.ViewModels;
 
 namespace Grupp7.Controllers
 { 
@@ -49,12 +50,7 @@ namespace Grupp7.Controllers
 
             return View();
         }
-
-        public IActionResult Register ()
-        {
-            RegisterUserViewModel model = new RegisterUserViewModel();
-            return View(model);
-        }
+      
         public IActionResult AnimalObservation(int id)
         {
             List<Animal> animals = dbContext.GetAnimals();
@@ -89,22 +85,6 @@ namespace Grupp7.Controllers
 
             return View(model);
         }
-        
-        public async Task<ActionResult> RegisterUser(RegisterUserViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-               
-                var user = new User();
-                user = model.User;
-                dbContext.AddUser(user);
-
-                return RedirectToAction("Index", "Home");
-
-            }
-            return RedirectToAction("Register", "Home");
-        }
-
 
         public IActionResult Privacy()
         {

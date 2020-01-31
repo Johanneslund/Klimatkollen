@@ -50,5 +50,20 @@ namespace Grupp7.Classes
         {
             throw new NotImplementedException();
         }
+
+        public Animal getAnimal(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateAimal(Animal animal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Weather> GetWeathers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
