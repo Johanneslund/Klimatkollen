@@ -1,0 +1,98 @@
+﻿@model Grupp7.Classes.Animal
+
+@{
+    ViewData["Title"] = "Djur observation";
+}
+
+<h2>Djur observation</h2>
+
+<style>
+    #map {
+        height: 200px;
+        width: 50%;
+    }
+</style>
+<div>
+    <h4>Observerat djur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Datetime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Datetime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Firstname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Species)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Species)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Ändra på observation", "EditAnimal", "Home", new { id = Model.AnimalId })
+</div>
+<br />
+<hr />
+<div id="map"></div>
+<script>
+        var marker;
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: { lat: @Model.Longitude, lng: @Model.Latitude}
+            });
+
+            function addMarker(latitude, longitude, title, description, map) {
+                var latLng = new google.maps.LatLng(latitude, longitude);
+                var contentString = '<h3>' + title + '</h3>' + '<p>' + description + '</p>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    title: title,
+                    map: map,
+                    draggable: false
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+
+                addMarker(@Model.Longitude, @Model.Latitude, '@Model.Species', '@Model.Coat', map);
+    }
+
+
+</script>
+<br />
+<br />

@@ -1,0 +1,45 @@
+﻿@model Grupp7.ViewModels.MapViewModel;
+
+
+@{
+    ViewData["Title"] = "RegisterView";
+}
+
+<h3>Observationer</h3>
+
+    <div id="map"></div>
+    <script>
+        var marker;
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 6,
+                center: { lat: @Model.CenterLongitude, lng: @Model.CenterLatitude}
+            });
+
+            function addMarker(latitude, longitude, title, description, map) {
+                var latLng = new google.maps.LatLng(latitude, longitude);
+                var contentString = '<h3>' + title + '</h3>' + '<p>' + description + '</p>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    title: title,
+                    map: map,
+                    draggable: false
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+                @foreach (var item in Model.Animals) {
+                <text>addMarker(@item.Longitude, @item.Latitude, '@item.Name', '@Html.ActionLink("Läs mer","AnimalObservation","Home", new { id = item.AnimalId })', map);</text>
+        }
+    }
+
+</script>
+

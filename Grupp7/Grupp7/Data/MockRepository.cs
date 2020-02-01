@@ -34,7 +34,17 @@ namespace Grupp7.Classes
         
         }
 
+        public void AddUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public List <User> GetUsers() => users;
+
+        public List<Animal> GetAnimals()
+        {
+            throw new NotImplementedException();
+        }
 
         public void Save(User user)
         {

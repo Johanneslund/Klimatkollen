@@ -7,7 +7,7 @@
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
+    </ol> @*testar*@
     <div class="carousel-inner" role="listbox">
         <div class="item active">
             <img src="~/images/three-brown-bunnies.jpg" alt="ASP.NET" class="img-responsive" />
@@ -55,15 +55,31 @@
 
 <div class="row">
     <div class="col-md-6">
-        <h2>Crowdsourcing</h2>
+        <h2> Crowdsourcing <img src="~/images/crowdsourcing.jpg" alt="Card image" class="img-responsive" style="width: 10%; display: inline;" />  </h2>
         <p>
-            Crowdsourcing är en bra forskningsmetod som gör det möjligt för allmänheten att bidra med idéer, data och tid till projekt trots att de inte är formellt utbildade experter. Flera forskningsprojekt har redan framgångsrikt använt denna metod i sitt arbete. Crowdsourcing gör det möjligt att samla in data i mycket större skala
+            Crowdsourcing är en bra forskningsmetod som gör det möjligt för allmänheten att bidra med idéer, data och tid till projekt trots att de inte är formellt utbildade experter.
+            Flera forskningsprojekt har redan framgångsrikt använt denna metod i sitt arbete. Crowdsourcing gör det möjligt att samla in data i mycket större skala på ett kosteffekt sätt.
+            På klimatkollen kan du bidra med dina observationer så att klimatförändringarna i Sverige bli mer synlig.
         </p>
+        <a class="btn btn-default" href=@Url.Action("Register", "Home")>
+            Registrera
+        </a>
+        @*@Html.ActionLink("Google Map", "Map");*@
     </div>
     <div class="col-md-6">
-        <h2>Klimatförändringar</h2>
+        <h2>Klimatförändringar över tid</h2>
         <p>
-            Visualering av större klimatförändringar över tid mha statistik.
+            Visualering av större klimatförändringar över tid med hjälp av statistik.
+            <a class="btn btn-default" href=@Url.Action("Observation", "Home")>
+                Läs mer
+            </a>
         </p>
+
+        <div>
+            <img src="~/images/diagram_avvikelse_temp.png" alt="Card image" class="img-responsive">
+        </div>
+        <p> Avvikelserna i figuren är i förhållande till temperaturgenomsnittet för perioden 1850−1900. Källa: Climatic Research Unit, University of East Anglia. </p>
+
     </div>
 </div>
+

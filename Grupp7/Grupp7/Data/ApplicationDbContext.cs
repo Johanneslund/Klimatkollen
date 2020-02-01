@@ -11,6 +11,7 @@ namespace Grupp7.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
@@ -27,45 +28,86 @@ namespace Grupp7.Data
                 UserId = 1,
                 Firstname = "Martin",
                 Lastname = "Timell",
-                Username = "Bajsmannen",
+                Username = "MT",
                 Email = "Marreparre@live.se",
-                Password = "lllll",
-                Phone = "07228321"
+                Password = "llll",
+                Phone = "0724445522"
             },
 
             new User()
             {
                 UserId = 2,
                 Firstname = "Björn",
-                Lastname = "Bajs",
-                Username = "Bajsmannen12",
-                Email = "Marreparre12@live.se",
+                Lastname = "Bertilsson",
+                Username = "BB",
+                Email = "Björne@live.se",
                 Password = "2222",
-                Phone = "07228333"
+                Phone = "07212312344"
             }
 
             );
-            
+
+            modelBuilder.Entity<Species>().HasData(
+
+            new Species()
+            {
+                SpeciesId = 1,
+                Speciesname = "Hare"
+            },
+            new Species()
+            {
+                SpeciesId = 2,
+                Speciesname = "Fjällräv"
+            },
+            new Species()
+            {
+                SpeciesId = 3,
+                Speciesname = "Ripa"
+            },
+            new Species()
+            {
+                SpeciesId = 4,
+                Speciesname = "Vildsvin"
+            },
+            new Species()
+            {
+                SpeciesId = 5,
+                Speciesname = "Groda"
+            }
+
+            );
+
             modelBuilder.Entity<Animal>().HasData(
 
             new Animal()
             {
                 AnimalId = 1,
-                Name = "Hare",
                 Datetime = DateTime.Now,
                 Longitude = "63.247951",
                 Latitude = "14.662298",
-                UserId = 1
+                UserId = 1,
+                SpeciesId = 1
             },
 
             new Animal()
             {
                 AnimalId = 2,
-                Name = "Fjällräv",
                 Datetime = DateTime.Now,
                 Longitude = "63.247231",
                 Latitude = "14.662298",
-                UserId = 1
+                UserId = 1,
+                SpeciesId = 2
+            },
+
+            new Animal()
+            {
+                AnimalId = 3,
+                Datetime = DateTime.Now,
+                Longitude = "63.119802",
+                Latitude = "14.445399",
+                Coat = "Vinter",
+                UserId = 2,
+                SpeciesId = 3
             }
 
             );
@@ -85,7 +127,7 @@ namespace Grupp7.Data
                 new Weather()
                 {
                     WeatherId = 2,
-                    Type = "Storsjön, badhusparken",
+                    Type = "Storsjön",
                     Datetime = DateTime.Now,
                     Longitude = "63.247231",
                     Latitude = "14.662298",

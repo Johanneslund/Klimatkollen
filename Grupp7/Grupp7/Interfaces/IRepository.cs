@@ -11,6 +11,12 @@ namespace Grupp7.Interfaces
         User GetUser(int id);
         void Save(User user);
         List<User> GetUsers();
+        void AddUser(User user);
 
+        List<Animal> GetAnimals();
+        Animal getAnimal(int id);
+        void updateAimal(Animal animal);
+
+        List<Weather> GetWeathers();
     }
 }
