@@ -6,18 +6,8 @@ using System.Threading.Tasks;
 
 namespace Grupp7.Models
 {
-    public class UserModel
+    public class ResetPasswordModel
     {
-        public int UserId { get; set; }
-
-        [Required]
-        public string Firstname { get; set; }
-
-        [Required]
-        public string Lastname { get; set; }
-
-        public string Username { get; set; }
-
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -28,9 +18,9 @@ namespace Grupp7.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
-        [Compare("Password", ErrorMessage = "Password and confirmation password do not match")]
+        [Compare("Password", ErrorMessage = "Password and Confirm Password must match ")]
         public string ConfirmPassword { get; set; }
 
-        public int Phone { get; set; }
+        public string Token { get; set; }
     }
 }
