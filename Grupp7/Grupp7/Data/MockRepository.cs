@@ -20,9 +20,6 @@ namespace Grupp7.Classes
                 Firstname = "Martin",
                 Lastname = "Timell",
                 Username = "Bajsmannen",
-                Email = "Marreparre@live.se",
-                Password = "lllll",
-                Phone = "07228321"
 
             };
             users.Add(user);
