@@ -12,8 +12,6 @@ namespace Grupp7.Classes
 
         public DateTime Datetime { get; set; }
 
-        public string Name { get; set; }
-
         public string Coat { get; set; }
 
         public string Longitude { get; set; }

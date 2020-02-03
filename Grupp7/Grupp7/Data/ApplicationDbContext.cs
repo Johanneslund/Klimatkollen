@@ -21,6 +21,7 @@ namespace Grupp7.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<User>().HasData(
 
             new User()
@@ -28,10 +29,7 @@ namespace Grupp7.Data
                 UserId = 1,
                 Firstname = "Martin",
                 Lastname = "Timell",
-                Username = "MT",
-                Email = "Marreparre@live.se",
-                Password = "llll",
-                Phone = "0724445522"
+                Username = "MT"
             },
 
             new User()
@@ -39,10 +37,7 @@ namespace Grupp7.Data
                 UserId = 2,
                 Firstname = "Björn",
                 Lastname = "Bertilsson",
-                Username = "BB",
-                Email = "Björne@live.se",
-                Password = "2222",
-                Phone = "07212312344"
+                Username = "BB"
             }
 
             );

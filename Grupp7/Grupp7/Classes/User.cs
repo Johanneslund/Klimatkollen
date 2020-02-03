@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,18 +18,16 @@ namespace Grupp7.Classes
         public string Lastname { get; set; }
         [Required(ErrorMessage = "Ange efternamn")]
 
-
         public string Username { get; set; }
-        [Required(ErrorMessage = "Ange användarnamn")]
 
-        public string Email { get; set; }
-        [Required(ErrorMessage = "Ange Email-adress")]
+        [ForeignKey("AspnetuserId")]
+        public string AspnetuserId { get; set; }
+
+        
 
 
-        public string Password { get; set; }
-        [Required(ErrorMessage = "Ange ett lösenord")]
 
-        public string Phone { get; set; }
+
 
     }
 }
