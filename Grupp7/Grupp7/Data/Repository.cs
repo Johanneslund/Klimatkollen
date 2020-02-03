@@ -52,7 +52,12 @@ namespace Grupp7.Classes
 
         public List<User> GetUsers() 
         {
-            return null;
+            List<User> Users = new List<User>();
+            foreach (var user in context.Users)
+            {
+                Users.Add(user);
+            }
+            return Users;
         }
 
         public List<Weather> GetWeathers()

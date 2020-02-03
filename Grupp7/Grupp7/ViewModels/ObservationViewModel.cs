@@ -10,8 +10,8 @@ namespace Grupp7.ViewModels
     {
         public List<Animal> AnimalList { get; set; }
         public List<Weather> WeatherList { get; set; }
-        public List<Animal> User { get; set; }
+        public List<User> UserList { get; set; }
 
-
+        public List<object> ObservationsList { get; set; } // test
     }
 }
