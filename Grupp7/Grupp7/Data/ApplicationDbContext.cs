@@ -27,9 +27,10 @@ namespace Grupp7.Data
             new User()
             {
                 UserId = 1,
-                Firstname = "Martin",
-                Lastname = "Timell",
-                Username = "MT"
+                Firstname = "Johannes",
+                Lastname = "Lundkvist",
+                Username = "Jossieri",
+                Id = "21a529ea-f6fd-4f35-ae77-afc54aa83fe5"
             },
 
             new User()
@@ -37,7 +38,8 @@ namespace Grupp7.Data
                 UserId = 2,
                 Firstname = "Björn",
                 Lastname = "Bertilsson",
-                Username = "BB"
+                Username = "BB",
+                Id = "c85d4906-25ec-4e8d-9ebd-9f4b74b506f0"
             }
 
             );

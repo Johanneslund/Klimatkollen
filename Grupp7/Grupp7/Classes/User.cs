@@ -20,8 +20,8 @@ namespace Grupp7.Classes
 
         public string Username { get; set; }
 
-        [ForeignKey("AspnetuserId")]
-        public string AspnetuserId { get; set; }
+        [ForeignKey("Id")]
+        public string Id { get; set; }
 
         
 

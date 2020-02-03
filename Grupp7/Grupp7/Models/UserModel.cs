@@ -8,7 +8,7 @@ namespace Grupp7.Models
 {
     public class UserModel
     {
-        public int UserId { get; set; }
+        public string Id { get; set; }
 
         //[Required]
         public string Firstname { get; set; }
