@@ -56,16 +56,21 @@ section {
 ul.social li img {
     height: 50px;
 }
-/*a {
-    color: #FFF;
-    text-decoration: none;
-    font-weight: bold;
-}
+/*article {
+    float: left;
+    line-height: 120%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}*/
 
-    a:hover {
-        color: #FFF;
-        text-decoration: underline;
-    }*/
+.responsive {
+    float: right;
+    width: 50%;
+    max-width: 100%;
+    height: auto;
+}
+		
 
 
 footer.second {
