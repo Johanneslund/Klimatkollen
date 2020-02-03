@@ -78,5 +78,10 @@ namespace Grupp7.Classes
         {
             throw new NotImplementedException();
         }
+
+        public List<Specie> GetSpecies()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

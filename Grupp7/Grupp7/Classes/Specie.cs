@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Grupp7.Classes
 {
-    public class Species
+    public class Specie
     {
 
-        public int SpeciesId { get; set; }
+        public int SpecieId { get; set; }
 
-        public string Speciesname { get; set; }
+        public string Speciename { get; set; }
     }
 }

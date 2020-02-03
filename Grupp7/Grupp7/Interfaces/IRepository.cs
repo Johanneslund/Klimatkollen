@@ -21,5 +21,7 @@ namespace Grupp7.Interfaces
         List<Weather> getUserWeathers(int id);
 
         List<Weather> GetWeathers();
+
+        List<Specie> GetSpecies();
     }
 }

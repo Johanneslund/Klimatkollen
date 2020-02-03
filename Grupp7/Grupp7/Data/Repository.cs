@@ -95,5 +95,17 @@ namespace Grupp7.Classes
         {
             return context.Weathers.Where(i => i.User.UserId.Equals(id)).ToList();
         }
+
+        public List<Specie> GetSpecies()
+        {
+            List<Specie> Species = new List<Specie>();
+
+            foreach (var specie in context.Species)
+            {
+                Species.Add(specie);
+            }
+
+            return Species;
+        }
     }
 }
