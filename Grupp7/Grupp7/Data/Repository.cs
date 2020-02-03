@@ -27,9 +27,15 @@ namespace Grupp7.Classes
             return context.Animals.Where(x => x.AnimalId.Equals(id)).FirstOrDefault();
         }
 
-        public void  AddUser(User user)
+        public void  AddUser(string firstname, string lastname, string id, string username)
         {
-            context.Add(user);
+            context.Add(new User()
+            {
+                Firstname = firstname,
+                Lastname = lastname,
+                Username = username,
+                Id = id
+            });
             context.SaveChanges();
         }
         public List<Animal> GetAnimals()
@@ -75,6 +81,19 @@ namespace Grupp7.Classes
         public void Save(User user)
         {
 
+        }
+
+        public User GetUserFromIdentity(string id)
+        {
+            return context.Users.Where(u => u.Id.Equals(id)).FirstOrDefault();
+        }
+        public List<Animal> getUserAnimals(int id)
+        {
+            return context.Animals.Where(i => i.User.UserId.Equals(id)).ToList();
+        }
+        public List<Weather> getUserWeathers(int id)
+        {
+            return context.Weathers.Where(i => i.User.UserId.Equals(id)).ToList();
         }
     }
 }

@@ -25,13 +25,13 @@ namespace Grupp7.Classes
             users.Add(user);
         }
 
-        public User GetUser(int id) 
+        public User GetUser(int id)
         {
             return users.Where(x => x.UserId.Equals(id)).FirstOrDefault();
-        
+
         }
 
-        public void AddUser(User user)
+        public void AddUser(string firstname, string lastname, string id, string username)
         {
             throw new NotImplementedException();
         }
@@ -62,6 +62,19 @@ namespace Grupp7.Classes
         }
 
         public List<Weather> GetWeathers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public User GetUserFromIdentity(string id)
+        {
+            throw new NotImplementedException();
+        }
+        public List<Animal> getUserAnimals(int id)
+        {
+            throw new NotImplementedException();
+        }
+        public List<Weather> getUserWeathers(int id)
         {
             throw new NotImplementedException();
         }

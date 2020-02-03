@@ -11,22 +11,30 @@ using Grupp7.Data;
 using System.Web;
 using Microsoft.AspNetCore.Identity;
 using Grupp7.ViewModels;
+using System.Security.Claims;
 
 namespace Grupp7.Controllers
 { 
     public class HomeController : Controller
     {
         private readonly IRepository dbContext;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public HomeController(IRepository repository)
+        public HomeController(IRepository repository, UserManager<IdentityUser> userManager)
         {
             this.dbContext = repository;
+            this.userManager = userManager;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
             return View();
+        }
+        public IActionResult AddUserFromRegister(string firstname, string lastname, string id, string username)
+        {
+            dbContext.AddUser(firstname, lastname, id, username);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Observation()
@@ -88,6 +96,17 @@ namespace Grupp7.Controllers
             return RedirectToAction("Map");
         }
 
+        public IActionResult UserHome()
+        {
+            UserHomeViewModel model = new UserHomeViewModel();
+            var userId = userManager.GetUserId(HttpContext.User);
+            model.User = dbContext.GetUserFromIdentity(userId);
+            model.Animals = dbContext.getUserAnimals(model.User.UserId);
+            model.Weathers = dbContext.getUserWeathers(model.User.UserId);
+
+
+            return View(model);
+        }
         public IActionResult Map()
         {
             MapViewModel model = new MapViewModel();
