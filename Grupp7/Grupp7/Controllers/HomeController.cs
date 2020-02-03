@@ -31,9 +31,28 @@ namespace Grupp7.Controllers
 
         public IActionResult Observation()
         {
+            //gets all observations in 2 lists.
             ObservationViewModel model = new ObservationViewModel();
             model.AnimalList = dbContext.GetAnimals();
             model.WeatherList = dbContext.GetWeathers();
+            model.UserList = dbContext.GetUsers();
+       
+            //sorts the 2 lists
+            model.AnimalList = model.AnimalList.OrderByDescending(x => x.Datetime).ToList();
+            model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();
+
+            //testa samla alla observationer i en lista och sedan sortera
+            model.ObservationsList = new List<object>(); 
+            foreach ( var item in model.AnimalList)
+            {
+                model.ObservationsList.Add(item);
+            }
+            foreach (var item in model.WeatherList)
+            {
+                model.ObservationsList.Add(item);
+            }
+            //ObservationsList.OrderBy(x => x.DateTime).ToList();
+
             return View(model);
         }
 
