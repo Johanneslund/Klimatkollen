@@ -44,11 +44,41 @@ body {
 h4 {
     text-align: center;
 }
+section {
+   
+    text-align: center;
+   
+}
+.social li {
+    display: inline;
+   
+}
+ul.social li img {
+    height: 50px;
+}
+/*article {
+    float: left;
+    line-height: 120%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}*/
+
+.responsive {
+    float: right;
+    width: 50%;
+    max-width: 100%;
+    height: auto;
+}
+		
+
+
 footer.second {
     border-top: 1px solid #404E50;
     background-color: #A9A9A9;
-    max-height: 50px;
+    max-height: 200px;
     text-align: center;
     opacity: 0.95;
+   
 }
 
