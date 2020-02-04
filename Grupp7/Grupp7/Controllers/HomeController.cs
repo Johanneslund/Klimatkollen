@@ -39,10 +39,10 @@ namespace Grupp7.Controllers
        
             //sorts the 2 lists
             model.AnimalList = model.AnimalList.OrderByDescending(x => x.Datetime).ToList();
-            model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();
+            model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();          
 
             //testa samla alla observationer i en lista och sedan sortera
-            model.ObservationsList = new List<object>(); 
+            model.ObservationsList = new List<Observation>(); 
             foreach ( var item in model.AnimalList)
             {
                 model.ObservationsList.Add(item);
@@ -51,9 +51,10 @@ namespace Grupp7.Controllers
             {
                 model.ObservationsList.Add(item);
             }
-            //ObservationsList.OrderBy(x => x.DateTime).ToList();
 
-            return View(model);
+            model.ObservationsList = model.ObservationsList.OrderByDescending(x => x.Datetime).ToList(); 
+
+            return View(model); 
         }
 
         public IActionResult About()

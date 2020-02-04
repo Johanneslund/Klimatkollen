@@ -12,6 +12,6 @@ namespace Grupp7.ViewModels
         public List<Weather> WeatherList { get; set; }
         public List<User> UserList { get; set; }
 
-        public List<object> ObservationsList { get; set; } // test
+        public List<Observation> ObservationsList { get; set; } // test
     }
 }
