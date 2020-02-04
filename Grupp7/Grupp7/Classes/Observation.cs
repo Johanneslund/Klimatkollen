@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Grupp7.Classes
 {
-    public abstract class Observation
+    public class Observation
     {
         public DateTime Datetime { get; set; }
         public string Longitude { get; set; }
