@@ -41,10 +41,10 @@
             @Html.DisplayFor(model => model.User.Firstname)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Species)
+            @Html.DisplayNameFor(model => model.Specie)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Species)
+            @Html.DisplayFor(model => model.Specie)
         </dd>
     </dl>
 </div>
@@ -83,7 +83,7 @@
                 });
             }
 
-                addMarker(@Model.Longitude, @Model.Latitude, '@Model.Species', '@Model.Coat', map);
+                addMarker(@Model.Longitude, @Model.Latitude, '@Model.Specie', '@Model.Coat', map);
     }
 
 

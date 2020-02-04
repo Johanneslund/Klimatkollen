@@ -1,0 +1,66 @@
+﻿@model Grupp7.ViewModels.UserHomeViewModel
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Username)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Username)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Firstname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Firstname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Lastname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Lastname)
+        </dd>
+    </dl>
+    <h3>Djur</h3>
+    @Html.ActionLink("Lägg till nytt djur","AddAnimal","Home")
+    <hr />
+
+    @foreach (var item in Model.Animals)
+    {
+
+        <p>Datum: @item.Datetime </p>
+        <p>Art: @item.SpecieId </p>
+        <p>Long: @item.Longitude </p>
+        <p>Lat: @item.Latitude </p>
+        <p>Päls: @item.Coat </p>
+        <hr />
+
+    }
+
+    <h3>Väder</h3>
+    <hr />
+
+    @foreach (var item in Model.Weathers)
+    {
+
+        <p>Datum: @item.Datetime </p>
+        <p>Fukt: @item.Humidity </p>
+        <p>Ph: @item.PH</p>
+        <p>Kol: @item.Carbon </p>
+        <p>Tempratur: @item.Temperature </p>
+        <p>Long: @item.Longitude </p>
+        <p>Lat: @item.Latitude </p>
+        <hr />
+
+    }
+
+</div>
+
