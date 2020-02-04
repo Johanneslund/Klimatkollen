@@ -52,11 +52,12 @@ namespace Grupp7.Controllers
             model.ObservationsList = new List<Observation>(); 
             foreach ( var item in animals)
             {
-                model.ObservationsList.Add(item);
+                model.ObservationsList.Add(new Observation {Animal = item , Datetime = item.Datetime});
+
             }
             foreach (var item in weathers)
             {
-                model.ObservationsList.Add(item);
+                model.ObservationsList.Add(new Observation { Weather = item , Datetime = item.Datetime });
             }
             model.ObservationsList = model.ObservationsList.OrderByDescending(x => x.Datetime).ToList(); 
 
