@@ -132,9 +132,12 @@ namespace Grupp7.Controllers
             double latSum = 0;
             double longSum = 0;
             foreach (var item in model.Animals)
-            { 
-                latSum += Convert.ToDouble(item.Latitude.Replace('.', ','));
-                longSum += Convert.ToDouble(item.Longitude.Replace('.', ','));
+            {
+                if (item.Latitude != null && item.Longitude != null)
+                {
+                    latSum += Convert.ToDouble(item.Latitude.Replace('.', ','));
+                    longSum += Convert.ToDouble(item.Longitude.Replace('.', ','));
+                }
             }
             model.CenterLatitude = (latSum / model.Animals.Count).ToString().Replace(',','.');
             model.CenterLongitude = (longSum / model.Animals.Count).ToString().Replace(',','.');
