@@ -5,35 +5,22 @@
 
 }
 <h3>Observationer</h3>
-
-<div>
-    @Html.DisplayFor(m => m.Model)
-</div>
-
- fix bootstrap
-
+ 
 <div class="container">
     @foreach (var item in Model.ObservationsList)
     {
         if (item.GetType().Name.Equals("Animal"))
         {
-            var t = (Animal)item;
-
             <div class="card flex-row flex-wrap">
                 <img src="~/images/three-brown-bunnies.jpg" alt="images" style="width:300px; height:200px;">
                 <div class="card-block px-4">
-                    <h4 class="card-title">@t.Species  @((Animal)item).Species </h4>
+                    <h4 class="card-title">@item.Animal.Species.Speciesname </h4>
                     <p class="card-text">
-                        Päls: @item.Coat <br>
+                        Päls: @item.Animal.Coat <br>
                         Tid och Datum: @item.Datetime <br>
                         Longitude: @item.Longitude <br>
-                        Latitude: @item.Latitude <br>
-
-                        @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                        {
-                            @user.Username <br />
-                            @user.Firstname @user.Lastname
-                        }
+                        Latitude: @item.Latitude <br><br>
+                        Observatör : @item.Animal.User.Username
                     </p>
                 </div>
                 <a href="#" class="btn btn-primary pull-right">Läs mer </a>
@@ -45,20 +32,17 @@
             <div class="card flex-row flex-wrap">
                 <img src="~/images/icebergs-2574987.jpg" alt="images" style="width:300px; height:200px;">
                 <div class="card-block px-4">
-                    <h4 class="card-title">@item.Type</h4>
+                    <h4 class="card-title">@item.Weather.Type</h4>
                     <p class="card-text">
                         Datum och tid: @item.Datetime <br>
                         Longitude @item.Longitude <br>
                         Latitude: @item.Latitude <br>
-                        PH halt: @item.PH <br>
-                        Fuktighet: @item.Humidity <br>
-                        Temperatur: @item.Temperature <br>
-                        Carbon: @item.Carbon <br>
-                        @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                        {
-                            @user.Username <br />
-                            @user.Firstname @user.Lastname
-                        }
+                        PH halt: @item.Weather.PH <br>
+                        Fuktighet: @item.Weather.Humidity <br>
+                        Temperatur: @item.Weather.Temperature <br>
+                        Carbon: @item.Weather.Carbon <br><br>
+
+                        Observatör : @item.Animal.User.Username
                     </p>
                 </div>
                 <a href="#" class="btn btn-primary" style="float:right">Läs mer </a>
@@ -69,58 +53,60 @@
 </div>
 
 @*
-        **************************************
+            **************************************
+    lista med bara animals
 
-    <div class="container">
-        @foreach (var item in Model.AnimalList)
-        {
-            <div class="card flex-row flex-wrap">
-                <img src="~/images/three-brown-bunnies.jpg" alt="images" style="width:300px; height:200px;">
-                <div class="card-block px-4">
-                    <h4 class="card-title">@item.Species</h4>
-                    <p class="card-text">
-                        Päls: @item.Coat <br>
-                        Tid och Datum: @item.Datetime <br>
-                        Longitude: @item.Longitude <br>
-                        Latitude: @item.Latitude <br>
+        <div class="container">
+            @foreach (var item in Model.AnimalList)
+            {
+                <div class="card flex-row flex-wrap">
+                    <img src="~/images/three-brown-bunnies.jpg" alt="images" style="width:300px; height:200px;">
+                    <div class="card-block px-4">
+                        <h4 class="card-title">@item.Species</h4>
+                        <p class="card-text">
+                            Päls: @item.Coat <br>
+                            Tid och Datum: @item.Datetime <br>
+                            Longitude: @item.Longitude <br>
+                            Latitude: @item.Latitude <br>
 
-                        @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                        {
-                            @user.Username <br />
-                            @user.Firstname @user.Lastname
-                        }
-                    </p>
+                            @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
+                            {
+                                @user.Username <br />
+                                @user.Firstname @user.Lastname
+                            }
+                        </p>
+                    </div>
+                    <a href="#" class="btn btn-primary pull-right">Läs mer </a>
                 </div>
-                <a href="#" class="btn btn-primary pull-right">Läs mer </a>
-            </div>
-            <br />
-        }
-        @foreach (var item in Model.WeatherList)
-        {
-            <div class="card flex-row flex-wrap">
-                <img src="~/images/icebergs-2574987.jpg" alt="images" style="width:300px; height:200px;">
-                <div class="card-block px-4">
-                    <h4 class="card-title">@item.Type</h4>
-                    <p class="card-text">
-                        Datum och tid: @item.Datetime <br>
-                        Longitude @item.Longitude <br>
-                        Latitude: @item.Latitude <br>
-                        PH halt: @item.PH <br>
-                        Fuktighet: @item.Humidity <br>
-                        Temperatur: @item.Temperature <br>
-                        Carbon: @item.Carbon <br>
+                <br />
+              }
 
-                        @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                        {
-                            @user.Username <br />
-                            @user.Firstname @user.Lastname
-                        }
-                    </p>
+     Lista med bara weather
+            @foreach (var item in Model.WeatherList)
+            {
+                <div class="card flex-row flex-wrap">
+                    <img src="~/images/icebergs-2574987.jpg" alt="images" style="width:300px; height:200px;">
+                    <div class="card-block px-4">
+                        <h4 class="card-title">@item.Type</h4>
+                        <p class="card-text">
+                            Datum och tid: @item.Datetime <br>
+                            Longitude @item.Longitude <br>
+                            Latitude: @item.Latitude <br>
+                            PH halt: @item.PH <br>
+                            Fuktighet: @item.Humidity <br>
+                            Temperatur: @item.Temperature <br>
+                            Carbon: @item.Carbon <br>
+
+                            @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
+                            {
+                                @user.Username <br />
+                                @user.Firstname @user.Lastname
+                            }
+                        </p>
+                    </div>
+                    <a href="#" class="btn btn-primary" style="float:right">Läs mer </a>
                 </div>
-                <a href="#" class="btn btn-primary" style="float:right">Läs mer </a>
-            </div>
-            <br />
-        }
-    </div>
-
+                <br />
+            }
+        </div>
 *@
