@@ -9,7 +9,7 @@
 <div class="container">
     @foreach (var item in Model.ObservationsList)
     {
-        if (item.GetType().Name.Equals("Animal"))
+        if (item.Animal != null)
         {
             <div class="card flex-row flex-wrap">
                 <img src="~/images/three-brown-bunnies.jpg" alt="images" style="width:300px; height:200px;">
@@ -27,7 +27,7 @@
             </div>
             <br />
         }
-        else if (item.GetType().Name.Equals("Weather"))
+        else if (item.Weather != null)
         {
             <div class="card flex-row flex-wrap">
                 <img src="~/images/icebergs-2574987.jpg" alt="images" style="width:300px; height:200px;">
@@ -42,7 +42,7 @@
                         Temperatur: @item.Weather.Temperature <br>
                         Carbon: @item.Weather.Carbon <br><br>
 
-                        Observatör : @item.Animal.User.Username
+                        Observatör : @item.Weather.User.Username
                     </p>
                 </div>
                 <a href="#" class="btn btn-primary" style="float:right">Läs mer </a>
