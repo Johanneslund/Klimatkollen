@@ -70,6 +70,21 @@ namespace Grupp7.Controllers
 
             return View();
         }
+        public IActionResult AddAnimal()
+        {
+            AddAnimalViewModel model = new AddAnimalViewModel();
+            model.Animal = new Animal();
+            model.Species = dbContext.getSpeciesItemList();
+
+            return View(model);
+        }
+        public IActionResult AddAnimalToUser(AddAnimalViewModel model)
+        {
+            AddAnimalViewModel Model = model;
+            Model.User = dbContext.GetUserFromIdentity(userManager.GetUserId(HttpContext.User));
+            dbContext.AddAnimalToUser(model);
+            return RedirectToAction("UserHome");
+        }
 
         public IActionResult Contact()
         {
@@ -80,14 +95,17 @@ namespace Grupp7.Controllers
       
         public IActionResult AnimalObservation(int id)
         {
-            List<Animal> animals = dbContext.GetAnimals();
+            Animal animal = dbContext.getAnimal(id);
+            Specie specie = dbContext.getAnimalSpecie(animal);
             
-            return View(animals.Where(a => a.AnimalId.Equals(id)).FirstOrDefault());
+            return View(dbContext.setAnimalSpecie(animal,specie));
         }
         public IActionResult EditAnimal(int id)
         {
-            List<Animal> animals = dbContext.GetAnimals();
-            return View(animals.Where(a => a.AnimalId.Equals(id)).FirstOrDefault());
+            Animal animal = dbContext.getAnimal(id);
+            Specie specie = dbContext.getAnimalSpecie(animal);
+
+            return View(dbContext.setAnimalSpecie(animal, specie));
         }
         public IActionResult EditAnimalFromId(Animal animal)
         {

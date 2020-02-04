@@ -1,5 +1,7 @@
 ﻿using Grupp7.Data;
 using Grupp7.Interfaces;
+using Grupp7.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -40,12 +42,18 @@ namespace Grupp7.Classes
         }
         public List<Animal> GetAnimals()
         {
+            List<Specie> species = GetSpecies();
             List<Animal> Animals = new List<Animal>();
-
             foreach (var animal in context.Animals)
             {
-                Animals.Add(animal);
-                
+                foreach (var specie in species)
+                {
+                    if (animal.SpecieId == specie.SpecieId)
+                    {
+                        animal.Specie = specie;
+                        Animals.Add(animal);
+                    }
+                }               
             }
             return Animals;
         }
@@ -106,6 +114,44 @@ namespace Grupp7.Classes
             }
 
             return Species;
+        }
+        public Specie getAnimalSpecie(Animal animal)
+        {
+            Specie specie = new Specie();
+            specie = context.Species.Where(c => c.SpecieId.Equals(animal.SpecieId)).FirstOrDefault();
+            return specie;
+        }
+        public Animal setAnimalSpecie(Animal animal, Specie specie)
+        {
+            animal.Specie = specie;
+            return animal;
+        }
+
+        public List<SelectListItem> getSpeciesItemList()
+        {
+            List<Specie> specieList = GetSpecies();
+            List<SelectListItem> selectList = new List<SelectListItem>();
+            foreach (var specie in specieList)
+            {
+
+                selectList.Add(new SelectListItem { Value = specie.SpecieId.ToString(), Text = specie.Speciename });
+            }
+            return selectList;
+        }
+        public void AddAnimalToUser(AddAnimalViewModel model)
+        {
+            Animal animal = new Animal()
+            {
+                Coat = model.Animal.Coat,
+                SpecieId = model.Animal.SpecieId,
+                Latitude = model.Animal.Latitude,
+                Longitude = model.Animal.Longitude,
+                Datetime = model.Animal.Datetime,
+                User = model.User
+            };
+            setAnimalSpecie(animal, getAnimalSpecie(animal));
+            context.Add(animal);
+            context.SaveChanges();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Grupp7.Classes;
+using Grupp7.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +25,9 @@ namespace Grupp7.Interfaces
         List<Weather> GetWeathers();
 
         List<Specie> GetSpecies();
+        List<SelectListItem> getSpeciesItemList();
+        Specie getAnimalSpecie(Animal animal);
+        Animal setAnimalSpecie(Animal animal, Specie specie);
+        void AddAnimalToUser(AddAnimalViewModel model);
     }
 }
