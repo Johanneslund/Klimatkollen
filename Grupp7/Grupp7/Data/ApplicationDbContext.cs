@@ -17,6 +17,7 @@ namespace Grupp7.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Animal> Animals { get; set; }
         public DbSet<Weather> Weathers { get; set; }
+        public DbSet<Specie> Species { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,32 +45,32 @@ namespace Grupp7.Data
 
             );
 
-            modelBuilder.Entity<Species>().HasData(
+            modelBuilder.Entity<Specie>().HasData(
 
-            new Species()
+            new Specie()
             {
-                SpeciesId = 1,
-                Speciesname = "Hare"
+                SpecieId = 1,
+                Speciename = "Hare"
             },
-            new Species()
+            new Specie()
             {
-                SpeciesId = 2,
-                Speciesname = "Fjällräv"
+                SpecieId = 2,
+                Speciename = "Fjällräv"
             },
-            new Species()
+            new Specie()
             {
-                SpeciesId = 3,
-                Speciesname = "Ripa"
+                SpecieId = 3,
+                Speciename = "Ripa"
             },
-            new Species()
+            new Specie()
             {
-                SpeciesId = 4,
-                Speciesname = "Vildsvin"
+                SpecieId = 4,
+                Speciename = "Vildsvin"
             },
-            new Species()
+            new Specie()
             {
-                SpeciesId = 5,
-                Speciesname = "Groda"
+                SpecieId = 5,
+                Speciename = "Groda"
             }
 
             );
@@ -83,7 +84,7 @@ namespace Grupp7.Data
                 Longitude = "63.247951",
                 Latitude = "14.662298",
                 UserId = 1,
-                SpeciesId = 1
+                SpecieId = 1
             },
 
             new Animal()
@@ -93,7 +94,7 @@ namespace Grupp7.Data
                 Longitude = "63.247231",
                 Latitude = "14.662298",
                 UserId = 1,
-                SpeciesId = 2
+                SpecieId = 2
             },
 
             new Animal()
@@ -104,7 +105,7 @@ namespace Grupp7.Data
                 Latitude = "14.445399",
                 Coat = "Vinter",
                 UserId = 2,
-                SpeciesId = 3
+                SpecieId = 3
             }
 
             );

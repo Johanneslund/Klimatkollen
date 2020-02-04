@@ -11,22 +11,30 @@ using Grupp7.Data;
 using System.Web;
 using Microsoft.AspNetCore.Identity;
 using Grupp7.ViewModels;
+using System.Security.Claims;
 
 namespace Grupp7.Controllers
 { 
     public class HomeController : Controller
     {
         private readonly IRepository dbContext;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public HomeController(IRepository repository)
+        public HomeController(IRepository repository, UserManager<IdentityUser> userManager)
         {
             this.dbContext = repository;
+            this.userManager = userManager;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
             return View();
+        }
+        public IActionResult AddUserFromRegister(string firstname, string lastname, string id, string username)
+        {
+            dbContext.AddUser(firstname, lastname, id, username);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Observation()
@@ -62,6 +70,21 @@ namespace Grupp7.Controllers
 
             return View();
         }
+        public IActionResult AddAnimal()
+        {
+            AddAnimalViewModel model = new AddAnimalViewModel();
+            model.Animal = new Animal();
+            model.Species = dbContext.getSpeciesItemList();
+
+            return View(model);
+        }
+        public IActionResult AddAnimalToUser(AddAnimalViewModel model)
+        {
+            AddAnimalViewModel Model = model;
+            Model.User = dbContext.GetUserFromIdentity(userManager.GetUserId(HttpContext.User));
+            dbContext.AddAnimalToUser(model);
+            return RedirectToAction("UserHome");
+        }
 
         public IActionResult Contact()
         {
@@ -72,14 +95,17 @@ namespace Grupp7.Controllers
       
         public IActionResult AnimalObservation(int id)
         {
-            List<Animal> animals = dbContext.GetAnimals();
+            Animal animal = dbContext.getAnimal(id);
+            Specie specie = dbContext.getAnimalSpecie(animal);
             
-            return View(animals.Where(a => a.AnimalId.Equals(id)).FirstOrDefault());
+            return View(dbContext.setAnimalSpecie(animal,specie));
         }
         public IActionResult EditAnimal(int id)
         {
-            List<Animal> animals = dbContext.GetAnimals();
-            return View(animals.Where(a => a.AnimalId.Equals(id)).FirstOrDefault());
+            Animal animal = dbContext.getAnimal(id);
+            Specie specie = dbContext.getAnimalSpecie(animal);
+
+            return View(dbContext.setAnimalSpecie(animal, specie));
         }
         public IActionResult EditAnimalFromId(Animal animal)
         {
@@ -88,6 +114,17 @@ namespace Grupp7.Controllers
             return RedirectToAction("Map");
         }
 
+        public IActionResult UserHome()
+        {
+            UserHomeViewModel model = new UserHomeViewModel();
+            var userId = userManager.GetUserId(HttpContext.User);
+            model.User = dbContext.GetUserFromIdentity(userId);
+            model.Animals = dbContext.getUserAnimals(model.User.UserId);
+            model.Weathers = dbContext.getUserWeathers(model.User.UserId);
+
+
+            return View(model);
+        }
         public IActionResult Map()
         {
             MapViewModel model = new MapViewModel();

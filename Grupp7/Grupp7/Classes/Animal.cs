@@ -18,14 +18,14 @@ namespace Grupp7.Classes
 
         public string Latitude { get; set; }
 
-        [ForeignKey("SpeciesId")]
-        public int SpeciesId { get; set; }
-        
+        [ForeignKey("SpecieId")]
+        public int SpecieId { get; set; }
+
         [ForeignKey("UserId")]
         public int UserId { get; set; }
 
         public User User { get; set; }
 
-        public Species Species { get; set; }
+        public Specie Specie { get; set; }
     }
 }
