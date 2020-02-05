@@ -44,25 +44,30 @@ namespace Grupp7.Controllers
             ObservationViewModel model = new ObservationViewModel();
             List<Animal> animals = new List<Animal>();
             List<Weather> weathers = new List<Weather>();
+            List<Specie> species = new List<Specie>();
             animals = dbContext.GetAnimals();
             weathers = dbContext.GetWeathers();
-           // model.UserList = dbContext.GetUsers();
+            // model.UserList = dbContext.GetUsers();
             //model.AnimalList = model.AnimalList.OrderByDescending(x => x.Datetime).ToList();
-            //model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();          
+            //model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();   
 
-            model.ObservationsList = new List<Observation>(); 
-            foreach ( var item in animals)
+            model.ObservationsList = new List<Observation>();
+            foreach (var item in animals)
             {
-                model.ObservationsList.Add(new Observation {Animal = item , Datetime = item.Datetime});
-
+                model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
             }
             foreach (var item in weathers)
             {
-                model.ObservationsList.Add(new Observation { Weather = item , Datetime = item.Datetime });
+                model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
             }
-            model.ObservationsList = model.ObservationsList.OrderByDescending(x => x.Datetime).ToList(); 
+            foreach (var item in species)
+            {
+                model.ObservationsList.Add(new Observation { Species = item, SpecieName = item.Speciename });
+            }
+            model.ObservationsList = model.ObservationsList.OrderByDescending(x => x.Datetime).ToList();
 
-            return View(model); 
+            return View(model);
+
         }
 
         public IActionResult About()

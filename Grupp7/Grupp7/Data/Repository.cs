@@ -28,7 +28,6 @@ namespace Grupp7.Classes
         {
             return context.Animals.Where(x => x.AnimalId.Equals(id)).FirstOrDefault();
         }
-
         public void  AddUser(string firstname, string lastname, string id, string username)
         {
             context.Add(new User()
@@ -72,7 +71,6 @@ namespace Grupp7.Classes
             context.Entry(animal).State = EntityState.Modified;
             context.SaveChanges();
         }
-
         public List<User> GetUsers() 
         {
             List<User> Users = new List<User>();
@@ -82,7 +80,6 @@ namespace Grupp7.Classes
             }
             return Users;
         }
-
         public List<Weather> GetWeathers()
         {
             List<Weather> Weathers = new List<Weather>();
@@ -102,12 +99,10 @@ namespace Grupp7.Classes
             }
             return Weathers;
         }
-
         public void Save(User user)
         {
 
         }
-
         public User GetUserFromIdentity(string id)
         {
             return context.Users.Where(u => u.Id.Equals(id)).FirstOrDefault();
@@ -120,7 +115,6 @@ namespace Grupp7.Classes
         {
             return context.Weathers.Where(i => i.User.UserId.Equals(id)).ToList();
         }
-
         public List<Specie> GetSpecies()
         {
             List<Specie> Species = new List<Specie>();
@@ -143,7 +137,6 @@ namespace Grupp7.Classes
             animal.Specie = specie;
             return animal;
         }
-
         public List<SelectListItem> getSpeciesItemList()
         {
             List<Specie> specieList = GetSpecies();
@@ -169,6 +162,15 @@ namespace Grupp7.Classes
             setAnimalSpecie(animal, getAnimalSpecie(animal));
             context.Add(animal);
             context.SaveChanges();
+        }
+
+        public IEnumerable<Specie> Search(string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                return context.Species;
+            }
+            return context.Species.Where(a => a.Speciename.Contains(searchTerm));
         }
     }
 }

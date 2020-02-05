@@ -13,6 +13,7 @@ namespace Grupp7.Classes
     {
 
         private List<User> users = new List<User>();
+        private List<Specie> species = new List<Specie>();
 
         public MockRepository()
         {
@@ -26,48 +27,39 @@ namespace Grupp7.Classes
             };
             users.Add(user);
         }
-
         public User GetUser(int id)
         {
             return users.Where(x => x.UserId.Equals(id)).FirstOrDefault();
 
         }
-
         public void AddUser(string firstname, string lastname, string id, string username)
         {
             throw new NotImplementedException();
         }
-
         public List<User> GetUsers() //  => users
         {
             throw new NotImplementedException();
         }
-
         public List<Animal> GetAnimals()
         {
             throw new NotImplementedException();
         }
-
         public void Save(User user)
         {
             throw new NotImplementedException();
         }
-
         public Animal getAnimal(int id)
         {
             throw new NotImplementedException();
         }
-
         public void updateAimal(Animal animal)
         {
             throw new NotImplementedException();
         }
-
         public List<Weather> GetWeathers()
         {
             throw new NotImplementedException();
         }
-
         public User GetUserFromIdentity(string id)
         {
             throw new NotImplementedException();
@@ -80,28 +72,27 @@ namespace Grupp7.Classes
         {
             throw new NotImplementedException();
         }
-
         public List<Specie> GetSpecies()
         {
             throw new NotImplementedException();
         }
-
         public Specie getAnimalSpecie(Animal animal)
         {
             throw new NotImplementedException();
         }
-
         public Animal setAnimalSpecie(Animal animal, Specie specie)
         {
             throw new NotImplementedException();
         }
-
         public List<SelectListItem> getSpeciesItemList()
         {
             throw new NotImplementedException();
         }
-
         public void AddAnimalToUser(AddAnimalViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+        public IEnumerable<Specie> Search(string searchTerm)
         {
             throw new NotImplementedException();
         }

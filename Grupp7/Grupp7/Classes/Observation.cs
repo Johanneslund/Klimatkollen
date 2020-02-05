@@ -11,5 +11,7 @@ namespace Grupp7.Classes
         public DateTime Datetime { get; set; }      
         public Animal Animal { get; set; }
         public Weather Weather { get; set; }
+        public Specie Species { get; set; }
+        public string SpecieName { get; set; }
     }
 }
