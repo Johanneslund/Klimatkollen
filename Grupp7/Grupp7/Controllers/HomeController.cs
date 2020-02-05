@@ -12,6 +12,7 @@ using System.Web;
 using Microsoft.AspNetCore.Identity;
 using Grupp7.ViewModels;
 using System.Security.Claims;
+using Grupp7.Helpers;
 
 namespace Grupp7.Controllers
 { 
@@ -129,20 +130,8 @@ namespace Grupp7.Controllers
         {
             MapViewModel model = new MapViewModel();
             model.Animals = dbContext.GetAnimals();
-            double latSum = 0;
-            double longSum = 0;
-            foreach (var item in model.Animals)
-            {
-                if (item.Latitude != null && item.Longitude != null)
-                {
-                    latSum += Convert.ToDouble(item.Latitude.Replace('.', ','));
-                    longSum += Convert.ToDouble(item.Longitude.Replace('.', ','));
-                }
-            }
-            model.CenterLatitude = (latSum / model.Animals.Count).ToString().Replace(',','.');
-            model.CenterLongitude = (longSum / model.Animals.Count).ToString().Replace(',','.');
 
-            return View(model);
+            return View(Helper.getCentralPosition(model));
         }
 
         public IActionResult Privacy()
