@@ -17,28 +17,28 @@
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Firstname" class="control-label"></label>
+                <label asp-for="Firstname" class="control-label"> Förnamn</label>
                 <input asp-for="Firstname" class="form-control" />
                 <span asp-validation-for="Firstname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Lastname" class="control-label"></label>
+                <label asp-for="Lastname" class="control-label">Efternamn</label>
                 <input asp-for="Lastname" class="form-control" />
                 <span asp-validation-for="Lastname" class="text-danger"></span>
             </div>
             <div class="form-group">
-            <label asp-for="Email" class="control-label"></label>
+            <label asp-for="Email" class="control-label">E-post adress</label>
             <input asp-for="Email" class="form-control" />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
             <div class="form-group">
-                <label asp-for="Message" class="control-label"></label>
+                <label asp-for="Message" class="control-label">Meddelande</label>
                 @*<input asp-for="Message" class="form-control" />*@
                 <span asp-validation-for="Message" class="text-danger"></span>
                 <textarea rows="4" cols="1" id="messageTextbox" class="form-control"></textarea>
             </div>
             <div class="form-group">
-                <input type="submit" value="Send" class="btn btn-default" />
+                <input type="submit" value="Skicka" class="btn btn-default" />
             </div>
         </form>
     </div>
