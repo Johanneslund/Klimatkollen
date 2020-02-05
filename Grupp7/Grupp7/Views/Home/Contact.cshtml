@@ -6,7 +6,6 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-@*<h3>Ta gärna kontakt om du behöver något</h3>*@
 
 
 <h4>Har du frågor eller funderingar?</h4>
@@ -28,30 +27,14 @@
                 <span asp-validation-for="Lastname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
             <label asp-for="Email" class="control-label"></label>
             <input asp-for="Email" class="form-control" />
             <span asp-validation-for="Email" class="text-danger"></span>
-        </div>*@
-
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </div>
+        </div>
             <div class="form-group">
                 <label asp-for="Message" class="control-label"></label>
                 @*<input asp-for="Message" class="form-control" />*@
                 <span asp-validation-for="Message" class="text-danger"></span>
-
-
                 <textarea rows="4" cols="1" id="messageTextbox" class="form-control"></textarea>
             </div>
             <div class="form-group">
