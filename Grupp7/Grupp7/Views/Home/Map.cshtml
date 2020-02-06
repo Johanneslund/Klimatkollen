@@ -14,12 +14,12 @@
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 6,
-                center: { lat: @Model.CenterLongitude, lng: @Model.CenterLatitude}
+                center: { lat: @Model.CenterLatitude, lng: @Model.CenterLongitude}
             });
 
-            function addMarker(latitude, longitude, title, description, map) {
+            function addMarker(latitude, longitude, title, date,coat, link, map) {
                 var latLng = new google.maps.LatLng(latitude, longitude);
-                var contentString = '<h3>' + title + '</h3>' + '<p>' + description + '</p>';
+                var contentString = '<h4>' + title + '</h4>' +  '<p>Observerad: '+ date + '</p>' + '<p>Päls: ' + coat + '</p>' + '<p>' + link + '</p>';
 
                 var infowindow = new google.maps.InfoWindow({
                     content: contentString
@@ -37,7 +37,7 @@
                 });
             }
                 @foreach (var item in Model.Animals) {
-                <text>addMarker(@item.Latitude, @item.Longitude, '@item.Specie.Speciename', '@Html.ActionLink("Läs mer","AnimalObservation","Home", new { id = item.AnimalId })', map);</text>
+                <text>addMarker(@item.Latitude, @item.Longitude,'@item.Specie.Speciename', '@item.Datetime','@item.Coat', '@Html.ActionLink("Läs mer","AnimalObservation","Home",new { id = item.AnimalId })', map);</text>
         }
     }
 
