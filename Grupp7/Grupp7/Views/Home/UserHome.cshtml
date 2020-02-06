@@ -29,7 +29,7 @@
         </dd>
     </dl>
     <h3>Djur</h3>
-    @Html.ActionLink("Lägg till nytt djur","AddAnimal","Home")
+    @Html.ActionLink("Lägg till nytt djur", "AddAnimal", "Home")
     <hr />
 
     @foreach (var item in Model.Animals)
@@ -58,8 +58,6 @@
         <p>Long @item.Longitude </p>
         <p>Lat @item.Latitude </p>
         <hr />
-
     }
-
 </div>
 
