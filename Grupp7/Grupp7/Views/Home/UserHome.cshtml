@@ -48,6 +48,7 @@
         <p>Long @item.Longitude </p>
         <p>Lat @item.Latitude </p>
         <p>Päls @item.Coat </p>
+        @Html.ActionLink("Detaljer", "AnimalObservation", "Home", new { id = item.AnimalId })
         <hr />
 
     }
