@@ -12,7 +12,7 @@
         <div class="card">
             <img class="cardImage" src="~/images/three-brown-bunnies.jpg" alt="Bild">
             <div class="cardContent">
-                <h4>Hare</h4>
+                <h4>@item.Specie.Speciename</h4>
                 <p>
                     Päls: @item.Coat <br>
                     Tid och Datum: @item.Datetime <br>
@@ -21,7 +21,7 @@
                 </p>
             </div>
             <div class=" BtnDiv">
-                <input type="button" class="button" value="Läs mer">
+                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId }, new { @class = "btn button" })            
             </div>
             <div class="observer">
                 @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
