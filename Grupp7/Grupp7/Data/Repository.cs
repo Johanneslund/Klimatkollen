@@ -28,7 +28,8 @@ namespace Grupp7.Classes
         {
             return context.Animals.Where(x => x.AnimalId.Equals(id)).FirstOrDefault();
         }
-        public void  AddUser(string firstname, string lastname, string id, string username)
+
+        public void AddUser(string firstname, string lastname, string id, string username)
         {
             context.Add(new User()
             {
@@ -109,7 +110,20 @@ namespace Grupp7.Classes
         }
         public List<Animal> getUserAnimals(int id)
         {
-            return context.Animals.Where(i => i.User.UserId.Equals(id)).ToList();
+            List<Animal> animals = context.Animals.Where(i => i.User.UserId.Equals(id)).ToList();
+            List<Specie> species = GetSpecies();
+            foreach (var animal in animals)
+            {
+                foreach (var specie in species)
+                {
+                    if(animal.SpecieId == specie.SpecieId)
+                    {
+                        animal.Specie = specie;
+                    }
+                }
+            }
+
+            return animals;
         }
         public List<Weather> getUserWeathers(int id)
         {

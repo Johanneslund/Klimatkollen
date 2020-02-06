@@ -26,5 +26,12 @@ namespace Grupp7.Helpers
             model.CenterLongitude = (longSum / model.Animals.Count).ToString().Replace(',', '.');
             return model;
         }
+
+        public static Animal setCurrentTime(Animal animal)
+        {
+            Animal _animal = animal;
+            _animal.Datetime = DateTime.Now;
+            return _animal;
+        }
     }
 }

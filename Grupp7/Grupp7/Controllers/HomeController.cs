@@ -81,6 +81,7 @@ namespace Grupp7.Controllers
             AddAnimalViewModel model = new AddAnimalViewModel();
             model.Animal = new Animal();
             model.Species = dbContext.getSpeciesItemList();
+            Helper.setCurrentTime(model.Animal);
 
             return View(model);
         }

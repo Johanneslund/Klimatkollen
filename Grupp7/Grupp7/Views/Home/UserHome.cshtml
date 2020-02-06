@@ -4,26 +4,25 @@
     ViewData["Title"] = "View";
 }
 
-<h2>View</h2>
+<h2>Mitt hem</h2>
 
 <div>
-    <h4>User</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.User.Username)
+            Användarnamn
         </dt>
         <dd>
             @Html.DisplayFor(model => model.User.Username)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.User.Firstname)
+            Förnamn
         </dt>
         <dd>
             @Html.DisplayFor(model => model.User.Firstname)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.User.Lastname)
+            Efternamn
         </dt>
         <dd>
             @Html.DisplayFor(model => model.User.Lastname)
@@ -36,11 +35,11 @@
     @foreach (var item in Model.Animals)
     {
 
-        <p>Datum: @item.Datetime </p>
-        <p>Art: @item.SpecieId </p>
-        <p>Long: @item.Longitude </p>
-        <p>Lat: @item.Latitude </p>
-        <p>Päls: @item.Coat </p>
+        <p>@item.Datetime </p>
+        <p>Djur @item.Specie.Speciename</p>
+        <p>Long @item.Longitude </p>
+        <p>Lat @item.Latitude </p>
+        <p>Päls @item.Coat </p>
         <hr />
 
     }
@@ -51,13 +50,13 @@
     @foreach (var item in Model.Weathers)
     {
 
-        <p>Datum: @item.Datetime </p>
-        <p>Fukt: @item.Humidity </p>
-        <p>Ph: @item.PH</p>
-        <p>Kol: @item.Carbon </p>
-        <p>Tempratur: @item.Temperature </p>
-        <p>Long: @item.Longitude </p>
-        <p>Lat: @item.Latitude </p>
+        <p>@item.Datetime </p>
+        <p>Fukt @item.Humidity </p>
+        <p>Ph @item.PH</p>
+        <p>Kol @item.Carbon </p>
+        <p>Tempratur @item.Temperature </p>
+        <p>Long @item.Longitude </p>
+        <p>Lat @item.Latitude </p>
         <hr />
 
     }
