@@ -17,7 +17,7 @@
                 center: { lat: @Model.CenterLatitude, lng: @Model.CenterLongitude}
             });
 
-            function addMarker(latitude, longitude, title, date,coat, link, map) {
+            function addMarker(latitude, longitude, title, date,coat, link, map, Image) {
                 var latLng = new google.maps.LatLng(latitude, longitude);
                 var contentString = '<h4>' + title + '</h4>' +  '<p>Observerad: '+ date + '</p>' + '<p>Päls: ' + coat + '</p>' + '<p>' + link + '</p>';
 
@@ -29,7 +29,8 @@
                     position: latLng,
                     title: title,
                     map: map,
-                    draggable: false
+                    draggable: false,
+                    icon: Image
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {
@@ -37,9 +38,22 @@
                 });
             }
                 @foreach (var item in Model.Animals) {
-                <text>addMarker(@item.Latitude, @item.Longitude,'@item.Specie.Speciename', '@item.Datetime','@item.Coat', '@Html.ActionLink("Läs mer","AnimalObservation","Home",new { id = item.AnimalId })', map);</text>
-        }
-    }
+                    if (item.Specie.Speciename is "Fjällräv")
+                    {
+                <text>addMarker(@item.Latitude, @item.Longitude, '@item.Specie.Speciename',
+                '@item.Datetime', '@item.Coat',
+                '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId })',
+                map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
+                    }
+                    else
+                    {
+                                        <text>addMarker(@item.Latitude, @item.Longitude, '@item.Specie.Speciename',
+                '@item.Datetime', '@item.Coat',
+                '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId })',
+                map, 'http://maps.google.com/mapfiles/ms/icons/green.png');</text>
+                    }
+                }
+            }
 
-</script>
+    </script>
 
