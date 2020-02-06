@@ -4,7 +4,7 @@
     ViewData["Title"] = "View";
 }
 
-<h2>Mitt hem</h2>
+<h3>Mitt hem</h3>
 <h4>Här visas dina observationer</h4>
 <div>
     <hr />
@@ -31,7 +31,7 @@
     <h3>Djur</h3>
 
     <div>
-        <img src="~/images/wildBoar_small.jpg" alt="Card image" align="middle" />
+        <img src="~/images/AnimalSymbol.png" alt="Card image" align="middle" title="Bild: Dogo Argentino Wildcat Zampa di Clip art - zampa"/>
     </div>
     <p> </p>
 
@@ -48,6 +48,7 @@
         <p>Long @item.Longitude </p>
         <p>Lat @item.Latitude </p>
         <p>Päls @item.Coat </p>
+        @Html.ActionLink("Detaljer", "AnimalObservation", "Home", new { id = item.AnimalId })
         <hr />
 
     }
