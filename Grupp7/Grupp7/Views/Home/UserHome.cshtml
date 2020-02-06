@@ -5,7 +5,7 @@
 }
 
 <h2>Mitt hem</h2>
-
+<h4>Här visas dina observationer</h4>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -29,6 +29,14 @@
         </dd>
     </dl>
     <h3>Djur</h3>
+
+    <div>
+        <img src="~/images/wildBoar_small.jpg" alt="Card image" align="middle" />
+    </div>
+    <p> </p>
+
+
+
     @Html.ActionLink("Lägg till nytt djur", "AddAnimal", "Home")
     <hr />
 
@@ -45,6 +53,10 @@
     }
 
     <h3>Väder</h3>
+    <div>
+        <img src="~/images/weather_small1.jpg" alt="Card image" align="middle" />
+    </div>
+    <p> </p>
     <hr />
 
     @foreach (var item in Model.Weathers)
