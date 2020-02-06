@@ -9,7 +9,7 @@
 <div class="container">
     @foreach (var item in Model.AnimalList)
     {
-        <div class="card">
+        <div class="observationCard">
             <img class="cardImage" src="~/images/three-brown-bunnies.jpg" alt="Bild">
             <div class="cardContent">
                 <h4>@item.Specie.Speciename</h4>
@@ -35,7 +35,7 @@
     }
     @foreach (var item in Model.WeatherList)
     {
-        <div class="card">
+        <div class="observationCard">
             <img class="cardImage" src="~/images/icebergs-2574987.jpg" alt="Bild">
             <div class="cardContent">
                 <h4>@item.Type</h4>
