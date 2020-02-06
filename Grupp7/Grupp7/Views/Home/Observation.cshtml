@@ -6,58 +6,64 @@
 }
 <h3>Observationer</h3>
 
-<form method="get">
-    <div class="input-group">
-        <input class="form-control" asp-for="SearchTerm" />
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-    </div>
-</form>
 
 <div class="container">
-    @foreach (var item in Model.ObservationsList)
-        {
-            if (item.Animal != null)
-            {
-                <div class="card flex-row flex-wrap">
-                    <img src="~/images/three-brown-bunnies.jpg" alt="images" style="width:300px; height:200px;">
-                    <div class="card-block px-4">
-                        <h4 class="card-title">@item.Animal.Specie.Speciename </h4>
-                        <p class="card-text">
-                            Päls: @item.Animal.Coat <br>
-                            Tid och Datum: @item.Datetime <br>
-                            Longitude: @item.Animal.Longitude <br>
-                            Latitude: @item.Animal.Latitude <br><br>
-                            Observatör : @item.Animal.User.Username
-                        </p>
-                    </div>
-                    <a href="#" class="btn btn-primary pull-right">Läs mer </a>
-                </div>
-                <br />
-            }
-            else if (item.Weather != null)
-            {
-                <div class="card flex-row flex-wrap">
-                    <img src="~/images/icebergs-2574987.jpg" alt="images" style="width:300px; height:200px;">
-                    <div class="card-block px-4">
-                        <h4 class="card-title">@item.Weather.Type</h4>
-                        <p class="card-text">
-                            Datum och tid: @item.Datetime <br>
-                            Longitude @item.Weather.Longitude <br>
-                            Latitude: @item.Weather.Latitude <br>
-                            PH halt: @item.Weather.PH <br>
-                            Fuktighet: @item.Weather.Humidity <br>
-                            Temperatur: @item.Weather.Temperature <br>
-                            Carbon: @item.Weather.Carbon <br><br>
-
-                            Observatör : @item.Weather.User.Username
-                        </p>
-                    </div>
-                    <a href="#" class="btn btn-primary" style="float:right">Läs mer </a>
-                </div>
-                <br />
-            }
+    @foreach (var item in Model.AnimalList)
+    {
+        <div class="observationCard">
+            <img class="cardImage" src="~/images/three-brown-bunnies.jpg" alt="Bild">
+            <div class="cardContent">
+                <h4>@item.Specie.Speciename</h4>
+                <p>
+                    Päls: @item.Coat <br>
+                    Tid och Datum: @item.Datetime <br>
+                    Longitude: @item.Longitude <br>
+                    Latitude: @item.Latitude <br><br>
+                </p>
+            </div>
+            <div class=" BtnDiv">
+                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId }, new { @class = "btn button" })            
+            </div>
+            <div class="observer">
+                @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
+                {
+                    <span>Observatör: </span> @user.Username <br />
+                    @*@user.Firstname @:&nbsp; @user.Lastname*@
+                }
+            </div>
+        </div>
+        <br />
+    }
+    @foreach (var item in Model.WeatherList)
+    {
+        <div class="observationCard">
+            <img class="cardImage" src="~/images/icebergs-2574987.jpg" alt="Bild">
+            <div class="cardContent">
+                <h4>@item.Type</h4>
+                <p>
+                    Datum och tid: @item.Datetime <br>
+                    Longitude @item.Longitude <br>
+                    Latitude: @item.Latitude <br><br><br>
+                    @*PH halt: @item.PH <br>
+            Fuktighet: @item.Humidity <br>
+            Temperatur: @item.Temperature <br>
+            Carbon: @item.Carbon <br> *@
+                </p>
+            </div>
+            <div class=" BtnDiv">
+                <input type="button" class="button" value="Läs mer">
+            </div>
+            <div class="observer">
+                @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
+                {
+                   <span>Observatör: </span> @user.Username <br />
+                    @*@user.Firstname @:&nbsp; @user.Lastname*@
+                }
+            </div>
+        </div>
+        <br />
     }
 </div>
+
+
 

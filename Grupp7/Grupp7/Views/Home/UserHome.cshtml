@@ -4,8 +4,8 @@
     ViewData["Title"] = "View";
 }
 
-<h2>Mitt hem</h2>
-
+<h3>Mitt hem</h3>
+<h4>Här visas dina observationer</h4>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -29,7 +29,15 @@
         </dd>
     </dl>
     <h3>Djur</h3>
-    @Html.ActionLink("Lägg till nytt djur","AddAnimal","Home")
+
+    <div>
+        <img src="~/images/AnimalSymbol.png" alt="Card image" align="middle" title="Bild: Dogo Argentino Wildcat Zampa di Clip art - zampa"/>
+    </div>
+    <p> </p>
+
+
+
+    @Html.ActionLink("Lägg till nytt djur", "AddAnimal", "Home")
     <hr />
 
     @foreach (var item in Model.Animals)
@@ -40,11 +48,16 @@
         <p>Long @item.Longitude </p>
         <p>Lat @item.Latitude </p>
         <p>Päls @item.Coat </p>
+        @Html.ActionLink("Detaljer", "AnimalObservation", "Home", new { id = item.AnimalId })
         <hr />
 
     }
 
     <h3>Väder</h3>
+    <div>
+        <img src="~/images/weather_small1.jpg" alt="Card image" align="middle" />
+    </div>
+    <p> </p>
     <hr />
 
     @foreach (var item in Model.Weathers)
@@ -58,8 +71,6 @@
         <p>Long @item.Longitude </p>
         <p>Lat @item.Latitude </p>
         <hr />
-
     }
-
 </div>
 

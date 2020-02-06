@@ -102,10 +102,11 @@ namespace Grupp7.Controllers
       
         public IActionResult AnimalObservation(int id)
         {
-            Animal animal = dbContext.getAnimal(id);
-            Specie specie = dbContext.getAnimalSpecie(animal);
-            
-            return View(dbContext.setAnimalSpecie(animal,specie));
+            AnimalObservationViewModel model = new AnimalObservationViewModel();
+            model.Animal = dbContext.getAnimal(id);
+            model.User = dbContext.GetUser(model.Animal.UserId);
+            model.Animal.Specie = dbContext.getAnimalSpecie(model.Animal);
+            return View(model);
         }
         public IActionResult EditAnimal(int id)
         {
