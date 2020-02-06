@@ -30,9 +30,10 @@
     </dl>
     <h3>Djur</h3>
     <div>
-        <img src="~/images/wildBoar_small.jpg" alt="Card image" align="middle" //>
+        <img src="~/images/wildBoar_small.jpg" alt="Card image" align="middle" />
     </div>
-    @Html.ActionLink("Lägg till nytt djur","AddAnimal","Home")
+    <p> </p>
+    @Html.ActionLink("Lägg till nytt djur", "AddAnimal", "Home")
     <hr />
 
     @foreach (var item in Model.Animals)
@@ -48,6 +49,10 @@
     }
 
     <h3>Väder</h3>
+    <div>
+        <img src="~/images/weather_small1.jpg" alt="Card image" align="middle" />
+    </div>
+    <p> </p>
     <hr />
 
     @foreach (var item in Model.Weathers)
