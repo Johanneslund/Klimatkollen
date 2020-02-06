@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "Djur observation";
 }
-
-<h2>Djur observation</h2>
+<h3>Mitt Hem</h3>
+<h4>Observations detaljer</h4>
 
 <style>
     #map {
@@ -15,12 +15,15 @@
 <div class="row">
     <hr />
     <div class="col-md-4">
-        <p><strong>@Html.DisplayFor(model => model.Animal.Datetime)</strong></p>
-        <p><strong>Observatör: </strong>  @Html.DisplayFor(model => model.User.Firstname) @Html.DisplayFor(model => model.User.Lastname) </p>
-        <p><strong>Djur:</strong> @Html.DisplayFor(model => model.Animal.Specie.Speciename) </p>
-        <p><strong>Päls:</strong> @Html.DisplayFor(model => model.Animal.Coat)</p>
+        <div class="card flex-row flex-wrap">
+            <img src="~/images/AnimalSymbol.png" alt="images">
+            <p> </p>
+            <p><strong>@Html.DisplayFor(model => model.Animal.Datetime)</strong></p>
+            <p><strong>Observatör: </strong>  @Html.DisplayFor(model => model.User.Firstname) @Html.DisplayFor(model => model.User.Lastname) </p>
+            <p><strong>Djur:</strong> @Html.DisplayFor(model => model.Animal.Specie.Speciename) </p>
+            <p><strong>Päls:</strong> @Html.DisplayFor(model => model.Animal.Coat)</p>
+        </div>
     </div>
-</div>
 <div>
     @Html.ActionLink("Ändra på observation", "EditAnimal", "Home", new { id = Model.Animal.AnimalId })
 </div>
