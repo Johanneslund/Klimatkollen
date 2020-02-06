@@ -8,7 +8,7 @@ namespace Grupp7.Models
 {
     public class UserModel
     {
-        public int UserId { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public string Firstname { get; set; }
@@ -32,5 +32,10 @@ namespace Grupp7.Models
         public string ConfirmPassword { get; set; }
 
         public int Phone { get; set; }
+
+        [Display(Name = "Remember Me")]
+        public bool RememberMe { get; set; }
+
+        public string Message { get; set; }
     }
 }

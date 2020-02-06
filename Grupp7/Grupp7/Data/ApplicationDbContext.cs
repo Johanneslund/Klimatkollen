@@ -17,21 +17,21 @@ namespace Grupp7.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Animal> Animals { get; set; }
         public DbSet<Weather> Weathers { get; set; }
+        public DbSet<Specie> Species { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<User>().HasData(
 
             new User()
             {
                 UserId = 1,
-                Firstname = "Martin",
-                Lastname = "Timell",
-                Username = "MT",
-                Email = "Marreparre@live.se",
-                Password = "llll",
-                Phone = "0724445522"
+                Firstname = "Johannes",
+                Lastname = "Lundkvist",
+                Username = "Jossieri",
+                Id = "21a529ea-f6fd-4f35-ae77-afc54aa83fe5"
             },
 
             new User()
@@ -40,39 +40,37 @@ namespace Grupp7.Data
                 Firstname = "Björn",
                 Lastname = "Bertilsson",
                 Username = "BB",
-                Email = "Björne@live.se",
-                Password = "2222",
-                Phone = "07212312344"
+                Id = "c85d4906-25ec-4e8d-9ebd-9f4b74b506f0"
             }
 
             );
 
-            modelBuilder.Entity<Species>().HasData(
+            modelBuilder.Entity<Specie>().HasData(
 
-            new Species()
+            new Specie()
             {
-                SpeciesId = 1,
-                Speciesname = "Hare"
+                SpecieId = 1,
+                Speciename = "Hare"
             },
-            new Species()
+            new Specie()
             {
-                SpeciesId = 2,
-                Speciesname = "Fjällräv"
+                SpecieId = 2,
+                Speciename = "Fjällräv"
             },
-            new Species()
+            new Specie()
             {
-                SpeciesId = 3,
-                Speciesname = "Ripa"
+                SpecieId = 3,
+                Speciename = "Ripa"
             },
-            new Species()
+            new Specie()
             {
-                SpeciesId = 4,
-                Speciesname = "Vildsvin"
+                SpecieId = 4,
+                Speciename = "Vildsvin"
             },
-            new Species()
+            new Specie()
             {
-                SpeciesId = 5,
-                Speciesname = "Groda"
+                SpecieId = 5,
+                Speciename = "Groda"
             }
 
             );
@@ -86,7 +84,7 @@ namespace Grupp7.Data
                 Longitude = "63.247951",
                 Latitude = "14.662298",
                 UserId = 1,
-                SpeciesId = 1
+                SpecieId = 1
             },
 
             new Animal()
@@ -96,7 +94,7 @@ namespace Grupp7.Data
                 Longitude = "63.247231",
                 Latitude = "14.662298",
                 UserId = 1,
-                SpeciesId = 2
+                SpecieId = 2
             },
 
             new Animal()
@@ -107,7 +105,7 @@ namespace Grupp7.Data
                 Latitude = "14.445399",
                 Coat = "Vinter",
                 UserId = 2,
-                SpeciesId = 3
+                SpecieId = 3
             }
 
             );

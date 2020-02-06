@@ -1,0 +1,91 @@
+﻿@model Grupp7.ViewModels.AddAnimalViewModel
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h3>Mitt hem<h3
+
+<h4>Här kan du lägga till en djur-observation</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-action="AddAnimalToUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Djur</label>
+                <select asp-for="Animal.SpecieId" asp-items="Model.Species" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Animal.Datetime" class="control-label"></label>
+                <input asp-for="Animal.Datetime" class="form-control" />
+                <span asp-validation-for="Animal.Datetime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Animal.Longitude" class="control-label" id="lng"></label>
+                <input asp-for="Animal.Longitude" class="form-control" />
+                <span asp-validation-for="Animal.Longitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Animal.Latitude" class="control-label" id="lat"></label>
+                <input asp-for="Animal.Latitude" class="form-control" />
+                <span asp-validation-for="Animal.Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Animal.Coat" class="control-label"></label>
+                <input asp-for="Animal.Coat" class="form-control" />
+                <span asp-validation-for="Animal.Coat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Skapa" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div id="map">
+</div>
+<script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 6,
+                center: {lat: 60.284, lng: 15.896 }
+            });
+
+            var marker;
+            function placeMarker(location) {
+                if (marker) {
+                    marker.setPosition(location);
+                } else {
+                    marker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        draggable: true,
+                        animation: google.maps.Animation.DROP
+                    });
+                }
+                google.maps.event.addListener(marker, 'dragend', function () {
+                    getCordsFromMarker();
+                });
+                getCordsFromMarker();
+            }
+
+            function getCordsFromMarker() {
+
+                document.getElementById('Animal_Longitude').value = marker.getPosition().lng();
+                document.getElementById('Animal_Latitude').value = marker.getPosition().lat();
+            }
+
+
+            google.maps.event.addListener(map, 'click', function (event) {
+                    placeMarker(event.latLng);
+                });
+    }
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

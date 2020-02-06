@@ -4,14 +4,16 @@ using Grupp7.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Grupp7.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200203153151_seed12")]
+    partial class seed12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,9 +48,9 @@ namespace Grupp7.Migrations
                     b.ToTable("Animals");
 
                     b.HasData(
-                        new { AnimalId = 1, Datetime = new DateTime(2020, 2, 6, 17, 22, 53, 181, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247951", SpecieId = 1, UserId = 1 },
-                        new { AnimalId = 2, Datetime = new DateTime(2020, 2, 6, 17, 22, 53, 182, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247231", SpecieId = 2, UserId = 1 },
-                        new { AnimalId = 3, Coat = "Vinter", Datetime = new DateTime(2020, 2, 6, 17, 22, 53, 182, DateTimeKind.Local), Latitude = "14.445399", Longitude = "63.119802", SpecieId = 3, UserId = 2 }
+                        new { AnimalId = 1, Datetime = new DateTime(2020, 2, 3, 16, 31, 50, 250, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247951", SpecieId = 1, UserId = 1 },
+                        new { AnimalId = 2, Datetime = new DateTime(2020, 2, 3, 16, 31, 50, 257, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247231", SpecieId = 2, UserId = 1 },
+                        new { AnimalId = 3, Coat = "Vinter", Datetime = new DateTime(2020, 2, 3, 16, 31, 50, 257, DateTimeKind.Local), Latitude = "14.445399", Longitude = "63.119802", SpecieId = 3, UserId = 2 }
                     );
                 });
 
@@ -130,8 +132,8 @@ namespace Grupp7.Migrations
                     b.ToTable("Weathers");
 
                     b.HasData(
-                        new { WeatherId = 1, Datetime = new DateTime(2020, 2, 6, 17, 22, 53, 182, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Type = "Regn", UserId = 2 },
-                        new { WeatherId = 2, Carbon = "10 mg", Datetime = new DateTime(2020, 2, 6, 17, 22, 53, 182, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "16", Type = "Storsjön", UserId = 2 }
+                        new { WeatherId = 1, Datetime = new DateTime(2020, 2, 3, 16, 31, 50, 258, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Type = "Regn", UserId = 2 },
+                        new { WeatherId = 2, Carbon = "10 mg", Datetime = new DateTime(2020, 2, 3, 16, 31, 50, 258, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "16", Type = "Storsjön", UserId = 2 }
                     );
                 });
 

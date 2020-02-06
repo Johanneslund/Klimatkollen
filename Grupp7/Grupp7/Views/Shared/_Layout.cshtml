@@ -31,7 +31,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Hem</a></li>
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Hem</a></li>*@
                     <li><a asp-area="" asp-controller="Home" asp-action="Observation">Observationer</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">Om oss</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
@@ -39,21 +39,24 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (signInManager.IsSignedIn(User))
                     {
-                        <li class="nav-item">
-                            <form method="post" asp-action="Logout" asp-controller="Account">
+                       <li class="nav-item">
+                            <form method="post" asp-action="logout" asp-controller="account">
                                 <button type="submit" class"nav-link btn btn-link py-0" style="width:auto">
-                                    Logout @User.Identity.Name
+                                    logout @User.Identity.Name
                                 </button>
                             </form>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="UserHome">Mitt Hem</a>
                         </li>
                     }
                     else
                     {
                         <li>
-                            <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            <a asp-area="" asp-controller="Account" asp-action="Register">Registera</a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            <a asp-area="" asp-controller="Account" asp-action="Login">Logga in</a>
                         </li>
                     }
                 </ul>
@@ -66,8 +69,21 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
+        <section>
+
+            <ul class="social">
+                <li><a href="https://www.facebook.com"> <img src="~/images/facebook1.png" /></a></li>
+                <li ><a href="https://www.instagram.com"> <img src="~/images/instagram.jpg" />  </a></li>
+                <li><a href="https://twitter.com"> <img src="~/images/twitter1.png" /></a></li>
+                <li><a href="https://www.youtube.com"> <img src="~/images/youtube1.png" /></a></li>
+            </ul>
+        </section>
+        <section>
+        </section>
         <footer class="second">
-            <p>&copy; Copyright Grupp7 - 2020</p>
+            <p>&copy; Grupp7 - 2020
+            
+            </p>
         </footer>
     </div>
 

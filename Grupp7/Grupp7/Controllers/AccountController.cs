@@ -41,7 +41,7 @@ namespace Grupp7.Controllers
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: true);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AddUserFromRegister", "Home", new {firstname = model.Firstname, lastname=model.Lastname, id = user.Id, username= model.Username });
                 }
 
                 foreach (var error in result.Errors)

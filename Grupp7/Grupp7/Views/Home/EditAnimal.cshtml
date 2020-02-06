@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "EditAnimal";
 }
+<h3>Mitt hem</h3>
+<h4>Ändra Observation</h4>
 
-<h2>Ändra Observation</h2>
 
-<h4>Animal</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,17 +18,12 @@
                 <span asp-validation-for="Datetime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Specie.Speciename" class="control-label">Djurart</label>
+                <input asp-for="Specie.Speciename" class="form-control" />
+                <span asp-validation-for="Specie.Speciename" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AnimalId" class="control-label"></label>
-                <input asp-for="AnimalId" class="form-control" />
-                <span asp-validation-for="AnimalId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Coat" class="control-label"></label>
+                <label asp-for="Coat" class="control-label">Päls</label>
                 <input asp-for="Coat" class="form-control" />
                 <span asp-validation-for="Coat" class="text-danger"></span>
             </div>
@@ -42,24 +37,18 @@
                 <input asp-for="Latitude" class="form-control" />
                 <span asp-validation-for="Latitude" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="UserId" class="control-label"></label>
                 <input asp-for="UserId" class="form-control" />
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Coat" class="control-label"></label>
-                <input asp-for="Coat" class="form-control" />
-                <span asp-validation-for="Coat" class="text-danger"></span>
-            </div>
+                <label asp-for="AnimalId" class="control-label"></label>
+                <input asp-for="AnimalId" class="form-control" />
+                <span asp-validation-for="AnimalId" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
-                <label asp-for="Species.Speciesname" class="control-label"></label>
-                <input asp-for="Species.Speciesname" class="form-control" />
-                <span asp-validation-for="Species.Speciesname" class="text-danger"></span>
-                <span asp-validation-for="Species.SpeciesId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Spara" class="btn btn-default" />
             </div>
         </form>
     </div>
