@@ -1,6 +1,27 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewBag.Title = "Privacy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewData["Title"]</h2>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<h3>Statistik</h3>
+
+<h4>En översikt av klimatförändringar över tid</h4>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <img src="~/images/diagram_avvikelse_temp.png" alt="Card image" class="img-responsive">
+        </div>
+        <p> Avvikelserna i figuren är i förhållande till temperaturgenomsnittet för perioden 1850−1900. Källa: Climatic Research Unit, University of East Anglia. </p>
+    </div>
+    <div>
+        <img src="~/images/ph_Svavelnedfall.png" alt="Card image" class="img-responsive">
+    </div>
+    <p align="right"> Svavelnedfallet har minskat kraftigt under de senaste 20 åren, framför allt i södra Sverige. Källa: EMEP </p>
+    <div>
+        <img src="~/images/Fjallrävar.png" alt="Card image" class="img-responsive">
+    </div>
+    <p> Källa: Zoologiska Institutionen </p>
+</div>
