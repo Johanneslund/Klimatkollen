@@ -62,7 +62,7 @@ namespace Grupp7.Controllers
             }
             //ObservationsList.OrderBy(x => x.DateTime).ToList();
 
-            return View(model);
+            return View(Helper.getCentralPosition(model));
         }
 
         public IActionResult About()
@@ -128,13 +128,13 @@ namespace Grupp7.Controllers
 
             return View(model);
         }
-        public IActionResult Map()
-        {
-            MapViewModel model = new MapViewModel();
-            model.Animals = dbContext.GetAnimals();
+        //public IActionResult Map()
+       // {
+          //  MapViewModel model = new MapViewModel();
+           // model.Animals = dbContext.GetAnimals();
 
-            return View(Helper.getCentralPosition(model));
-        }
+           // return View(Helper.getCentralPosition(model));
+       // }
 
         public IActionResult Privacy()
         {

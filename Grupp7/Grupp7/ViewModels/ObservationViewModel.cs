@@ -13,5 +13,7 @@ namespace Grupp7.ViewModels
         public List<User> UserList { get; set; }
 
         public List<object> ObservationsList { get; set; } // test
+        public string CentralLatitude { get; set; }
+        public string CentralLongitude { get; set; }
     }
 }

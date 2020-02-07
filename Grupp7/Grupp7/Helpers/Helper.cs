@@ -9,12 +9,12 @@ namespace Grupp7.Helpers
 {
     public static class Helper
     {
-        public static MapViewModel getCentralPosition(MapViewModel model)
+        public static ObservationViewModel getCentralPosition(ObservationViewModel model)
         {
 
             double latSum = 0;
             double longSum = 0;
-            foreach (var item in model.Animals)
+            foreach (var item in model.AnimalList)
             {
                 if (item.Latitude != null && item.Longitude != null)
                 {
@@ -22,8 +22,8 @@ namespace Grupp7.Helpers
                     longSum += Convert.ToDouble(item.Longitude.Replace('.', ','));
                 }
             }
-            model.CenterLatitude = (latSum / model.Animals.Count).ToString().Replace(',', '.');
-            model.CenterLongitude = (longSum / model.Animals.Count).ToString().Replace(',', '.');
+            model.CentralLatitude = (latSum / model.AnimalList.Count).ToString().Replace(',', '.');
+            model.CentralLongitude = (longSum / model.AnimalList.Count).ToString().Replace(',', '.');
             return model;
         }
 
