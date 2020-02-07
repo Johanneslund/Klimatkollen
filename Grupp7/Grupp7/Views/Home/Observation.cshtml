@@ -5,8 +5,13 @@
 }
 <h3>Observationer</h3>
 
-
+<style>
+    #map {
+        width: 90%;
+    }
+</style>
 <div class="container">
+    <div id="map" class="observationCard"></div><br />
     @foreach (var item in Model.AnimalList)
     {
         <div class="observationCard">
@@ -21,7 +26,7 @@
                 </p>
             </div>
             <div class=" BtnDiv">
-                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId }, new { @class = "btn button" })            
+                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId }, new { @class = "btn button" })
             </div>
             <div class="observer">
                 @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
@@ -44,9 +49,9 @@
                     Longitude @item.Longitude <br>
                     Latitude: @item.Latitude <br><br><br>
                     @*PH halt: @item.PH <br>
-            Fuktighet: @item.Humidity <br>
-            Temperatur: @item.Temperature <br>
-            Carbon: @item.Carbon <br> *@
+                        Fuktighet: @item.Humidity <br>
+                        Temperatur: @item.Temperature <br>
+                        Carbon: @item.Carbon <br> *@
                 </p>
             </div>
             <div class=" BtnDiv">
@@ -55,7 +60,7 @@
             <div class="observer">
                 @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
                 {
-                   <span>Observatör: </span> @user.Username <br />
+                    <span>Observatör: </span> @user.Username <br />
                     @*@user.Firstname @:&nbsp; @user.Lastname*@
                 }
             </div>
@@ -63,6 +68,54 @@
         <br />
     }
 </div>
+
+<script>
+        var marker;
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5.5,
+                center: { lat: @Model.CentralLatitude, lng: @Model.CentralLongitude}
+            });
+
+            function addMarker(latitude, longitude, title, date,coat, link, map, Image) {
+                var latLng = new google.maps.LatLng(latitude, longitude);
+                var contentString = '<h4>' + title + '</h4>' +  '<p>Observerad: '+ date + '</p>' + '<p>' + coat + '</p>' + '<p>' + link + '</p>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    title: title,
+                    map: map,
+                    draggable: false,
+                    icon: Image
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+                @foreach (var item in Model.AnimalList)
+                {
+                <text>addMarker(@item.Latitude, @item.Longitude, '@item.Specie.Speciename',
+                '@item.Datetime', 'Päls: @item.Coat',
+                '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId })',
+                map, 'http://maps.google.com/mapfiles/ms/icons/green.png');</text>
+                }
+            @foreach (var item in Model.WeatherList)
+            {
+                                                        <text>addMarker(@item.Latitude, @item.Longitude, '@item.Type',
+                '@item.Datetime', 'Tempratur: @item.Temperature',
+                '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.WeatherId })',
+                map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
+            }
+        }
+
+</script>
+
 
 
 
