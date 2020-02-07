@@ -49,13 +49,13 @@
                     Longitude @item.Longitude <br>
                     Latitude: @item.Latitude <br><br><br>
                     @*PH halt: @item.PH <br>
-                        Fuktighet: @item.Humidity <br>
-                        Temperatur: @item.Temperature <br>
-                        Carbon: @item.Carbon <br> *@
+                Fuktighet: @item.Humidity <br>
+                Temperatur: @item.Temperature <br>
+                Carbon: @item.Carbon <br> *@
                 </p>
             </div>
             <div class=" BtnDiv">
-                <input type="button" class="button" value="Läs mer">
+                @Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.WeatherId }, new { @class = "btn button" })
             </div>
             <div class="observer">
                 @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
@@ -109,7 +109,7 @@
             {
                                                         <text>addMarker(@item.Latitude, @item.Longitude, '@item.Type',
                 '@item.Datetime', 'Tempratur: @item.Temperature',
-                '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.WeatherId })',
+                '@Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.WeatherId })',
                 map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
             }
         }

@@ -103,6 +103,13 @@ namespace Grupp7.Controllers
             model.Animal.Specie = dbContext.getAnimalSpecie(model.Animal);
             return View(model);
         }
+        public IActionResult WeatherObservation(int id)
+        {
+            WeatherObservationViewModel model = new WeatherObservationViewModel();
+            model.Weather = dbContext.GetWeather(id);
+            model.User = dbContext.GetUser(model.Weather.UserId);
+            return View(model);
+        }
         public IActionResult EditAnimal(int id)
         {
             Animal animal = dbContext.getAnimal(id);
