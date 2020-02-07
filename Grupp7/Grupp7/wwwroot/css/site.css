@@ -125,12 +125,15 @@ ul.social li img {
     width: 50%;
     max-width: 100%;
     height: auto;
-}	
+}
 
 footer.second {
-    border-top: 1px solid #404E50;
-    background-color: #A9A9A9;
-    max-height: 200px;
+    background-color: #222;
+    margin:auto;
+}
+
+footer.second p{
+    color:#333;
     text-align: center;
-    opacity: 0.95;
+
 }
