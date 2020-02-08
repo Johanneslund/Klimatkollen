@@ -42,24 +42,31 @@ namespace Grupp7.Controllers
         {
             //gets all observations in 2 lists.
             ObservationViewModel model = new ObservationViewModel();
-            model.AnimalList = dbContext.GetAnimals();
-            model.WeatherList = dbContext.GetWeathers();
-            //model.UserList = dbContext.GetUsers();
+            List<Animal> animals = new List<Animal>();
+            List<Weather> weathers = new List<Weather>();
+            animals = dbContext.GetAnimals();
+            weathers = dbContext.GetWeathers();
 
-            //sorts the 2 lists
-            //model.AnimalList = model.AnimalList.OrderByDescending(x => x.Datetime).ToList();
-            //model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();
+
+            model.ObservationsList = new List<Observation>();
+            foreach (var item in animals)
+            {
+                model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
+
+            }
+            foreach (var item in weathers)
+            {
+                model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
+            }
+            model.ObservationsList = model.ObservationsList.OrderByDescending(x => x.Datetime).ToList();
+
+            //model.AnimalList = dbContext.GetAnimals();
+            //model.WeatherList = dbContext.GetWeathers();
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 model.AnimalList = model.AnimalList.Where(x => x.Specie.Speciename.Contains(searchTerm)).ToList();
             }
-
-            //model.ObservationsList = new List<object>(); 
-            //foreach ( var item in model.AnimalList)
-            //{
-            //    model.ObservationsList.Add(item);
-            //}
 
             return View(model);
         }

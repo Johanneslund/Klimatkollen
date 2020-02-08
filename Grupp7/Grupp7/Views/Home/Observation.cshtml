@@ -1,0 +1,54 @@
+﻿@model Grupp7.ViewModels.ObservationViewModel;
+
+@{
+    ViewData["Title"] = "Observationer";
+
+}
+<h3>Observationer</h3>
+
+<div class="container">
+    @foreach (var item in Model.ObservationsList)
+    {
+        if (item.Animal != null)
+        {
+            <div class="card flex-row flex-wrap">
+                <img src="~/images/three-brown-bunnies.jpg" alt="images" style="width:300px; height:200px;">
+                <div class="card-block px-4">
+                    <h4 class="card-title">@item.Animal.Specie.Speciename </h4>
+                    <p class="card-text">
+                        Päls: @item.Animal.Coat <br>
+                        Tid och Datum: @item.Datetime <br>
+                        Longitude: @item.Animal.Longitude <br>
+                        Latitude: @item.Animal.Latitude <br><br>
+                        Observatör : @item.Animal.User.Username
+                    </p>
+                </div>
+                <a href="#" class="btn btn-primary pull-right">Läs mer </a>
+            </div>
+            <br />
+        }
+        else if (item.Weather != null)
+        {
+            <div class="card flex-row flex-wrap">
+                <img src="~/images/icebergs-2574987.jpg" alt="images" style="width:300px; height:200px;">
+                <div class="card-block px-4">
+                    <h4 class="card-title">@item.Weather.Type</h4>
+                    <p class="card-text">
+                        Datum och tid: @item.Datetime <br>
+                        Longitude @item.Weather.Longitude <br>
+                        Latitude: @item.Weather.Latitude <br>
+                        PH halt: @item.Weather.PH <br>
+                        Fuktighet: @item.Weather.Humidity <br>
+                        Temperatur: @item.Weather.Temperature <br>
+                        Carbon: @item.Weather.Carbon <br><br>
+
+                        Observatör : @item.Weather.User.Username
+                    </p>
+                </div>
+                <a href="#" class="btn btn-primary" style="float:right">Läs mer </a>
+            </div>
+            <br />
+        }
+    }
+</div>
+
