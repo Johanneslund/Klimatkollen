@@ -15,6 +15,7 @@
         <form asp-action="AddAnimalToUser">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label>Djur</label>
                 <select asp-for="Animal.SpecieId" asp-items="Model.Species" class="form-control"></select>
             </div>
             <div class="form-group">
@@ -85,7 +86,6 @@
                 });
     }
 </script>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -35,5 +35,7 @@ namespace Grupp7.Models
 
         [Display(Name = "Remember Me")]
         public bool RememberMe { get; set; }
+
+        public string Message { get; set; }
     }
 }

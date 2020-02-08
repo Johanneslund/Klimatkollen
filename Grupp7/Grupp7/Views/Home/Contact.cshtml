@@ -1,17 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Contact";
+﻿@model Grupp7.Models.UserModel;
+
+@{
+    ViewBag.Title = "Kontakt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<h4>Har du frågor eller funderingar?</h4>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Firstname" class="control-label"> Förnamn</label>
+                <input asp-for="Firstname" class="form-control" />
+                <span asp-validation-for="Firstname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lastname" class="control-label">Efternamn</label>
+                <input asp-for="Lastname" class="form-control" />
+                <span asp-validation-for="Lastname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Email" class="control-label">E-post adress</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label">Meddelande</label>
+                @*<input asp-for="Message" class="form-control" />*@
+                <span asp-validation-for="Message" class="text-danger"></span>
+                <textarea rows="4" cols="1" id="messageTextbox" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Skicka" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+    <img src="~/images/Water.jpg" alt="Card image" class="responsive" title="Bild: Naturskyddsföreningen">
+    <p></p>
+</div>
+  
+
