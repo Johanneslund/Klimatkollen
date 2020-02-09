@@ -10,15 +10,19 @@ namespace Grupp7.Classes
     public class Weather
     {
         public int WeatherId { get; set; }
-
+        [Required]
         public DateTime Datetime { get; set; }
-
+        [Required]
+        [MaxLength(128)]
         public string Type { get; set; }
-
+        [Required]
+        [MaxLength(128)]
         public string Longitude { get; set; }
-
+        [Required]
+        [MaxLength(128)]
         public string Latitude { get; set; }
-
+        [Required]
+        [MaxLength(128)]
         public string Temperature { get; set; }
 
         public string PH { get; set; }

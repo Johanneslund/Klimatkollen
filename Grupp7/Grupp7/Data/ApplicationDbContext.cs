@@ -83,6 +83,7 @@ namespace Grupp7.Data
                 Datetime = DateTime.Now,
                 Longitude = "63.247951",
                 Latitude = "14.662298",
+                Coat = "Vinter",
                 UserId = 1,
                 SpecieId = 1
             },
@@ -93,6 +94,7 @@ namespace Grupp7.Data
                 Datetime = DateTime.Now,
                 Longitude = "63.247231",
                 Latitude = "14.662298",
+                Coat = "Vinter",
                 UserId = 1,
                 SpecieId = 2
             },
@@ -120,7 +122,8 @@ namespace Grupp7.Data
                     Longitude = "63.247231",
                     Latitude = "14.662298",
                     Humidity = "87,2",
-                    UserId = 2
+                    UserId = 2,
+                    Temperature = "22"
                 },
                 new Weather()
                 {
