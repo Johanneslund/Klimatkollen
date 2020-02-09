@@ -5,59 +5,117 @@
 }
 <h3>Observationer</h3>
 
-@*join the animal and weather into one list and sort
-    fix bootstrap
-*@
+<style>
+    #map {
+        width: 90%;
+    }
+</style>
+<div class="container">
+    <div id="map" class="observationCard"></div><br />
+    @foreach (var item in Model.AnimalList)
+    {
+        <div class="observationCard">
+            <img class="cardImage" src="~/images/three-brown-bunnies.jpg" alt="Bild">
+            <div class="cardContent">
+                <h4>@item.Specie.Speciename</h4>
+                <p>
+                    Päls: @item.Coat <br>
+                    Tid och Datum: @item.Datetime <br>
+                    Longitude: @item.Longitude <br>
+                    Latitude: @item.Latitude <br><br>
+                </p>
+            </div>
+            <div class=" BtnDiv">
+                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId }, new { @class = "btn button" })
+            </div>
+            <div class="observer">
+                @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
+                {
+                    <span>Observatör: </span> @user.Username <br />
+                    @*@user.Firstname @:&nbsp; @user.Lastname*@
+                }
+            </div>
+        </div>
+        <br />
+    }
+    @foreach (var item in Model.WeatherList)
+    {
+        <div class="observationCard">
+            <img class="cardImage" src="~/images/icebergs-2574987.jpg" alt="Bild">
+            <div class="cardContent">
+                <h4>@item.Type</h4>
+                <p>
+                    Datum och tid: @item.Datetime <br>
+                    Longitude @item.Longitude <br>
+                    Latitude: @item.Latitude <br><br><br>
+                    @*PH halt: @item.PH <br>
+                Fuktighet: @item.Humidity <br>
+                Temperatur: @item.Temperature <br>
+                Carbon: @item.Carbon <br> *@
+                </p>
+            </div>
+            <div class=" BtnDiv">
+                @Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.WeatherId }, new { @class = "btn button" })
+            </div>
+            <div class="observer">
+                @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
+                {
+                    <span>Observatör: </span> @user.Username <br />
+                    @*@user.Firstname @:&nbsp; @user.Lastname*@
+                }
+            </div>
+        </div>
+        <br />
+    }
+</div>
 
-        <div class="container">
-            @foreach (var item in Model.AnimalList)
-            {
-                <div class="card flex-row flex-wrap">
-                    <img src="~/images/three-brown-bunnies.jpg" alt="images" style="width:300px; height:200px;">
-                    <div class="card-block px-4">
-                        <h4 class="card-title">@item.Specie</h4>
-                        <p class="card-text">
-                            Päls: @item.Coat <br>
-                            Tid och Datum: @item.Datetime <br>
-                            Longitude: @item.Longitude <br>
-                            Latitude: @item.Latitude <br>
+<script>
+        var marker;
 
-                            @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                            {
-                                @user.Username <br />
-                                @user.Firstname @user.Lastname
-                            }
-                        </p>
-                    </div>
-                    <a href="#" class="btn btn-primary pull-right">Läs mer </a>
-                </div>
-                <br />
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5.5,
+                center: { lat: @Model.CentralLatitude, lng: @Model.CentralLongitude}
+            });
+
+            function addMarker(latitude, longitude, title, date,coat, link, map, Image) {
+                var latLng = new google.maps.LatLng(latitude, longitude);
+                var contentString = '<h4>' + title + '</h4>' +  '<p>Observerad: '+ date + '</p>' + '<p>' + coat + '</p>' + '<p>' + link + '</p>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    title: title,
+                    map: map,
+                    draggable: false,
+                    icon: Image
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
             }
+                @foreach (var item in Model.AnimalList)
+                {
+                <text>addMarker(@item.Latitude, @item.Longitude, '@item.Specie.Speciename',
+                '@item.Datetime', 'Päls: @item.Coat',
+                '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId })',
+                map, 'http://maps.google.com/mapfiles/ms/icons/green.png');</text>
+                }
             @foreach (var item in Model.WeatherList)
             {
-                <div class="card flex-row flex-wrap">
-                    <img src="~/images/icebergs-2574987.jpg" alt="images" style="width:300px; height:200px;">
-                    <div class="card-block px-4">
-                        <h4 class="card-title">@item.Type</h4>
-                        <p class="card-text">
-                            Datum och tid: @item.Datetime <br>
-                            Longitude @item.Longitude <br>
-                            Latitude: @item.Latitude <br>
-                            PH halt: @item.PH <br>
-                            Fuktighet: @item.Humidity <br>
-                            Temperatur: @item.Temperature <br>
-                            Carbon: @item.Carbon <br>
-
-                            @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                            {
-                                @user.Username <br />
-                                @user.Firstname @user.Lastname
-                            }
-                        </p>
-                    </div>
-                    <a href="#" class="btn btn-primary" style="float:right">Läs mer </a>
-                </div>
-                <br />
+                                                        <text>addMarker(@item.Latitude, @item.Longitude, '@item.Type',
+                '@item.Datetime', 'Tempratur: @item.Temperature',
+                '@Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.WeatherId })',
+                map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
             }
-        </div>
+        }
+
+</script>
+
+
+
 

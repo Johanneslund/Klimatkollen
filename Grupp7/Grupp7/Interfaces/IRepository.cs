@@ -21,6 +21,7 @@ namespace Grupp7.Interfaces
         void updateAimal(Animal animal);
         List<Animal> getUserAnimals(int id);
         List<Weather> getUserWeathers(int id);
+        Weather GetWeather(int id);
 
         List<Weather> GetWeathers();
 

@@ -62,7 +62,7 @@ namespace Grupp7.Controllers
             }
             //ObservationsList.OrderBy(x => x.DateTime).ToList();
 
-            return View(model);
+            return View(Helper.getCentralPosition(model));
         }
 
         public IActionResult About()
@@ -97,10 +97,18 @@ namespace Grupp7.Controllers
       
         public IActionResult AnimalObservation(int id)
         {
-            Animal animal = dbContext.getAnimal(id);
-            Specie specie = dbContext.getAnimalSpecie(animal);
-            
-            return View(dbContext.setAnimalSpecie(animal,specie));
+            AnimalObservationViewModel model = new AnimalObservationViewModel();
+            model.Animal = dbContext.getAnimal(id);
+            model.User = dbContext.GetUser(model.Animal.UserId);
+            model.Animal.Specie = dbContext.getAnimalSpecie(model.Animal);
+            return View(model);
+        }
+        public IActionResult WeatherObservation(int id)
+        {
+            WeatherObservationViewModel model = new WeatherObservationViewModel();
+            model.Weather = dbContext.GetWeather(id);
+            model.User = dbContext.GetUser(model.Weather.UserId);
+            return View(model);
         }
         public IActionResult EditAnimal(int id)
         {
@@ -127,13 +135,13 @@ namespace Grupp7.Controllers
 
             return View(model);
         }
-        public IActionResult Map()
-        {
-            MapViewModel model = new MapViewModel();
-            model.Animals = dbContext.GetAnimals();
+        //public IActionResult Map()
+       // {
+          //  MapViewModel model = new MapViewModel();
+           // model.Animals = dbContext.GetAnimals();
 
-            return View(Helper.getCentralPosition(model));
-        }
+           // return View(Helper.getCentralPosition(model));
+       // }
 
         public IActionResult Privacy()
         {

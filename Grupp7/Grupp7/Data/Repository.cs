@@ -28,6 +28,10 @@ namespace Grupp7.Classes
         {
             return context.Animals.Where(x => x.AnimalId.Equals(id)).FirstOrDefault();
         }
+        public Weather GetWeather(int id)
+        {
+            return context.Weathers.Where(x => x.WeatherId.Equals(id)).FirstOrDefault();
+        }
 
         public void AddUser(string firstname, string lastname, string id, string username)
         {

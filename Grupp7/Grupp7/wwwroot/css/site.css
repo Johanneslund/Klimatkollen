@@ -29,9 +29,52 @@ body {
 }
 
 #map {
-    height: 400px; 
-    width: 100%; 
+    height: 500px; 
+    width: 80%; 
 }
+
+.observationCard {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 90%;
+    height: 200px;
+}
+
+    .observationCard:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+.container {
+}
+
+.cardImage {
+    width: 300px;
+    height: 200px;
+    float: left;
+    margin-right: 2%
+}
+
+
+.cardContent {
+    background-color: white;
+    padding-top: 5px;
+}
+
+.button {
+    background-color: seagreen;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 2%;
+    cursor: pointer;
+    float: right;
+    clear: right
+}
+
+
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
@@ -39,19 +82,36 @@ body {
     .carousel-caption {
         display: none;
     }
+
+    .container {
+        margin:auto;
+    }
+    .cardImage{
+        width:400px;
+        height:300px;
+    }
+    .observationCard {
+        width: 400px;
+        height: 500px;
+    }
+    
 }
 
 h4 {
     text-align: center;
 }
 section {
-   
     text-align: center;
-   
+    padding-top:20px;
+    color:lightgrey;
+    margin:auto; 
+}
+section ul{
+    padding:0;
+    text-align:center;
 }
 .social li {
-    display: inline;
-   
+    display: inline;   
 }
 ul.social li img {
     height: 50px;
@@ -69,15 +129,18 @@ ul.social li img {
     width: 50%;
     max-width: 100%;
     height: auto;
-}	
-
-
-footer.second {
-    border-top: 1px solid #404E50;
-    background-color: #A9A9A9;
-    max-height: 200px;
-    text-align: center;
-    opacity: 0.95;
-   
 }
 
+footer.second {
+    background-color: #222;
+    margin: auto;
+    width: 100%;
+    max-height: 200px;
+    margin-top:50px;
+}
+
+footer.second p{
+    color:white;
+    text-align: center;
+    margin-top:50px;
+}

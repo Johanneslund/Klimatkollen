@@ -105,5 +105,10 @@ namespace Grupp7.Classes
         {
             throw new NotImplementedException();
         }
+
+        public Weather GetWeather(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
