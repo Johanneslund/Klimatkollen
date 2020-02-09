@@ -4,8 +4,7 @@
     ViewData["Title"] = "View";
 }
 
-<h3>
-    Mitt hem<h3
+<h3>Mitt hem</h3>
 
     <h4>Här kan du lägga till en djur-observation</h4>
 
@@ -13,36 +12,40 @@
     <div class="row">
     <div class="col-md-4">
 
-    <form asp-action="AddAnimalToUser">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-    <label>Djur</label>
-    <select asp-for="Animal.SpecieId" asp-items="Model.Species" class="form-control"></select>
-    </div>
-    <div class="form-group">
-    <label asp-for="Animal.Datetime" class="control-label"></label>
-    <input asp-for="Animal.Datetime" class="form-control" />
-    <span asp-validation-for="Animal.Datetime" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-    <label asp-for="Animal.Longitude" class="control-label" id="lng"></label>
-    <input asp-for="Animal.Longitude" class="form-control" />
-    <span asp-validation-for="Animal.Longitude" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-    <label asp-for="Animal.Latitude" class="control-label" id="lat"></label>
-    <input asp-for="Animal.Latitude" class="form-control" />
-    <span asp-validation-for="Animal.Latitude" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-    <label asp-for="Animal.Coat" class="control-label"></label>
-    <input asp-for="Animal.Coat" class="form-control" />
-    <span asp-validation-for="Animal.Coat" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-    <input type="submit" value="Skapa" class="btn btn-default" />
-    </div>
-    </form>
+        <form asp-action="AddAnimalToUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Djur</label>
+                <select asp-for="Animal.SpecieId" asp-items="Model.Species" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Animal.Datetime" class="control-label"></label>
+                <input asp-for="Animal.Datetime" class="form-control" />
+                <span asp-validation-for="Animal.Datetime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Animal.Longitude" class="control-label" id="lng"></label>
+                <input asp-for="Animal.Longitude" class="form-control" />
+                <span asp-validation-for="Animal.Longitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Animal.Latitude" class="control-label" id="lat"></label>
+                <input asp-for="Animal.Latitude" class="form-control" />
+                <span asp-validation-for="Animal.Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Stad</label>
+                <input for="City" class="form-control" id="city", disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Animal.Coat" class="control-label"></label>
+                <input asp-for="Animal.Coat" class="form-control" />
+                <span asp-validation-for="Animal.Coat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Skapa" class="btn btn-default" />
+            </div>
+        </form>
     </div>
     </div>
 
@@ -50,69 +53,89 @@
 
     <div id="map">
     </div>
+    
     <script>
     function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 6,
-    center: {lat: 60.284, lng: 15.896 }
+        var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 6,
+        center: {lat: 60.284, lng: 15.896 }
     });
 
-    var marker;
-    function placeMarker(location) {
-    var positionLatInt = parseFloat(location.lat())
-    var positionLngInt = parseFloat(location.lng());
-    if (positionLatInt > 55.349 && positionLatInt < 69.721 && positionLngInt > 12.401 && positionLngInt < 23.931) {
+        var marker;
+        function placeMarker(location) {
+            var positionLatInt = parseFloat(location.lat())
+            var positionLngInt = parseFloat(location.lng());
+            if (positionLatInt > 55.349 && positionLatInt < 69.721 && positionLngInt > 12.401 && positionLngInt < 23.931) {
 
-    if (marker) {
-    marker.setPosition(location);
-    }
-    else {
+                if (marker) {
+                    marker.setPosition(location);
+                }
+                else {
 
-
-    marker = new google.maps.Marker({
-    position: location,
-    map: map,
-    draggable: true,
-    animation: google.maps.Animation.DROP
-    });
-        google.maps.event.addListener(marker, 'dragend', function () {
-            if (markerIsInSweden(marker)) {
-                getCordsFromMarker();
-            }
-            else {
-                marker.setPosition(google.maps.LatLng(58.321, 18.456));
-                alert("För tillfället accepterar vi enbart observationer i sverige");
-            }
-        });
-    }
+                    marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP
+                    });
+                google.maps.event.addListener(marker, 'dragend', function () {
+                if (markerIsInSweden(marker)) {
+                    getCordsFromMarker();
+                }
+                else {
+                    marker.setPosition(google.maps.LatLng(58.321, 18.456));
+                    removeCordsFromBox();
+                    errorMessage();
+                }
+            });
+        }
         getCordsFromMarker();  
     }
     else
     {
-        alert("För tillfället accepterar vi enbart observationer i sverige");
+        errorMessage()
     }
 
-        }
-        function markerIsInSweden(marker) {
+    }
+    function markerIsInSweden(marker) {
             if (parseFloat(marker.getPosition().lat()) > 55.349 && parseFloat(marker.getPosition().lat()) < 69.721 &&
                 parseFloat(marker.getPosition().lng()) > 12.401 && parseFloat(marker.getPosition().lng()) < 23.931)
             {
                 return true;
             }
             return false;
-        }
-    function getCordsFromMarker() {
+            }
 
-    document.getElementById('Animal_Longitude').value = marker.getPosition().lng();
-    document.getElementById('Animal_Latitude').value = marker.getPosition().lat();
-    }
+        function errorMessage() 
+        {
+            alert("För tillfället accepterar vi enbart observationer i sverige");
+        }
+        function getCordsFromMarker() {
+            var city;
+            document.getElementById('Animal_Longitude').value = marker.getPosition().lng();
+            document.getElementById('Animal_Latitude').value = marker.getPosition().lat();
+            var query = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${document.getElementById('Animal_Latitude').value},${document.getElementById('Animal_Longitude').value}&key=AIzaSyB9UwW11tMu3_ya1O7nvSjSwFWh-pY_YP8`
+            var getLocation = async () => {
+                var response = await fetch(query);
+                var jsonResponse = await response.json(); //extract JSON from the http response
+                var city = await jsonResponse.results[1].address_components[1].short_name;
+                document.getElementById('city').value = city
+            }
+            getLocation();
+        }
+
+        function removeCordsFromBox() {
+            document.getElementById('Animal_Longitude').value = "";
+            document.getElementById('Animal_Latitude').value = "";
+        }
 
 
     google.maps.event.addListener(map, 'click', function (event) {
     placeMarker(event.latLng);
-    });
+        });
     }
-    </script>
+</script>
+
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }
