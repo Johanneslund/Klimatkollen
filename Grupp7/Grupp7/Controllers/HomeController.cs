@@ -77,6 +77,7 @@ namespace Grupp7.Controllers
             model.Animal = new Animal();
             model.Species = dbContext.getSpeciesItemList();
             Helper.setCurrentTime(model.Animal);
+            model.Coat = Helper.getCoats();
 
             return View(model);
         }

@@ -19,6 +19,11 @@
                 <select asp-for="Animal.SpecieId" asp-items="Model.Species" class="form-control"></select>
             </div>
             <div class="form-group">
+                <label>Päls</label>
+                <select asp-for="Animal.Coat" asp-items="Model.Coat" class="form-control"></select>
+                <span asp-validation-for="Animal.Coat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Animal.Datetime" class="control-label"></label>
                 <input asp-for="Animal.Datetime" class="form-control" />
                 <span asp-validation-for="Animal.Datetime" class="text-danger"></span>
@@ -35,12 +40,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Animal.City"></label>
-                <input asp-for="Animal.City" class="form-control" disabled id="city"/>
-            </div>
-            <div class="form-group">
-                <label asp-for="Animal.Coat" class="control-label"></label>
-                <input asp-for="Animal.Coat" class="form-control" />
-                <span asp-validation-for="Animal.Coat" class="text-danger"></span>
+                <input asp-for="Animal.City" class="form-control" disabled id="city" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Skapa" class="btn btn-default" />
