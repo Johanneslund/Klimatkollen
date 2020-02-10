@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Grupp7.Classes
 {
-    public class Weather
+    public class Weather 
     {
         public int WeatherId { get; set; }
         [Required]
