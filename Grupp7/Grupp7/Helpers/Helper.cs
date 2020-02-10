@@ -1,5 +1,6 @@
 ﻿using Grupp7.Classes;
 using Grupp7.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,15 @@ namespace Grupp7.Helpers
             Animal _animal = animal;
             _animal.Datetime = DateTime.Now;
             return _animal;
+        }
+        public static List<SelectListItem> getCoats()
+        {
+            List<SelectListItem> coatList = new List<SelectListItem>();
+            coatList.Add(new SelectListItem { Value = "Sommar", Text = "Sommar"});
+            coatList.Add(new SelectListItem { Value = "Vinter", Text = "Vinter"});
+            coatList.Add(new SelectListItem { Value = "Spräcklig", Text = "Spräcklig"});
+
+            return coatList;
         }
     }
 }
