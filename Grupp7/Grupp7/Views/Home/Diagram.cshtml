@@ -1,9 +1,98 @@
 ﻿@{
-    ViewBag.Title = "Diagram";
+    ViewBag.Title = "Privacy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h3>Statistik</h3>
 
 <h4>En översikt av klimatförändringar över tid</h4>
+
+<hr />
+
+<div class="container">
+    <div class="col-md-5">
+
+        @*<div>
+            <img src="~/images/ph_Svavelnedfall.png" alt="Card image" class="img-responsive">*@
+        @*</div>
+            <p align="right"> Svavelnedfallet har minskat kraftigt under de senaste 20 åren, framför allt i södra Sverige. Källa: EMEP </p>
+            <div>*@
+        <canvas id="myChart" width="400" height="400"></canvas>
+
+        @*<img src="~/images/Fjallrävar.png" alt="Card image" class="img-responsive">*@
+    </div>
+    @*<p> Källa: Zoologiska Institutionen </p>*@
+    <div>
+        <img src="~/images/shmi_havsnivå.png" alt="Card image" class="responsive">
+    </div>
+
+    <div>
+        <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+<a rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"></a> @*//inte säkert om det här*@
+
+<script>
+    var myChart = document.getElementById('myChart').getContext('2d');
+
+    //Global options
+    //Chart.defaults.global.defaultFontFamily = 'Lato';
+    //Chart.defaults.global.defaultFontSize = '18';
+    //Chart.defaults.global.defaultFontColor = '#777';
+
+    var ClimatChart = new Chart(myChart, {
+        type: 'line',
+        data: {
+            labels: ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
+            datasets: [{
+                label: 'Antal kullar',
+                data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
+                backgroundColor:  '#68a275',
+
+                //[
+                //    'rgba(255, 99, 132, 0.8)',
+                //    'rgba(54, 162, 235, 0.8)',
+                //    'rgba(255, 206, 86, 0.8)',
+                //    'rgba(75, 192, 192, 0.8)',
+                //    'rgba(153, 102, 255, 0.8)',
+                //    'rgba(255, 159, 64, 0.8)'
+                //],
+                borderColor: '#777',
+
+                //    [
+                //    'rgba(255, 99, 132, 1)',
+                //    'rgba(54, 162, 235, 1)',
+                //    'rgba(255, 206, 86, 1)',
+                //    'rgba(75, 192, 192, 1)',
+                //    'rgba(153, 102, 255, 1)',
+                //    'rgba(255, 159, 64, 1)'
+                //],
+                borderWidth: 1,
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#000',
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Reproducerande fjällrävar 1974-2017',
+                fontsize: 25
+            },
+            legend: {display: false},
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+
 
