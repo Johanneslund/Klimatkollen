@@ -1,0 +1,36 @@
+﻿@model Grupp7.ViewModels.CreateRoleViewModel;
+
+@{
+    ViewBag.Title = "Skapa ny Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Skapa en ny role</h2>
+
+@*<h4>User</h4>*@
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoleName" class="control-label">Role namn</label>
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Skapa en ny Role" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+    <img src="~/images/deer.jpg" alt="Card image" class="responsive">
+</div>
+
+
+
+@*<div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+

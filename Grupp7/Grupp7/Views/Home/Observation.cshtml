@@ -5,6 +5,21 @@
 
 }
 <h3>Observationer</h3>
+<br />
+<br />
+
+<form asp-controller="Home" asp-action="Observation" method="get">
+    <p>
+        <select asp-for="ObservationType" asp-items="Model.ObservationTypes">
+            <option value="">All</option>
+        </select>
+
+        Sökning: <input type="text" name="SearchTerm">
+        <input type="submit" value="Sök" />
+    </p>
+</form>
+<br />
+<br />
 
 <div class="container">
     @foreach (var item in Model.ObservationsList)
@@ -20,7 +35,6 @@
                         Tid och Datum: @item.Datetime <br>
                         Longitude: @item.Animal.Longitude <br>
                         Latitude: @item.Animal.Latitude <br><br>
-                        Observatör : @item.Animal.User.Username
                     </p>
                 </div>
                 <a href="#" class="btn btn-primary pull-right">Läs mer </a>
@@ -42,7 +56,6 @@
                         Temperatur: @item.Weather.Temperature <br>
                         Carbon: @item.Weather.Carbon <br><br>
 
-                        Observatör : @item.Weather.User.Username
                     </p>
                 </div>
                 <a href="#" class="btn btn-primary" style="float:right">Läs mer </a>

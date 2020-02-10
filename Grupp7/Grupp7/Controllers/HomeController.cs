@@ -13,13 +13,81 @@ using Microsoft.AspNetCore.Identity;
 using Grupp7.ViewModels;
 using System.Security.Claims;
 using Grupp7.Helpers;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Grupp7.Controllers
-{ 
+{
     public class HomeController : Controller
     {
         private readonly IRepository dbContext;
         private readonly UserManager<IdentityUser> userManager;
+
+        // The observations page with search functionality. 
+        public object Observations(string searchTerm, string observationType)
+        {
+            ObservationViewModel model = new ObservationViewModel();
+            Animal animal = new Animal();
+            Weather weather = new Weather();
+            List<Animal> animals = new List<Animal>();
+            List<Weather> weathers = new List<Weather>();
+            //var users = userManager.Users;
+            animals = dbContext.GetAnimals();
+            weathers = dbContext.GetWeathers();
+            model.ObservationsList = new List<Observation>();
+
+            // Selected List dropdown
+            model.ObservationTypes = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Animal", Value = "1"},
+                new SelectListItem {Text = "Weather", Value = "2"}
+            };
+
+            // Populate ObservationsList with Animals and Weathers based on conditions
+            if (!string.IsNullOrEmpty(searchTerm) && observationType == "1")
+            {
+                foreach (var item in animals)
+                {
+                    model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
+                }
+                model.ObservationsList = model.ObservationsList.Where(x => x.Animal.Specie.Speciename.Contains(searchTerm)).ToList();
+            }
+            else if (string.IsNullOrEmpty(searchTerm) && observationType == "1")
+            {
+                foreach (var item in animals)
+                {
+                    model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
+                }
+                model.ObservationsList = model.ObservationsList.OrderBy(o => o.Datetime).ToList();
+            }
+            else if (!string.IsNullOrEmpty(searchTerm) && observationType == "2")
+            {
+                foreach (var item in weathers)
+                {
+                    model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
+                }
+                model.ObservationsList = model.ObservationsList.Where(x => x.Weather.Type.Contains(searchTerm)).ToList();
+            }
+            else if (string.IsNullOrEmpty(searchTerm) && observationType == "2")
+            {
+                foreach (var item in weathers)
+                {
+                    model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
+                }
+                model.ObservationsList = model.ObservationsList.OrderBy(o => o.Datetime).ToList();
+            }
+            else
+            {
+                foreach (var item in animals)
+                {
+                    model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
+                }
+                foreach (var item in weathers)
+                {
+                    model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
+                }
+            }
+            return model;
+        }
 
         public HomeController(IRepository repository, UserManager<IdentityUser> userManager)
         {
@@ -38,37 +106,11 @@ namespace Grupp7.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Observation(string searchTerm)
+        public IActionResult Observation(string searchTerm, string observationType)
         {
-            //gets all observations in 2 lists.
-            ObservationViewModel model = new ObservationViewModel();
-            List<Animal> animals = new List<Animal>();
-            List<Weather> weathers = new List<Weather>();
-            animals = dbContext.GetAnimals();
-            weathers = dbContext.GetWeathers();
+            var observation = Observations(searchTerm, observationType);
 
-
-            model.ObservationsList = new List<Observation>();
-            foreach (var item in animals)
-            {
-                model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
-
-            }
-            foreach (var item in weathers)
-            {
-                model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
-            }
-            model.ObservationsList = model.ObservationsList.OrderByDescending(x => x.Datetime).ToList();
-
-            //model.AnimalList = dbContext.GetAnimals();
-            //model.WeatherList = dbContext.GetWeathers();
-
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                model.AnimalList = model.AnimalList.Where(x => x.Specie.Speciename.Contains(searchTerm)).ToList();
-            }
-
-            return View(model);
+            return View(observation);
         }
 
         public IActionResult About()
@@ -100,7 +142,7 @@ namespace Grupp7.Controllers
 
             return View();
         }
-      
+
         public IActionResult AnimalObservation(int id)
         {
             AnimalObservationViewModel model = new AnimalObservationViewModel();
