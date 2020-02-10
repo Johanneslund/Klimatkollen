@@ -125,6 +125,7 @@ namespace Grupp7.Controllers
             model.Animal = new Animal();
             model.Species = dbContext.getSpeciesItemList();
             Helper.setCurrentTime(model.Animal);
+            model.Coat = Helper.getCoats();
 
             return View(model);
         }
@@ -149,6 +150,13 @@ namespace Grupp7.Controllers
             model.Animal = dbContext.getAnimal(id);
             model.User = dbContext.GetUser(model.Animal.UserId);
             model.Animal.Specie = dbContext.getAnimalSpecie(model.Animal);
+            return View(model);
+        }
+        public IActionResult WeatherObservation(int id)
+        {
+            WeatherObservationViewModel model = new WeatherObservationViewModel();
+            model.Weather = dbContext.GetWeather(id);
+            model.User = dbContext.GetUser(model.Weather.UserId);
             return View(model);
         }
         public IActionResult EditAnimal(int id)
@@ -176,13 +184,13 @@ namespace Grupp7.Controllers
 
             return View(model);
         }
-        public IActionResult Map()
-        {
-            MapViewModel model = new MapViewModel();
-            model.Animals = dbContext.GetAnimals();
+        //public IActionResult Map()
+       // {
+          //  MapViewModel model = new MapViewModel();
+           // model.Animals = dbContext.GetAnimals();
 
-            return View(Helper.getCentralPosition(model));
-        }
+           // return View(Helper.getCentralPosition(model));
+       // }
 
         public IActionResult Privacy()
         {
