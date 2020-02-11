@@ -43,5 +43,39 @@ namespace Grupp7.Helpers
 
             return coatList;
         }
+        public static List<Animal> filterByDate(ObservationViewModel model)
+        {
+            DateTime startDate = new DateTime(2010, 1, 1);
+            DateTime endDate = new DateTime(2019, 12, 31);
+            List<Animal> sortedList = new List<Animal>();
+            foreach (var item in model.AnimalList)
+            {
+                if(item.Datetime > startDate && endDate > item.Datetime)
+                {
+                    sortedList.Add(item);
+                }
+                
+            }
+            return sortedList;
+        }
+        public static void getCoatColors(ObservationViewModel model)
+        {
+            List<string> coatColor = new List<string>();
+            foreach (var item in model.AnimalList)
+            {
+                if(item.Coat == "Sommar") 
+                {
+                    model.Summer++;
+                }
+                if(item.Coat == "Vinter")
+                {
+                    model.Winter++;
+                }
+                if(item.Coat == "Spräcklig")
+                { 
+                model.Mixed++;
+                }
+            }
+        }
     }
 }

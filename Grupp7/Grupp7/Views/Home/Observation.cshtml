@@ -120,14 +120,13 @@
     </script>
     <script>
         var chart = document.getElementById('chart').getContext('2d');
-
         var ClimatChart1 = new Chart(chart, {
             type: 'pie',
             data: {
                 labels: ['Vinter', 'Sommar', 'Spräckligt'],
                 datasets: [{
                     label: 'Päls färg',
-                    data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
+                    data: [@Model.Winter,@Model.Summer ,@Model.Mixed ],
                     backgroundColor: '#68a275',
                     borderColor: '#777',
                     borderWidth: 1,

@@ -52,6 +52,7 @@ namespace Grupp7.Controllers
             model.AnimalList = model.AnimalList.OrderByDescending(x => x.Datetime).ToList();
             model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();
 
+
             
             foreach (var item in model.WeatherList)
             {
@@ -59,6 +60,8 @@ namespace Grupp7.Controllers
             }
             //ObservationsList.OrderBy(x => x.DateTime).ToList();
 
+            Helper.getCoatColors(model);
+            Helper.filterByDate(model);
             return View(Helper.getCentralPosition(model));
         }
 
