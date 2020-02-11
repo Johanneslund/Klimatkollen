@@ -47,7 +47,7 @@ namespace Grupp7.Controllers
             model.AnimalList = dbContext.GetAnimals();
             model.WeatherList = dbContext.GetWeathers();
             model.UserList = dbContext.GetUsers();
-       
+            model.ObservationsList = new List<object>();
             //sorts the 2 lists
             model.AnimalList = model.AnimalList.OrderByDescending(x => x.Datetime).ToList();
             model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();
