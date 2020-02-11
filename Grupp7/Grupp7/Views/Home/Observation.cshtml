@@ -11,6 +11,8 @@
     }
 </style>
 <div class="container">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <canvas id="chart" width="400" height="400"></canvas>
     <div id="map" class="observationCard"></div><br />
     @foreach (var item in Model.AnimalList)
     {
@@ -49,9 +51,9 @@
                     Longitude @item.Longitude <br>
                     Latitude: @item.Latitude <br><br><br>
                     @*PH halt: @item.PH <br>
-                Fuktighet: @item.Humidity <br>
-                Temperatur: @item.Temperature <br>
-                Carbon: @item.Carbon <br> *@
+                        Fuktighet: @item.Humidity <br>
+                        Temperatur: @item.Temperature <br>
+                        Carbon: @item.Carbon <br> *@
                 </p>
             </div>
             <div class=" BtnDiv">
@@ -113,7 +115,37 @@
                 map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
             }
         }
+</script>
+<script>
+    var chart = document.getElementById('chart').getContext('2d');
 
+    var ClimatChart1 = new Chart(chart, {
+        type: 'pie',
+        data: {
+            labels: ['Vinter', 'Sommar', 'Spräckligt'],
+            datasets: [{
+                label: 'Päls färg',
+                data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
+                backgroundColor: '#68a275',
+                borderColor: '#777',
+                borderWidth: 1,
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#000',
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Ripa 2010 ',
+                fontsize: 25
+            },
+            legend: {
+                display: true,
+                text: 'Antal kullar'
+            },
+
+        }
+    });
 </script>
 
 
