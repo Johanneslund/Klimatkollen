@@ -47,6 +47,7 @@ namespace Grupp7.Classes
         public List<Animal> GetAnimals()
         {
             List<Specie> species = GetSpecies();
+            List<User> users = GetUsers();
             List<Animal> Animals = new List<Animal>();
             foreach (var animal in context.Animals)
             {
@@ -55,7 +56,15 @@ namespace Grupp7.Classes
                     if (animal.SpecieId == specie.SpecieId)
                     {
                         animal.Specie = specie;
-                        Animals.Add(animal);
+                        foreach (var user in users)
+                        {
+                            if (animal.UserId == user.UserId)
+                            {
+                                animal.User = user;
+                                Animals.Add(animal);
+                            }
+                        }
+
                     }
                 }               
             }
@@ -81,10 +90,18 @@ namespace Grupp7.Classes
         public List<Weather> GetWeathers()
         {
             List<Weather> Weathers = new List<Weather>();
+            List<User> Users = GetUsers();
 
-            foreach (var Weather in context.Weathers)
+            foreach (var weather in context.Weathers)
             {
-                Weathers.Add(Weather);
+                foreach (var user in Users)
+                {
+                    if (weather.UserId == user.UserId)
+                    {
+                        weather.User = user;
+                        Weathers.Add(weather);
+                    }
+                }
 
             }
             return Weathers;

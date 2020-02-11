@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Grupp7.Classes
 {
-    public class Animal
+    public class Animal 
     {
         public int AnimalId { get; set; }
         [DisplayName("Datum")]

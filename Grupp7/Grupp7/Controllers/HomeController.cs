@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Identity;
 using Grupp7.ViewModels;
 using System.Security.Claims;
 using Grupp7.Helpers;
+using System.Net.Mail;
+using System.Net;
 
 namespace Grupp7.Controllers
 { 
@@ -50,12 +52,7 @@ namespace Grupp7.Controllers
             model.AnimalList = model.AnimalList.OrderByDescending(x => x.Datetime).ToList();
             model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();
 
-            //testa samla alla observationer i en lista och sedan sortera
-            model.ObservationsList = new List<object>(); 
-            foreach ( var item in model.AnimalList)
-            {
-                model.ObservationsList.Add(item);
-            }
+            
             foreach (var item in model.WeatherList)
             {
                 model.ObservationsList.Add(item);
@@ -89,13 +86,52 @@ namespace Grupp7.Controllers
             return RedirectToAction("UserHome");
         }
 
+        [HttpGet]
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            //ViewData["Message"] = "Your contact page.";
 
             return View();
         }
-      
+
+        [HttpPost]
+        public IActionResult Contact(string firstname, string lastname, string sender, string subject, string message)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    SendEmailContactPage(firstname,lastname,sender,subject,message);
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.Clear();
+                ViewBag.Message = $" Något gick fel. {ex.Message}";
+            }
+            return View();
+        }
+        private void SendEmailContactPage(string firstname, string lastname, string sender, string subject, string message)
+        {
+            MailMessage mm = new MailMessage();
+            mm.From = new MailAddress(sender, "Klimatkollens kontaktformulär"); // eller mejlen i formuläret 
+            mm.To.Add("sabrinthao@gmail.com");//Jörgens mail 
+            mm.Subject = subject;
+            string customerSender = "From: " + sender + " " + firstname + " " + lastname + "\n";
+            mm.Body = customerSender + message;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential("ADMINMAIL", "ADMINPASSWORD"); //admin //try model.Email, model.Password
+            smtp.EnableSsl = true;
+            smtp.Send(mm);
+            ModelState.Clear();
+            ViewBag.Message = "Thank you for Contacting us ";
+        }
+
         public IActionResult AnimalObservation(int id)
         {
             AnimalObservationViewModel model = new AnimalObservationViewModel();
