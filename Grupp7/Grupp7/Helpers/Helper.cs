@@ -43,11 +43,11 @@ namespace Grupp7.Helpers
 
             return coatList;
         }
-        public static List<Animal> filterByDate(ObservationViewModel model, Animal specie, DateTime startdate, DateTime Enddate)
+        public static List<Animal> filterByDate(ObservationViewModel model, DateTime startDate, DateTime endDate, int aSpecie)// Specie
         {
 
             List<Animal> sortedList = new List<Animal>();
-            foreach (var item in model.AnimalList)
+            foreach (var item in model.AnimalList.Where(x => x.SpecieId == aSpecie ))
             {
                 if(item.Datetime > startDate && endDate > item.Datetime)
                 {
@@ -74,24 +74,70 @@ namespace Grupp7.Helpers
             return sortedList;
         }
          */
+         /*Christoffers
         public static void getCoatColors(ObservationViewModel model)
         {
             List<string> coatColor = new List<string>();
-            foreach (var item in model.AnimalList)
+            foreach (var item in sortedAnimals)
             {
-                if(item.Coat == "Sommar") 
+                if (item.Coat == "Sommar")
                 {
                     model.Summer++;
                 }
-                if(item.Coat == "Vinter")
+                if (item.Coat == "Vinter")
                 {
                     model.Winter++;
                 }
+                if (item.Coat == "Spräcklig")
+                {
+                    model.Mixed++;
+                }
+            }
+        }*/
+          public static void getCoatColors(ObservationViewModel model, List<Animal> sortedList, int period)
+          {
+
+            List<string> coatColor = new List<string>();
+            foreach (var item in sortedList)
+            {
+                if(item.Coat == "Sommar") 
+                {
+                    if(period == 1)
+                    {
+                        model.FirstSummer++;
+                    }
+                    else if (period == 2)
+                    {
+                        model.SecondSummer++;
+                    }
+                }
+
+                if(item.Coat == "Vinter")
+                {
+                    if (period == 1)
+                    {
+                        model.FirstWinter++;
+                    }
+                    else if (period == 2)
+                    {
+                        model.SecondWinter++;
+                    }
+
+                }
                 if(item.Coat == "Spräcklig")
-                { 
-                model.Mixed++;
+                {
+                    if (period == 1)
+                    {
+                        model.FirstMixed++;
+                    }
+                    else if (period == 2)
+                    {
+                        model.SecondMixed++;
+                    }
+
                 }
             }
         }
     }
 }
+ 

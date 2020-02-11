@@ -19,5 +19,13 @@ namespace Grupp7.ViewModels
         public int Summer { get; set; }
         public int Mixed { get; set; }
         public Statistics Statistics {get; set;}
+
+
+        public int FirstWinter { get; set; }
+        public int FirstSummer { get; set; }
+        public int FirstMixed { get; set; }
+        public int SecondSummer { get; set; }
+        public int SecondWinter { get; set; }
+        public int SecondMixed { get; set; }
     }
 }

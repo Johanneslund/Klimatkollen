@@ -55,8 +55,6 @@ namespace Grupp7.Controllers
             //sorts the 2 lists
             model.AnimalList = model.AnimalList.OrderByDescending(x => x.Datetime).ToList();
             model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();
-
-
             
             foreach (var item in model.WeatherList)
             {
@@ -64,8 +62,21 @@ namespace Grupp7.Controllers
             }
             //ObservationsList.OrderBy(x => x.DateTime).ToList();
 
-            Helper.getCoatColors(model);
-            Helper.filterByDate(model);
+
+
+            DateTime FirstStartDate = new DateTime(2010, 11, 1);
+            DateTime FirstEndDate = new DateTime(2010, 12, 31);
+            DateTime SecondStartDate = new DateTime(2019, 11, 1);
+            DateTime SecondEndDate = new DateTime(2019, 12, 31);
+
+            int specieID = 3;// ripa
+            
+            Helper.getCoatColors(model, Helper.filterByDate(model, FirstStartDate, FirstEndDate, specieID), 1);
+            Helper.getCoatColors(model, Helper.filterByDate(model, SecondStartDate, SecondEndDate, specieID), 2);
+
+
+
+
             return View(Helper.getCentralPosition(model));
         }
 
