@@ -34,6 +34,10 @@ namespace Grupp7.Controllers
         {
             return View();
         }
+        public IActionResult Diagram()
+        {
+            return View();
+        }
         public IActionResult AddUserFromRegister(string firstname, string lastname, string id, string username)
         {
             dbContext.AddUser(firstname, lastname, id, username);
