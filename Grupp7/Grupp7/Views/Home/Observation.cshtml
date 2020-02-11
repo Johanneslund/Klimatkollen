@@ -14,66 +14,67 @@
     <div class="col-md-5">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
         <canvas id="chart" width="400" height="400"></canvas>
+        <canvas id="chart2" width="400" height="400"></canvas>
     </div>
-        <div id="map" class="observationCard"></div><br />
-        @foreach (var item in Model.AnimalList)
-        {
-            <div class="observationCard">
-                <img class="cardImage" src="~/images/three-brown-bunnies.jpg" alt="Bild">
-                <div class="cardContent">
-                    <h4>@item.Specie.Speciename</h4>
-                    <p>
-                        Päls: @item.Coat <br>
-                        Tid och Datum: @item.Datetime <br>
-                        Longitude: @item.Longitude <br>
-                        Latitude: @item.Latitude <br><br>
-                    </p>
-                </div>
-                <div class=" BtnDiv">
-                    @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId }, new { @class = "btn button" })
-                </div>
-                <div class="observer">
-                    @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                    {
-                        <span>Observatör: </span> @user.Username <br />
-                        @*@user.Firstname @:&nbsp; @user.Lastname*@
-                    }
-                </div>
+    <div id="map" class="observationCard"></div><br />
+    @foreach (var item in Model.AnimalList)
+    {
+        <div class="observationCard">
+            <img class="cardImage" src="~/images/three-brown-bunnies.jpg" alt="Bild">
+            <div class="cardContent">
+                <h4>@item.Specie.Speciename</h4>
+                <p>
+                    Päls: @item.Coat <br>
+                    Tid och Datum: @item.Datetime <br>
+                    Longitude: @item.Longitude <br>
+                    Latitude: @item.Latitude <br><br>
+                </p>
             </div>
-            <br />
-        }
-        @foreach (var item in Model.WeatherList)
-        {
-            <div class="observationCard">
-                <img class="cardImage" src="~/images/icebergs-2574987.jpg" alt="Bild">
-                <div class="cardContent">
-                    <h4>@item.Type</h4>
-                    <p>
-                        Datum och tid: @item.Datetime <br>
-                        Longitude @item.Longitude <br>
-                        Latitude: @item.Latitude <br><br><br>
-                        @*PH halt: @item.PH <br>
-                            Fuktighet: @item.Humidity <br>
-                            Temperatur: @item.Temperature <br>
-                            Carbon: @item.Carbon <br> *@
-                    </p>
-                </div>
-                <div class=" BtnDiv">
-                    @Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.WeatherId }, new { @class = "btn button" })
-                </div>
-                <div class="observer">
-                    @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                    {
-                        <span>Observatör: </span> @user.Username <br />
-                        @*@user.Firstname @:&nbsp; @user.Lastname*@
-                    }
-                </div>
+            <div class=" BtnDiv">
+                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId }, new { @class = "btn button" })
             </div>
-            <br />
-        }
-    </div>
+            <div class="observer">
+                @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
+                {
+                    <span>Observatör: </span> @user.Username <br />
+                    @*@user.Firstname @:&nbsp; @user.Lastname*@
+                }
+            </div>
+        </div>
+        <br />
+    }
+    @foreach (var item in Model.WeatherList)
+    {
+        <div class="observationCard">
+            <img class="cardImage" src="~/images/icebergs-2574987.jpg" alt="Bild">
+            <div class="cardContent">
+                <h4>@item.Type</h4>
+                <p>
+                    Datum och tid: @item.Datetime <br>
+                    Longitude @item.Longitude <br>
+                    Latitude: @item.Latitude <br><br><br>
+                    @*PH halt: @item.PH <br>
+                        Fuktighet: @item.Humidity <br>
+                        Temperatur: @item.Temperature <br>
+                        Carbon: @item.Carbon <br> *@
+                </p>
+            </div>
+            <div class=" BtnDiv">
+                @Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.WeatherId }, new { @class = "btn button" })
+            </div>
+            <div class="observer">
+                @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
+                {
+                    <span>Observatör: </span> @user.Username <br />
+                    @*@user.Firstname @:&nbsp; @user.Lastname*@
+                }
+            </div>
+        </div>
+        <br />
+    }
+</div>
 
-    <script>
+<script>
         var marker;
 
         function initMap() {
@@ -117,8 +118,8 @@
                 map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
             }
         }
-    </script>
-    <script>
+</script>
+<script>
         var chart = document.getElementById('chart').getContext('2d');
         var ClimatChart1 = new Chart(chart, {
             type: 'pie',
@@ -147,7 +148,40 @@
 
             }
         });
-    </script>
+</script>
+
+<script>
+        var cart2 = document.getElementById('chart2').getContext('2d');
+        var ClimatChart1 = new Chart(cart2, {
+            type: 'pie',
+            data: {
+                labels: ['Vinter', 'Sommar', 'Spräckligt'],
+                datasets: [{
+                    label: 'Päls färg',
+                    data: [@Model.Winter,@Model.Summer ,@Model.Mixed ],
+                    backgroundColor: '#68a275',
+                    borderColor: '#777',
+                    borderWidth: 1,
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000',
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Ripa 2010 ',
+                    fontsize: 25
+                },
+                legend: {
+                    display: true,
+                    text: 'Antal kullar'
+                },
+
+            }
+        });
+</script>
+
+
 
 
 

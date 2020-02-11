@@ -43,7 +43,22 @@ namespace Grupp7.Helpers
 
             return coatList;
         }
-        public static List<Animal> filterByDate(ObservationViewModel model)
+        public static List<Animal> filterByDate(ObservationViewModel model, Animal specie, DateTime startdate, DateTime Enddate)
+        {
+
+            List<Animal> sortedList = new List<Animal>();
+            foreach (var item in model.AnimalList)
+            {
+                if(item.Datetime > startDate && endDate > item.Datetime)
+                {
+                    sortedList.Add(item);
+                }
+                
+            }
+            return sortedList;
+        }
+        /* before the changes 
+         * public static List<Animal> filterByDate(ObservationViewModel model, Animal specie, DateTime startdate, DateTime Enddate)
         {
             DateTime startDate = new DateTime(2010, 1, 1);
             DateTime endDate = new DateTime(2019, 12, 31);
@@ -58,6 +73,7 @@ namespace Grupp7.Helpers
             }
             return sortedList;
         }
+         */
         public static void getCoatColors(ObservationViewModel model)
         {
             List<string> coatColor = new List<string>();
