@@ -11,69 +11,76 @@
     }
 </style>
 <div class="container">
-    <div class="col-md-5">
+    <div class="col-md-4">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
         <canvas id="chart" width="400" height="400"></canvas>
-    </div>
-        <div id="map" class="observationCard"></div><br />
-        @foreach (var item in Model.AnimalList)
-        {
-            <div class="observationCard">
-                <img class="cardImage" src="~/images/three-brown-bunnies.jpg" alt="Bild">
-                <div class="cardContent">
-                    <h4>@item.Specie.Speciename</h4>
-                    <p>
-                        Päls: @item.Coat <br>
-                        Tid och Datum: @item.Datetime <br>
-                        Longitude: @item.Longitude <br>
-                        Latitude: @item.Latitude <br><br>
-                    </p>
-                </div>
-                <div class=" BtnDiv">
-                    @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId }, new { @class = "btn button" })
-                </div>
-                <div class="observer">
-                    @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                    {
-                        <span>Observatör: </span> @user.Username <br />
-                        @*@user.Firstname @:&nbsp; @user.Lastname*@
-                    }
-                </div>
-            </div>
-            <br />
-        }
-        @foreach (var item in Model.WeatherList)
-        {
-            <div class="observationCard">
-                <img class="cardImage" src="~/images/icebergs-2574987.jpg" alt="Bild">
-                <div class="cardContent">
-                    <h4>@item.Type</h4>
-                    <p>
-                        Datum och tid: @item.Datetime <br>
-                        Longitude @item.Longitude <br>
-                        Latitude: @item.Latitude <br><br><br>
-                        @*PH halt: @item.PH <br>
-                            Fuktighet: @item.Humidity <br>
-                            Temperatur: @item.Temperature <br>
-                            Carbon: @item.Carbon <br> *@
-                    </p>
-                </div>
-                <div class=" BtnDiv">
-                    @Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.WeatherId }, new { @class = "btn button" })
-                </div>
-                <div class="observer">
-                    @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                    {
-                        <span>Observatör: </span> @user.Username <br />
-                        @*@user.Firstname @:&nbsp; @user.Lastname*@
-                    }
-                </div>
-            </div>
-            <br />
-        }
-    </div>
 
-    <script>
+    </div>
+    
+    <div class="col-md-4">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <canvas id="chart1" width="400" height="400" align="right"></canvas>
+    </div>
+    
+    <div id="map" class="observationCard"></div><br />
+    @foreach (var item in Model.AnimalList)
+    {
+        <div class="observationCard">
+            <img class="cardImage" src="~/images/three-brown-bunnies.jpg" alt="Bild">
+            <div class="cardContent">
+                <h4>@item.Specie.Speciename</h4>
+                <p>
+                    Päls: @item.Coat <br>
+                    Tid och Datum: @item.Datetime <br>
+                    Longitude: @item.Longitude <br>
+                    Latitude: @item.Latitude <br><br>
+                </p>
+            </div>
+            <div class=" BtnDiv">
+                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId }, new { @class = "btn button" })
+            </div>
+            <div class="observer">
+                @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
+                {
+                    <span>Observatör: </span> @user.Username <br />
+                    @*@user.Firstname @:&nbsp; @user.Lastname*@
+                }
+            </div>
+        </div>
+        <br />
+    }
+    @foreach (var item in Model.WeatherList)
+    {
+        <div class="observationCard">
+            <img class="cardImage" src="~/images/icebergs-2574987.jpg" alt="Bild">
+            <div class="cardContent">
+                <h4>@item.Type</h4>
+                <p>
+                    Datum och tid: @item.Datetime <br>
+                    Longitude @item.Longitude <br>
+                    Latitude: @item.Latitude <br><br><br>
+                    @*PH halt: @item.PH <br>
+                        Fuktighet: @item.Humidity <br>
+                        Temperatur: @item.Temperature <br>
+                        Carbon: @item.Carbon <br> *@
+                </p>
+            </div>
+            <div class=" BtnDiv">
+                @Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.WeatherId }, new { @class = "btn button" })
+            </div>
+            <div class="observer">
+                @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
+                {
+                    <span>Observatör: </span> @user.Username <br />
+                    @*@user.Firstname @:&nbsp; @user.Lastname*@
+                }
+            </div>
+        </div>
+        <br />
+    }
+</div>
+
+<script>
         var marker;
 
         function initMap() {
@@ -117,8 +124,8 @@
                 map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
             }
         }
-    </script>
-    <script>
+</script>
+<script>
         var chart = document.getElementById('chart').getContext('2d');
         var ClimatChart1 = new Chart(chart, {
             type: 'pie',
@@ -127,7 +134,36 @@
                 datasets: [{
                     label: 'Päls färg',
                     data: [@Model.Winter,@Model.Summer ,@Model.Mixed ],
-                    backgroundColor: '#68a275',
+                    backgroundColor: ['#ffffff', '##993300','#dfbf9f'],
+                    borderColor: '#777',
+                    borderWidth: 1,
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#e7e7e7',
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Raporterade pälsfärg ripa nov 2010 ',
+                    fontSize: 15
+                },
+
+            }
+        });
+</script>
+
+<script>
+
+    var chart1 = document.getElementById('chart1').getContext('2d');
+     
+        var ClimatChart1 = new Chart(chart1, {
+            type: 'pie',
+            data: {
+                labels: ['Vinter', 'Sommar', 'Spräckligt'],
+                datasets: [{
+                    label: 'Päls färg',
+                    data: [@Model.Winter,@Model.Summer ,@Model.Mixed ],
+                    backgroundColor: ['#ffffff', '##993300','#dfbf9f'],
                     borderColor: '#777',
                     borderWidth: 1,
                     hoverBorderWidth: 3,
@@ -137,18 +173,13 @@
             options: {
                 title: {
                     display: true,
-                    text: 'Ripa 2010 ',
-                    fontsize: 25
-                },
-                legend: {
-                    display: true,
-                    text: 'Antal kullar'
+                    text: 'Raporterade pälsfärg ripa nov 2019 ',
+                    fontSize: 15
                 },
 
             }
         });
-    </script>
-
+</script>
 
 
 
