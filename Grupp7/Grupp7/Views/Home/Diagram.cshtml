@@ -39,11 +39,6 @@
 <script>
     var myChart = document.getElementById('myChart').getContext('2d');
 
-    //Global options
-    //Chart.defaults.global.defaultFontFamily = 'Lato';
-    //Chart.defaults.global.defaultFontSize = '18';
-    //Chart.defaults.global.defaultFontColor = '#777';
-
     var ClimatChart = new Chart(myChart, {
         type: 'line',
         data: {
@@ -51,26 +46,8 @@
             datasets: [{
                 label: 'Antal kullar',
                 data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
-                backgroundColor:  '#68a275',
-
-                //[
-                //    'rgba(255, 99, 132, 0.8)',
-                //    'rgba(54, 162, 235, 0.8)',
-                //    'rgba(255, 206, 86, 0.8)',
-                //    'rgba(75, 192, 192, 0.8)',
-                //    'rgba(153, 102, 255, 0.8)',
-                //    'rgba(255, 159, 64, 0.8)'
-                //],
+                backgroundColor: '#68a275',
                 borderColor: '#777',
-
-                //    [
-                //    'rgba(255, 99, 132, 1)',
-                //    'rgba(54, 162, 235, 1)',
-                //    'rgba(255, 206, 86, 1)',
-                //    'rgba(75, 192, 192, 1)',
-                //    'rgba(153, 102, 255, 1)',
-                //    'rgba(255, 159, 64, 1)'
-                //],
                 borderWidth: 1,
                 hoverBorderWidth: 3,
                 hoverBorderColor: '#000',
@@ -79,20 +56,16 @@
         options: {
             title: {
                 display: true,
-                text: 'Reproducerande fjällrävar 1974-2017',
+                text: 'Reproducerande fjällrävar 2009-2017 Zoologiska Institutionen ',
                 fontsize: 25
             },
-            legend: {display: false},
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
+            legend: {
+                display: true,
+                text: 'Antal kullar'
+            },
+
         }
     });
 </script>
-
 
 
