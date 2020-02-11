@@ -143,6 +143,10 @@ namespace Grupp7.Classes
             animal.Specie = specie;
             return animal;
         }
+        public void getTopListAnimals()
+        {
+           // context.Animals.GroupBy(userId => userId).OrderByDescending(userId => userId.Count()).Select(g => new { Id = g.Key, Count = g.Count() });
+        }
 
         public List<SelectListItem> getSpeciesItemList()
         {
