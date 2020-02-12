@@ -102,6 +102,25 @@ namespace Grupp7.Controllers
         {
             return View();
         }
+        public IActionResult Diagram()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Diagram()
+        {
+            DateTime FirstStartDate = new DateTime(2010, 11, 1);
+            DateTime FirstEndDate = new DateTime(2010, 12, 31);
+            DateTime SecondStartDate = new DateTime(2019, 11, 1);
+            DateTime SecondEndDate = new DateTime(2019, 12, 31);
+
+            int specieID = 3;// ripa
+
+            Helper.getCoatColors(model, Helper.filterByDate(model, FirstStartDate, FirstEndDate, specieID), 1);
+            Helper.getCoatColors(model, Helper.filterByDate(model, SecondStartDate, SecondEndDate, specieID), 2);
+
+            return View(Helper.getCentralPosition(model));
+        }
         public IActionResult AddUserFromRegister(string firstname, string lastname, string id, string username)
         {
             dbContext.AddUser(firstname, lastname, id, username);
