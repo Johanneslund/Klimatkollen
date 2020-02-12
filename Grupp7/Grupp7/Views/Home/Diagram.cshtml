@@ -8,7 +8,18 @@
 <h4>En översikt av klimatförändringar över tid</h4>
 
 <hr />
+<div class="container">
+    <div class="col-md-4">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <canvas id="chart" width="400" height="400"></canvas>
 
+    </div>
+
+    <div class="col-md-4">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <canvas id="chart1" width="400" height="400" align="right"></canvas>
+    </div>
+</div>
 <div class="container">
     <div class="col-md-5">
 
@@ -69,3 +80,58 @@
 </script>
 
 
+<script>
+        var chart = document.getElementById('chart').getContext('2d');
+        var ClimatChart1 = new Chart(chart, {
+            type: 'pie',
+            data: {
+                labels: ['Vinter', 'Sommar', 'Spräckligt'],
+                datasets: [{
+                    label: 'Päls färg',
+                    data: [@Model.Statistics.FirstWinter,@Model.Statistics.FirstSummer ,@Model.Statistics.FirstMixed ],
+                    backgroundColor: ['#ffffff', '##993300','#dfbf9f'],
+                    borderColor: '#777',
+                    borderWidth: 1,
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#e7e7e7',
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Raporterade pälsfärg ripa nov 2010 ',
+                    fontSize: 15
+                },
+
+            }
+        });
+</script>
+
+<script>
+
+    var chart1 = document.getElementById('chart1').getContext('2d');
+
+        var ClimatChart1 = new Chart(chart1, {
+            type: 'pie',
+            data: {
+                labels: ['Vinter', 'Sommar', 'Spräckligt'],
+                datasets: [{
+                    label: 'Päls färg',
+                    data: [@Model.Statistics.SecondWinter, @Model.Statistics.SecondSummer ,@Model.Statistics.SecondMixed ],
+                    backgroundColor: ['#ffffff', '##993300','#dfbf9f'],
+                    borderColor: '#777',
+                    borderWidth: 1,
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000',
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Raporterade pälsfärg ripa nov 2019 ',
+                    fontSize: 15
+                },
+
+            }
+        });
+</script>
