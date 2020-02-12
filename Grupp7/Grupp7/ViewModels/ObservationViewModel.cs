@@ -17,8 +17,7 @@ namespace Grupp7.ViewModels
         public List<Animal> AnimalList { get; set; }
         public string CentralLatitude { get; set; }
         public string CentralLongitude { get; set; }
-        public int Winter { get; set; }
-        public int Summer { get; set; }
-        public int Mixed { get; set; }
+        public Statistics Statistics { get; set; }
+
     }
 }
