@@ -13,8 +13,10 @@ namespace Grupp7.Models
 
         
         [DisplayName("Förnamn")]
+        [Required]
         public string Firstname { get; set; }
 
+        [Required]
        
         [DisplayName("Efternamn")]
 

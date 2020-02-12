@@ -1,9 +1,26 @@
-﻿@model Grupp7.ViewModels.ObservationViewModel;
+﻿@using Grupp7.Classes;
+@model Grupp7.ViewModels.ObservationViewModel;
+
 @{
     ViewData["Title"] = "Observationer";
 
 }
 <h3>Observationer</h3>
+<br />
+<br />
+
+<form asp-controller="Home" asp-action="Observation" method="get">
+    <p>
+        <select asp-for="ObservationType" asp-items="Model.ObservationTypes">
+            <option value="">All</option>
+        </select>
+
+        Sökning: <input type="text" name="SearchTerm">
+        <input type="submit" value="Sök" />
+    </p>
+</form>
+<br />
+<br />
 
 <style>
     #map {
@@ -11,175 +28,99 @@
     }
 </style>
 <div class="container">
-    <div class="col-md-4">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-        <canvas id="chart" width="400" height="400"></canvas>
-
-    </div>
-    
-    <div class="col-md-4">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-        <canvas id="chart1" width="400" height="400" align="right"></canvas>
-    </div>
-    
     <div id="map" class="observationCard"></div><br />
-    @foreach (var item in Model.AnimalList)
+    @foreach (var item in Model.ObservationsList)
     {
-        <div class="observationCard">
-            <img class="cardImage" src="~/images/three-brown-bunnies.jpg" alt="Bild">
-            <div class="cardContent">
-                <h4>@item.Specie.Speciename</h4>
-                <p>
-                    Päls: @item.Coat <br>
-                    Tid och Datum: @item.Datetime <br>
-                    Longitude: @item.Longitude <br>
-                    Latitude: @item.Latitude <br><br>
-                </p>
+        if (item.Animal != null)
+        {
+            <div class="card flex-row flex-wrap">
+                <img src="~/images/three-brown-bunnies.jpg" alt="images" style="width:300px; height:200px;">
+                <div class="card-block px-4">
+                    <h4 class="card-title">@item.Animal.Specie.Speciename </h4>
+                    <p class="card-text">
+                        Päls: @item.Animal.Coat <br>
+                        Tid och Datum: @item.Datetime <br>
+                        Longitude: @item.Animal.Longitude <br>
+                        Latitude: @item.Animal.Latitude <br><br>
+                    </p>
+                </div>
+                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.Animal.AnimalId }, new { @class = "btn button" })
             </div>
-            <div class=" BtnDiv">
-                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId }, new { @class = "btn button" })
+            <br />
+        }
+        else if (item.Weather != null)
+        {
+            <div class="card flex-row flex-wrap">
+                <img src="~/images/icebergs-2574987.jpg" alt="images" style="width:300px; height:200px;">
+                <div class="card-block px-4">
+                    <h4 class="card-title">@item.Weather.Type</h4>
+                    <p class="card-text">
+                        Datum och tid: @item.Datetime <br>
+                        Longitude @item.Weather.Longitude <br>
+                        Latitude: @item.Weather.Latitude <br>
+                        PH halt: @item.Weather.PH <br>
+                        Fuktighet: @item.Weather.Humidity <br>
+                        Temperatur: @item.Weather.Temperature <br>
+                        Carbon: @item.Weather.Carbon <br><br>
+
+                    </p>
+                </div>
+                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.Weather.WeatherId }, new { @class = "btn button" })
             </div>
-            <div class="observer">
-                @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                {
-                    <span>Observatör: </span> @user.Username <br />
-                    @*@user.Firstname @:&nbsp; @user.Lastname*@
-                }
-            </div>
-        </div>
-        <br />
-    }
-    @foreach (var item in Model.WeatherList)
-    {
-        <div class="observationCard">
-            <img class="cardImage" src="~/images/icebergs-2574987.jpg" alt="Bild">
-            <div class="cardContent">
-                <h4>@item.Type</h4>
-                <p>
-                    Datum och tid: @item.Datetime <br>
-                    Longitude @item.Longitude <br>
-                    Latitude: @item.Latitude <br><br><br>
-                    @*PH halt: @item.PH <br>
-                        Fuktighet: @item.Humidity <br>
-                        Temperatur: @item.Temperature <br>
-                        Carbon: @item.Carbon <br> *@
-                </p>
-            </div>
-            <div class=" BtnDiv">
-                @Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.WeatherId }, new { @class = "btn button" })
-            </div>
-            <div class="observer">
-                @foreach (var user in Model.UserList.Where(n => n.UserId == @item.UserId))
-                {
-                    <span>Observatör: </span> @user.Username <br />
-                    @*@user.Firstname @:&nbsp; @user.Lastname*@
-                }
-            </div>
-        </div>
-        <br />
+            <br />
+        }
     }
 </div>
 
 <script>
-        var marker;
+            var marker;
 
-        function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 5.5,
-                center: { lat: @Model.CentralLatitude, lng: @Model.CentralLongitude}
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 5.5,
+            center: { lat: @Model.CentralLatitude, lng: @Model.CentralLongitude}
+        });
+
+        function addMarker(latitude, longitude, title, date, coat, link, map, Image) {
+            var latLng = new google.maps.LatLng(latitude, longitude);
+            var contentString = '<h4>' + title + '</h4>' + '<p>Observerad: ' + date + '</p>' + '<p>' + coat + '</p>' + '<p>' + link + '</p>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
             });
 
-            function addMarker(latitude, longitude, title, date,coat, link, map, Image) {
-                var latLng = new google.maps.LatLng(latitude, longitude);
-                var contentString = '<h4>' + title + '</h4>' +  '<p>Observerad: '+ date + '</p>' + '<p>' + coat + '</p>' + '<p>' + link + '</p>';
+            var marker = new google.maps.Marker({
+                position: latLng,
+                title: title,
+                map: map,
+                draggable: false,
+                icon: Image
+            });
 
-                var infowindow = new google.maps.InfoWindow({
-                    content: contentString
-                });
-
-                var marker = new google.maps.Marker({
-                    position: latLng,
-                    title: title,
-                    map: map,
-                    draggable: false,
-                    icon: Image
-                });
-
-                google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.open(map, marker);
-                });
-            }
-                @foreach (var item in Model.AnimalList)
-                {
-                <text>addMarker(@item.Latitude, @item.Longitude, '@item.Specie.Speciename',
-                '@item.Datetime', 'Päls: @item.Coat',
-                '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId })',
-                map, 'http://maps.google.com/mapfiles/ms/icons/green.png');</text>
-                }
-            @foreach (var item in Model.WeatherList)
-            {
-                                                        <text>addMarker(@item.Latitude, @item.Longitude, '@item.Type',
-                '@item.Datetime', 'Tempratur: @item.Temperature',
-                '@Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.WeatherId })',
-                map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
-            }
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
         }
-</script>
-<script>
-        var chart = document.getElementById('chart').getContext('2d');
-        var ClimatChart1 = new Chart(chart, {
-            type: 'pie',
-            data: {
-                labels: ['Vinter', 'Sommar', 'Spräckligt'],
-                datasets: [{
-                    label: 'Päls färg',
-                    data: [@Model.Winter,@Model.Summer ,@Model.Mixed ],
-                    backgroundColor: ['#ffffff', '##993300','#dfbf9f'],
-                    borderColor: '#777',
-                    borderWidth: 1,
-                    hoverBorderWidth: 3,
-                    hoverBorderColor: '#e7e7e7',
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Raporterade pälsfärg ripa nov 2010 ',
-                    fontSize: 15
-                },
+                @foreach (var item in Model.ObservationsList.Where(a => a.Animal is Animal))
 
-            }
-        });
+                    { 
+                <text>addMarker(@item.Animal.Latitude, @item.Animal.Longitude, '@item.Animal.Specie.Speciename',
+            '@item.Animal.Datetime', 'Päls: @item.Animal.Coat',
+            '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.Animal.AnimalId })',
+            map, 'http://maps.google.com/mapfiles/ms/icons/green.png');</text>
+                    }
+
+
+                @foreach (var item in Model.ObservationsList.Where(a => a.Weather is Weather))
+                {
+                <text>addMarker(@item.Weather.Latitude, @item.Weather.Longitude, '@item.Weather.Type',
+            '@item.Weather.Datetime', 'Tempratur: @item.Weather.Temperature',
+            '@Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.Weather.WeatherId })',
+            map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
+                }
+    }
 </script>
 
-<script>
-
-    var chart1 = document.getElementById('chart1').getContext('2d');
-     
-        var ClimatChart1 = new Chart(chart1, {
-            type: 'pie',
-            data: {
-                labels: ['Vinter', 'Sommar', 'Spräckligt'],
-                datasets: [{
-                    label: 'Päls färg',
-                    data: [@Model.Winter,@Model.Summer ,@Model.Mixed ],
-                    backgroundColor: ['#ffffff', '##993300','#dfbf9f'],
-                    borderColor: '#777',
-                    borderWidth: 1,
-                    hoverBorderWidth: 3,
-                    hoverBorderColor: '#000',
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Raporterade pälsfärg ripa nov 2019 ',
-                    fontSize: 15
-                },
-
-            }
-        });
-</script>
 
 
 

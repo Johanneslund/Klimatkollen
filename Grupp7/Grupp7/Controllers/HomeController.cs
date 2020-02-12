@@ -13,15 +13,82 @@ using Microsoft.AspNetCore.Identity;
 using Grupp7.ViewModels;
 using System.Security.Claims;
 using Grupp7.Helpers;
-using System.Net.Mail;
-using System.Net;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Grupp7.Controllers
-{ 
+{
     public class HomeController : Controller
     {
         private readonly IRepository dbContext;
         private readonly UserManager<IdentityUser> userManager;
+
+        // The observations page with search functionality. 
+        public object Observations(string searchTerm, string observationType)
+        {
+            ObservationViewModel model = new ObservationViewModel();
+            Animal animal = new Animal();
+            Weather weather = new Weather();
+            List<Animal> animals = new List<Animal>();
+            List<Weather> weathers = new List<Weather>();
+            //var users = userManager.Users;
+            animals = dbContext.GetAnimals();
+            weathers = dbContext.GetWeathers();
+            model.ObservationsList = new List<Observation>();
+
+            // Selected List dropdown
+            model.ObservationTypes = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Animal", Value = "1"},
+                new SelectListItem {Text = "Weather", Value = "2"}
+            };
+
+            // Populate ObservationsList with Animals and Weathers based on conditions
+            if (!string.IsNullOrEmpty(searchTerm) && observationType == "1")
+            {
+                foreach (var item in animals)
+                {
+                    model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
+                }
+                model.ObservationsList = model.ObservationsList.Where(x => x.Animal.Specie.Speciename.Contains(searchTerm)).ToList();
+            }
+            else if (string.IsNullOrEmpty(searchTerm) && observationType == "1")
+            {
+                foreach (var item in animals)
+                {
+                    model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
+                }
+                model.ObservationsList = model.ObservationsList.OrderBy(o => o.Datetime).ToList();
+            }
+            else if (!string.IsNullOrEmpty(searchTerm) && observationType == "2")
+            {
+                foreach (var item in weathers)
+                {
+                    model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
+                }
+                model.ObservationsList = model.ObservationsList.Where(x => x.Weather.Type.Contains(searchTerm)).ToList();
+            }
+            else if (string.IsNullOrEmpty(searchTerm) && observationType == "2")
+            {
+                foreach (var item in weathers)
+                {
+                    model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
+                }
+                model.ObservationsList = model.ObservationsList.OrderBy(o => o.Datetime).ToList();
+            }
+            else
+            {
+                foreach (var item in animals)
+                {
+                    model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
+                }
+                foreach (var item in weathers)
+                {
+                    model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
+                }
+            }
+            Helper.getCentralPosition(model);
+            return model;
+        }
 
         public HomeController(IRepository repository, UserManager<IdentityUser> userManager)
         {
@@ -34,39 +101,17 @@ namespace Grupp7.Controllers
         {
             return View();
         }
-        public IActionResult Diagram()
-        {
-            return View();
-        }
         public IActionResult AddUserFromRegister(string firstname, string lastname, string id, string username)
         {
             dbContext.AddUser(firstname, lastname, id, username);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Observation()
+        public IActionResult Observation(string searchTerm, string observationType)
         {
-            //gets all observations in 2 lists.
-            ObservationViewModel model = new ObservationViewModel();
-            model.AnimalList = dbContext.GetAnimals();
-            model.WeatherList = dbContext.GetWeathers();
-            model.UserList = dbContext.GetUsers();
-            model.ObservationsList = new List<object>();
-            //sorts the 2 lists
-            model.AnimalList = model.AnimalList.OrderByDescending(x => x.Datetime).ToList();
-            model.WeatherList = model.WeatherList.OrderByDescending(x => x.Datetime).ToList();
+            var observation = Observations(searchTerm, observationType);
 
-
-            
-            foreach (var item in model.WeatherList)
-            {
-                model.ObservationsList.Add(item);
-            }
-            //ObservationsList.OrderBy(x => x.DateTime).ToList();
-
-            Helper.getCoatColors(model);
-            Helper.filterByDate(model);
-            return View(Helper.getCentralPosition(model));
+            return View(observation);
         }
 
         public IActionResult About()
@@ -93,50 +138,11 @@ namespace Grupp7.Controllers
             return RedirectToAction("UserHome");
         }
 
-        [HttpGet]
         public IActionResult Contact()
         {
-            //ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Your contact page.";
 
             return View();
-        }
-
-        [HttpPost]
-        public IActionResult Contact(string firstname, string lastname, string sender, string subject, string message)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    SendEmailContactPage(firstname,lastname,sender,subject,message);
-                    return View();
-                }
-            }
-            catch (Exception ex)
-            {
-                ModelState.Clear();
-                ViewBag.Message = $" Något gick fel. {ex.Message}";
-            }
-            return View();
-        }
-        private void SendEmailContactPage(string firstname, string lastname, string sender, string subject, string message)
-        {
-            MailMessage mm = new MailMessage();
-            mm.From = new MailAddress(sender, "Klimatkollens kontaktformulär"); // eller mejlen i formuläret 
-            mm.To.Add("sabrinthao@gmail.com");//Jörgens mail 
-            mm.Subject = subject;
-            string customerSender = "From: " + sender + " " + firstname + " " + lastname + "\n";
-            mm.Body = customerSender + message;
-
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.Port = 587;
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("ADMINMAIL", "ADMINPASSWORD"); //admin //try model.Email, model.Password
-            smtp.EnableSsl = true;
-            smtp.Send(mm);
-            ModelState.Clear();
-            ViewBag.Message = "Thank you for Contacting us ";
         }
 
         public IActionResult AnimalObservation(int id)

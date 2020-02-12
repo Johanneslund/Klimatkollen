@@ -15,16 +15,21 @@ namespace Grupp7.Helpers
 
             double latSum = 0;
             double longSum = 0;
-            foreach (var item in model.AnimalList)
+            foreach (var item in model.ObservationsList)
             {
-                if (item.Latitude != null && item.Longitude != null)
+                if (item.Animal?.Latitude != null && item.Animal?.Longitude != null)
                 {
-                    latSum += Convert.ToDouble(item.Latitude.Replace('.', ','));
-                    longSum += Convert.ToDouble(item.Longitude.Replace('.', ','));
+                    latSum += Convert.ToDouble(item.Animal.Latitude.Replace('.', ','));
+                    longSum += Convert.ToDouble(item.Animal.Longitude.Replace('.', ','));
+                }
+                if (item.Weather?.Latitude != null && item.Weather?.Longitude != null)
+                {
+                    latSum += Convert.ToDouble(item.Weather.Latitude.Replace('.', ','));
+                    longSum += Convert.ToDouble(item.Weather.Longitude.Replace('.', ','));
                 }
             }
-            model.CentralLatitude = (latSum / model.AnimalList.Count).ToString().Replace(',', '.');
-            model.CentralLongitude = (longSum / model.AnimalList.Count).ToString().Replace(',', '.');
+            model.CentralLatitude = (latSum / model.ObservationsList.Count).ToString().Replace(',', '.');
+            model.CentralLongitude = (longSum / model.ObservationsList.Count).ToString().Replace(',', '.');
             return model;
         }
 

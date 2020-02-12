@@ -1,4 +1,5 @@
 ﻿using Grupp7.Classes;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,12 @@ namespace Grupp7.ViewModels
 {
     public class ObservationViewModel
     {
-        public List<Animal> AnimalList { get; set; }
+        public string SearchTerm { get; set; }
+        public string ObservationType { get; set; }
+        public List<Observation> ObservationsList { get; set; }
+        public List<SelectListItem> ObservationTypes { set; get; }
         public List<Weather> WeatherList { get; set; }
-        public List<User> UserList { get; set; }
-
-        public List<object> ObservationsList { get; set; } // test
+        public List<Animal> AnimalList { get; set; }
         public string CentralLatitude { get; set; }
         public string CentralLongitude { get; set; }
         public int Winter { get; set; }
