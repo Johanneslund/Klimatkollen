@@ -104,11 +104,11 @@ namespace Grupp7.Helpers
                 {
                     if(period == 1)
                     {
-                        model.FirstSummer++;
+                        model.Statistics.FirstSummer++;
                     }
                     else if (period == 2)
                     {
-                        model.SecondSummer++;
+                        model.Statistics.SecondSummer++;
                     }
                 }
 
@@ -116,11 +116,11 @@ namespace Grupp7.Helpers
                 {
                     if (period == 1)
                     {
-                        model.FirstWinter++;
+                        model.Statistics.FirstWinter++;
                     }
                     else if (period == 2)
                     {
-                        model.SecondWinter++;
+                        model.Statistics.SecondWinter++;
                     }
 
                 }
@@ -128,11 +128,11 @@ namespace Grupp7.Helpers
                 {
                     if (period == 1)
                     {
-                        model.FirstMixed++;
+                        model.Statistics.FirstMixed++;
                     }
                     else if (period == 2)
                     {
-                        model.SecondMixed++;
+                        model.Statistics.SecondMixed++;
                     }
 
                 }

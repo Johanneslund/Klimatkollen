@@ -48,6 +48,8 @@ namespace Grupp7.Controllers
         {
             //gets all observations in 2 lists.
             ObservationViewModel model = new ObservationViewModel();
+            Statistics statistics = new Statistics();
+            model.Statistics = statistics;
             model.AnimalList = dbContext.GetAnimals();
             model.WeatherList = dbContext.GetWeathers();
             model.UserList = dbContext.GetUsers();
@@ -73,9 +75,6 @@ namespace Grupp7.Controllers
             
             Helper.getCoatColors(model, Helper.filterByDate(model, FirstStartDate, FirstEndDate, specieID), 1);
             Helper.getCoatColors(model, Helper.filterByDate(model, SecondStartDate, SecondEndDate, specieID), 2);
-
-
-
 
             return View(Helper.getCentralPosition(model));
         }
