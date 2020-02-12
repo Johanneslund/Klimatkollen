@@ -136,3 +136,48 @@
             }
         });
 </script>
+
+<script>
+    var myChart = document.getElementById('myChart').getContext('2d');
+
+    var ClimatChart = new Chart(myChart, {
+        type: 'line',
+        data: {
+            labels: ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
+            datasets: [{
+                label: 'Antal kullar',
+                data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
+                backgroundColor: '#68a275',
+                borderColor: '#777',
+                borderWidth: 1,
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#000',
+            },
+            {
+
+                label: 'Grodar',
+                data: [2, 10, 20, 30, 30, 20, 15, 10, 1],
+                backgroundColor: '#2b8f36',
+                borderColor: '#777',
+                borderWidth: 1,
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#000',
+            }],
+
+        }
+
+        ,
+        options: {
+            title: {
+                display: true,
+                text: 'Reproducerande fjällrävar 2009-2017 Zoologiska Institutionen ',
+                fontsize: 25
+            },
+            legend: {
+                display: true,
+                text: 'Antal kullar'
+            },
+
+        }
+    });
+</script>
