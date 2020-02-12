@@ -9,7 +9,9 @@ namespace Grupp7.ViewModels
     public class UserHomeViewModel
     {
         public User User { get; set; }
-        public List<Animal> Animals { get; set; }
-        public List<Weather> Weathers { get; set; }
+        public List<Observation> NearbyObservation {get; set;}
+        public double radius { get; set; }
+        public int daysBeforeToday { get; set; }
+
     }
 }

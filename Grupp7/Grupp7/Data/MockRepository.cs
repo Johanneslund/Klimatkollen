@@ -112,5 +112,10 @@ namespace Grupp7.Classes
         {
             throw new NotImplementedException();
         }
+
+        public List<Animal> GetNearbyAnimals(string lat, string lng, double radius)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -153,6 +153,7 @@ namespace Grupp7.Controllers
             AddAnimalViewModel Model = model;
             Model.User = dbContext.GetUserFromIdentity(userManager.GetUserId(HttpContext.User));
             dbContext.AddAnimalToUser(model);
+            
             return RedirectToAction("UserHome");
         }
         public IActionResult Contact()
@@ -228,16 +229,30 @@ namespace Grupp7.Controllers
             return RedirectToAction("Map");
         }
 
-        public IActionResult UserHome()
+        public IActionResult UserHome(double radius=50, int daysBeforeToday=3)
         {
             UserHomeViewModel model = new UserHomeViewModel();
-            var userId = userManager.GetUserId(HttpContext.User);
-            model.User = dbContext.GetUserFromIdentity(userId);
-            model.Animals = dbContext.getUserAnimals(model.User.UserId);
-            model.Weathers = dbContext.getUserWeathers(model.User.UserId);
+            model.radius = (radius / 111111) * 1000;
+            model.daysBeforeToday = daysBeforeToday;
+            DateTime today = DateTime.Now;
+            DateTime before = today.AddDays(daysBeforeToday * -1);
 
+                var userId = userManager.GetUserId(HttpContext.User);
+                model.User = dbContext.GetUserFromIdentity(userId);
+                List<Animal> NearbyAnimals = dbContext.GetNearbyAnimals(model.User.Latitude, model.User.Longitude, model.radius);
+                List<Observation> NearbyObservation = new List<Observation>();
+                model.NearbyObservation = NearbyObservation;
+                foreach (var item in NearbyAnimals)
+                {
+                model.NearbyObservation.Add(new Observation() { Animal = item, Datetime = item.Datetime });
+                }
+                model.NearbyObservation = Helper.filterByDateUserHome(model.NearbyObservation, before, today);
 
             return View(model);
+            }
+        public IActionResult UpdateUserHome(UserHomeViewModel model)
+        {
+           return RedirectToAction("UserHome",new { model.radius, model.daysBeforeToday });
         }
         //public IActionResult Map()
        // {

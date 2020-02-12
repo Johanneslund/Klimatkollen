@@ -34,6 +34,21 @@ namespace Grupp7.Classes
             return context.Weathers.Where(x => x.WeatherId.Equals(id)).FirstOrDefault();
         }
 
+        public List<Animal> GetNearbyAnimals(string lat, string lng, double radius)
+        {
+            var userLat = double.Parse(lat.Replace('.', ','));
+            var userLng = double.Parse(lng.Replace('.', ','));
+
+            return context.Animals.Where(
+                x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
+                double.Parse(x.Latitude.Replace('.',',')) > userLat - radius &&
+                double.Parse(x.Longitude.Replace('.',',')) < userLng + radius &&
+                double.Parse(x.Longitude.Replace('.',',')) > userLng - radius).Include(x => x.Specie)
+                .ToList();
+            
+            
+        }
+
         public void AddUser(UserModel user)
         {
             context.Add(new User()

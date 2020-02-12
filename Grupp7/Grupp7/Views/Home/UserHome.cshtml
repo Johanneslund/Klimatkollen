@@ -1,11 +1,84 @@
-﻿@model Grupp7.ViewModels.UserHomeViewModel
+﻿@using Grupp7.Classes
+@model Grupp7.ViewModels.UserHomeViewModel
 
 @{
     ViewData["Title"] = "View";
 }
+<style>
+    .slidecontainer {
+        width: 100%; 
+        display: inline-block;
+        margin: 0 50px 0 50px;
+    }
 
+    .hiddenInput {
+        background: transparent;
+        border: none;
+    }
+    #map {
+        width: 100%;
+    }
+
+    .slider {
+        margin-top: 20px;
+        -webkit-appearance: none; 
+        width: 100%;
+        height: 25px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+</style>
 <h3>Mitt hem</h3>
 <h4>Här visas dina observationer</h4>
+<div id="map"></div>
+<div class="container">
+    <div class="row">
+            <form asp-action="UpdateUserHome">
+                    <div class="form-group">
+                        <label>Avstånd Km</label>
+                        <input asp-for="radius" id="sliderRadius" class="Form-control hiddenInput "/>
+                    </div>
+                    <div class="form-group">
+                        <label>Dagar tillbaka i tiden</label>
+                        <input asp-for="daysBeforeToday" id="sliderDays" class="Form-control hiddenInput" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Uppdatera" class="btn btn-default" />
+                </div>
+            </form>
+                    </div>
+                </div>
+            <div class="slidecontainer">
+                <input type="range" min="0.1" max="2" value="1" class="slider" id="radius" step="0.01" onchange="updateRadiusInput(this.value)">
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="21" value="1" class="slider" id="days" step="1" onchange="updateDaysInput(this.value)">
+            </div>
+        </div>
+    </div>
+    </div>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -31,7 +104,7 @@
     <h3>Djur</h3>
 
     <div>
-        <img src="~/images/AnimalSymbol.png" alt="Card image" align="middle" title="Bild: Dogo Argentino Wildcat Zampa di Clip art - zampa"/>
+        <img src="~/images/AnimalSymbol.png" alt="Card image" align="middle" title="Bild: Dogo Argentino Wildcat Zampa di Clip art - zampa" />
     </div>
     <p> </p>
 
@@ -39,20 +112,22 @@
 
     @Html.ActionLink("Lägg till nytt djur", "AddAnimal", "Home")
     <hr />
-
-    @foreach (var item in Model.Animals)
     {
+        @foreach (var item in Model.NearbyObservation)
+        {
+            if(item.Animal is Animal)
+            { 
 
-        <p>@item.Datetime </p>
-        <p>Djur @item.Specie.Speciename</p>
-        <p>Long @item.Longitude </p>
-        <p>Lat @item.Latitude </p>
-        <p>Päls @item.Coat </p>
-        @Html.ActionLink("Detaljer", "AnimalObservation", "Home", new { id = item.AnimalId })
-        <hr />
-
+            <p>@item.Datetime </p>
+            <p>Djur @item.Animal.Specie.Speciename</p>
+            <p>Long @item.Animal.Longitude </p>
+            <p>Lat @item.Animal.Latitude </p>
+            <p>Päls @item.Animal.Coat </p>
+            @Html.ActionLink("Detaljer", "AnimalObservation", "Home", new { id = item.Animal.AnimalId })
+            <hr />
+            }
+        }
     }
-
     <h3>Väder</h3>
     <div>
         <img src="~/images/weather_small1.jpg" alt="Card image" align="middle" />
@@ -60,17 +135,84 @@
     <p> </p>
     <hr />
 
-    @foreach (var item in Model.Weathers)
+    @foreach (var item in Model.NearbyObservation)
     {
+        if (item.Weather is Weather)
+        {
 
-        <p>@item.Datetime </p>
-        <p>Fukt @item.Humidity </p>
-        <p>Ph @item.PH</p>
-        <p>Kol @item.Carbon </p>
-        <p>Tempratur @item.Temperature </p>
-        <p>Long @item.Longitude </p>
-        <p>Lat @item.Latitude </p>
-        <hr />
+            <p>@item.Weather.Datetime </p>
+            <p>Fukt @item.Weather.Humidity </p>
+            <p>Ph @item.Weather.PH</p>
+            <p>Kol @item.Weather.Carbon </p>
+            <p>Tempratur @item.Weather.Temperature </p>
+            <p>Long @item.Weather.Longitude </p>
+            <p>Lat @item.Weather.Latitude </p>
+            <hr />
+        }
     }
 </div>
+
+<script>
+            var marker;
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 9,
+            center: { lat: @Model.User.Latitude, lng: @Model.User.Longitude}
+        });
+
+        function addMarker(latitude, longitude, title, date, coat, link, map, Image) {
+            var latLng = new google.maps.LatLng(latitude, longitude);
+            var contentString = '<h4>' + title + '</h4>' + '<p>' + date + '</p>' + '<p>' + coat + '</p>' + '<p>' + link + '</p>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position: latLng,
+                title: title,
+                map: map,
+                draggable: false,
+                icon: Image
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+                @foreach (var item in Model.NearbyObservation.Where(a => a.Animal is Animal))
+
+                    {
+                <text>addMarker(@item.Animal.Latitude, @item.Animal.Longitude, '@item.Animal.Specie.Speciename',
+            'Observerad: @item.Animal.Datetime', 'Päls: @item.Animal.Coat',
+            '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.Animal.AnimalId })',
+            map, 'http://maps.google.com/mapfiles/ms/icons/green.png');</text>
+                    }
+
+
+                @foreach (var item in Model.NearbyObservation.Where(a => a.Weather is Weather))
+                {
+                <text>addMarker(@item.Weather.Latitude, @item.Weather.Longitude, '@item.Weather.Type',
+            'Observerad @item.Weather.Datetime', 'Tempratur: @item.Weather.Temperature',
+            '@Html.ActionLink("Läs mer", "WeatherObservation", "Home", new { id = item.Weather.WeatherId })',
+            map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
+                }
+        addMarker(@Model.User.Latitude, @Model.User.Longitude, '@Model.User.Firstname', '@Model.User.Lastname',
+            '@Model.User.City', '', map, 'http://maps.google.com/mapfiles/ms/icons/homegardenbusiness.png')
+    }
+
+</script>
+<script>
+    function updateRadiusInput(val) {
+        var radius = val * 111111 / 1000
+        var value = document.getElementById('sliderRadius').value = Math.round(radius);
+        console.log(value)
+    }
+    function updateDaysInput(val) {
+        document.getElementById('sliderDays').value = val;
+    }
+</script>
+
+
 

@@ -61,6 +61,20 @@ namespace Grupp7.Helpers
             }
             return sortedList;
         }
+        public static List<Observation> filterByDateUserHome(List<Observation> observations, DateTime startDate, DateTime endDate)
+        {
+
+            List<Observation> sortedList = new List<Observation>();
+            foreach (var item in observations)
+            {
+                if (item.Datetime > startDate && endDate > item.Datetime)
+                {
+                    sortedList.Add(item);
+                }
+
+            }
+            return sortedList;
+        }
         /* before the changes 
          * public static List<Animal> filterByDate(ObservationViewModel model, Animal specie, DateTime startdate, DateTime Enddate)
         {
