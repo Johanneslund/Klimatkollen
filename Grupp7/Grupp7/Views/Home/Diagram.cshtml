@@ -21,6 +21,7 @@
         <canvas id="chart1" width="400" height="400" align="right"></canvas>
     </div>
 </div>
+
 <div class="container">
     <div class="col-md-5">
 
@@ -33,6 +34,12 @@
 
         @*<img src="~/images/Fjallrävar.png" alt="Card image" class="img-responsive">*@
     </div>
+
+    <div class="col-md-4">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <canvas id="MyChart1" width="400" height="400"></canvas>
+
+    </div>
     @*<p> Källa: Zoologiska Institutionen </p>*@
     <div>
         <img src="~/images/shmi_havsnivå.png" alt="Card image" class="responsive">
@@ -44,44 +51,44 @@
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
-<a rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"></a> @*//inte säkert om det här*@
+    <a rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"></a> @*//inte säkert om det här*@
 
-<script>
-    var myChart = document.getElementById('myChart').getContext('2d');
+    <script>
+        var myChart = document.getElementById('myChart').getContext('2d');
 
-    var ClimatChart = new Chart(myChart, {
-        type: 'line',
-        data: {
-            labels: ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
-            datasets: [{
-                label: 'Antal kullar',
-                data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
-                backgroundColor: '#68a275',
-                borderColor: '#777',
-                borderWidth: 1,
-                hoverBorderWidth: 3,
-                hoverBorderColor: '#000',
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: 'Reproducerande fjällrävar 2009-2017 Zoologiska Institutionen ',
-                fontsize: 25
+        var ClimatChart = new Chart(myChart, {
+            type: 'line',
+            data: {
+                labels: ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
+                datasets: [{
+                    label: 'Antal kullar',
+                    data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
+                    backgroundColor: '#68a275',
+                    borderColor: '#777',
+                    borderWidth: 1,
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000',
+                }]
             },
-            legend: {
-                display: true,
-                text: 'Antal kullar'
-            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Reproducerande fjällrävar 2009-2017 Zoologiska Institutionen ',
+                    fontsize: 25
+                },
+                legend: {
+                    display: true,
+                    text: 'Antal kullar'
+                },
 
-        }
-    });
-</script>
+            }
+        });
+    </script>
 
 
-<script>
+    <script>
         var chart = document.getElementById('chart').getContext('2d');
         var ClimatChart1 = new Chart(chart, {
             type: 'pie',
@@ -106,9 +113,9 @@
 
             }
         });
-</script>
+    </script>
 
-<script>
+    <script>
 
     var chart1 = document.getElementById('chart1').getContext('2d');
 
@@ -135,49 +142,49 @@
 
             }
         });
-</script>
+    </script>
 
-<script>
-    var myChart = document.getElementById('myChart').getContext('2d');
+    <script>
+        var myChart1 = document.getElementById('myChart1').getContext('2d');
 
-    var ClimatChart = new Chart(myChart, {
-        type: 'line',
-        data: {
-            labels: ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
-            datasets: [{
-                label: 'Antal kullar',
-                data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
-                backgroundColor: '#68a275',
-                borderColor: '#777',
-                borderWidth: 1,
-                hoverBorderWidth: 3,
-                hoverBorderColor: '#000',
-            },
-            {
+        var ClimatChart = new Chart(myChart1, {
+            type: 'line',
+            data: {
+                labels: ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
+                datasets: [{
+                    label: 'Antal kullar',
+                    data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
+                    backgroundColor: '#68a275',
+                    borderColor: '#777',
+                    borderWidth: 1,
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000',
+                },
+                {
 
-                label: 'Grodar',
-                data: [2, 10, 20, 30, 30, 20, 15, 10, 1],
-                backgroundColor: '#2b8f36',
-                borderColor: '#777',
-                borderWidth: 1,
-                hoverBorderWidth: 3,
-                hoverBorderColor: '#000',
-            }],
+                    label: 'Grodar',
+                    data: [2, 10, 20, 30, 30, 20, 15, 10, 1],
+                    backgroundColor: '#2b8f36',
+                    borderColor: '#777',
+                    borderWidth: 1,
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000',
+                }],
 
-        }
+            }
 
-        ,
-        options: {
-            title: {
-                display: true,
-                text: 'Reproducerande fjällrävar 2009-2017 Zoologiska Institutionen ',
-                fontsize: 25
-            },
-            legend: {
-                display: true,
-                text: 'Antal kullar'
-            },
+            ,
+            options: {
+                title: {
+                    display: true,
+                    text: 'Reproducerande fjällrävar 2009-2017 Zoologiska Institutionen ',
+                    fontsize: 25
+                },
+                legend: {
+                    display: true,
+                    text: 'Antal kullar'
+                },
 
-        }
-    });
-</script>
+            }
+        });
+    </script>
