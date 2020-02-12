@@ -1,4 +1,5 @@
 ﻿using Grupp7.Interfaces;
+using Grupp7.Models;
 using Grupp7.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -33,10 +34,6 @@ namespace Grupp7.Classes
 
         }
 
-        public void AddUser(string firstname, string lastname, string id, string username)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<User> GetUsers() //  => users
         {
@@ -107,6 +104,11 @@ namespace Grupp7.Classes
         }
 
         public Weather GetWeather(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddUser(UserModel user)
         {
             throw new NotImplementedException();
         }

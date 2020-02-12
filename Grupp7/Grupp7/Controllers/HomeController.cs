@@ -103,10 +103,9 @@ namespace Grupp7.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult AddUserFromRegister(string firstname, string lastname, string id, string username)
+        public IActionResult AddUserFromRegister(UserModel user)
         {
-            dbContext.AddUser(firstname, lastname, id, username);
+            dbContext.AddUser(user);
             return RedirectToAction("Index");
         }
 

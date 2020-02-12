@@ -1,4 +1,5 @@
 ﻿using Grupp7.Classes;
+using Grupp7.Models;
 using Grupp7.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -14,7 +15,7 @@ namespace Grupp7.Interfaces
         User GetUserFromIdentity(string id);
         void Save(User user);
         List<User> GetUsers();
-        void AddUser(string firstname, string lastname, string id, string username);
+        void AddUser(UserModel user);
         List<Animal> GetAnimals();
         Animal getAnimal(int id);
         void updateAimal(Animal animal);

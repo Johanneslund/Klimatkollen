@@ -1,5 +1,6 @@
 ﻿using Grupp7.Data;
 using Grupp7.Interfaces;
+using Grupp7.Models;
 using Grupp7.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -33,14 +34,17 @@ namespace Grupp7.Classes
             return context.Weathers.Where(x => x.WeatherId.Equals(id)).FirstOrDefault();
         }
 
-        public void AddUser(string firstname, string lastname, string id, string username)
+        public void AddUser(UserModel user)
         {
             context.Add(new User()
             {
-                Firstname = firstname,
-                Lastname = lastname,
-                Username = username,
-                Id = id
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                Username = user.Username,
+                Id = user.Id,
+                Longitude = user.Longitude,
+                Latitude = user.Latitude,
+                City = user.City
             });
             context.SaveChanges();
         }

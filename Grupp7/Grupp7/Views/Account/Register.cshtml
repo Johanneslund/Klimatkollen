@@ -26,8 +26,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label">Användarnamn</label>
-                <input asp-for="Username" class="form-control" />
+                <input asp-for="Username" id="city" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label">Stad</label>
+                <input asp-for="City" id="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitude" class="control-label">Longitude</label>
+                <input asp-for="Longitude" class="form-control" />
+                <span asp-validation-for="Longitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitude" class="control-label">Latitude</label>
+                <input asp-for="Latitude" class="form-control" />
+                <span asp-validation-for="Latitude" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">E-post adress</label>
@@ -54,12 +69,99 @@
             </div>
         </form>
     </div>
-    <img src="~/images/deer.jpg" alt="Card image" class="responsive">
+    <div class="col-md-8">
+        <div id="map">
+        </div>
+    </div>
 </div>
+<style>
+    #map {
+        margin-top: 20px;
+        max-height: 500px;
+        min-height: 200px;
+        min-width: 200px;
+}
+</style>
+
+<script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 6,
+            center: { lat: 60.284, lng: 15.896 }
+        });
+
+        var marker;
+        function placeMarker(location) {
+            var positionLatInt = parseFloat(location.lat())
+            var positionLngInt = parseFloat(location.lng());
+            if (positionLatInt > 55.349 && positionLatInt < 69.721 && positionLngInt > 12.401 && positionLngInt < 23.931) {
+
+                if (marker) {
+                    marker.setPosition(location);
+                }
+                else {
+
+                    marker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        draggable: true,
+                        animation: google.maps.Animation.DROP
+                    });
+                    google.maps.event.addListener(marker, 'dragend', function () {
+                        if (markerIsInSweden(marker)) {
+                            getCordsFromMarker();
+                        }
+                        else {
+                            marker.setPosition(google.maps.LatLng(58.321, 18.456));
+                            removeCordsFromBox();
+                            errorMessage();
+                        }
+                    });
+                }
+                getCordsFromMarker();
+            }
+            else {
+                errorMessage()
+            }
+
+        }
+        function markerIsInSweden(marker) {
+            if (parseFloat(marker.getPosition().lat()) > 55.349 && parseFloat(marker.getPosition().lat()) < 69.721 &&
+                parseFloat(marker.getPosition().lng()) > 12.401 && parseFloat(marker.getPosition().lng()) < 23.931) {
+                return true;
+            }
+            return false;
+        }
+
+        function errorMessage() {
+            alert("För tillfället accepterar vi enbart observationer i sverige");
+        }
+        function getCordsFromMarker() {
+            document.getElementById('Longitude').value = marker.getPosition().lng();
+            document.getElementById('Latitude').value = marker.getPosition().lat();
+            var query = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${document.getElementById('Latitude').value},${document.getElementById('Longitude').value}&key=AIzaSyB9UwW11tMu3_ya1O7nvSjSwFWh-pY_YP8`
+            var getLocation = async () => {
+                var response = await fetch(query);
+                var jsonResponse = await response.json(); //extract JSON from the http response
+                var city = await jsonResponse.results[1].address_components[1].short_name;
+                document.getElementById('City').value = city
+                console.log(city);
+            }
+            getLocation();
+        }
+
+        function removeCordsFromBox() {
+            document.getElementById('Longitude').value = "";
+            document.getElementById('Latitude').value = "";
+        }
 
 
-
+        google.maps.event.addListener(map, 'click', function (event) {
+            placeMarker(event.latLng);
+        });
+    }
+</script>
 @*<div>
-    <a asp-action="Index">Back to List</a>
-</div>*@
+        <a asp-action="Index">Back to List</a>
+    </div>*@
 
