@@ -131,6 +131,11 @@ ul.social li img {
     height: auto;
 }
 
+.space {
+    font-size: 13px;
+
+    padding: 25px;
+}
 footer.second {
     background-color: #222;
     margin: auto;
