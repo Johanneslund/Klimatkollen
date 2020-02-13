@@ -45,7 +45,6 @@ namespace Grupp7.Controllers
                         Firstname = model.Firstname,
                         Lastname = model.Lastname,
                         Username = model.Username,
-                        Id = user.Id,
                         Longitude = model.Longitude,
                         Latitude = model.Latitude,
                         City = model.City
