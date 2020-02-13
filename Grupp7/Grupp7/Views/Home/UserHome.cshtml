@@ -56,12 +56,17 @@
 <h3>Mitt hem</h3>
 <h4>Här visas dina observationer</h4>
 <div id="map"></div>
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="text-success">@ViewData["Success"]</h4>
+    </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <div class="slidecontainer">
                 <input type="range" min="11" max="222" value="@Model.radius" class="slider" id="radius" step="3" onchange="updateRadiusInput(this.value)">
             </div>
-            <div id="distance" class="text-center">Avstånd: <input type="text" id="radiusShow" class="hiddenInput" disabled value="@Model.radius" /> </div>
+            <div id="distance" class="text-center">Avstånd(km): <input type="text" id="radiusShow" class="hiddenInput" disabled value="@Model.radius" /></div>
         </div>
         <div class="col-md-6">
             <div class="slidecontainer">
@@ -165,7 +170,7 @@
 
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 9,
+            zoom: 7,
             center: { lat: @Model.User.Latitude, lng: @Model.User.Longitude}
         });
 

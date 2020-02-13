@@ -99,10 +99,16 @@ namespace Grupp7.Classes
             }
             return Animals;
         }
-        public void updateAimal(Animal animal)
+        public void updateAnimal(Animal animal)
         {
             context.Animals.Update(animal);
             context.Entry(animal).State = EntityState.Modified;
+            context.SaveChanges();
+        }
+        public void updateWeather(Weather weather)
+        {
+            context.Weathers.Update(weather);
+            context.Entry(weather).State = EntityState.Modified;
             context.SaveChanges();
         }
 

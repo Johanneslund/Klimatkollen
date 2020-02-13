@@ -18,7 +18,8 @@ namespace Grupp7.Interfaces
         void AddUser(UserModel user);
         List<Animal> GetAnimals();
         Animal getAnimal(int id);
-        void updateAimal(Animal animal);
+        void updateAnimal(Animal animal);
+        void updateWeather(Weather weather);
         List<Animal> getUserAnimals(int id);
         List<Weather> getUserWeathers(int id);
         Weather GetWeather(int id);

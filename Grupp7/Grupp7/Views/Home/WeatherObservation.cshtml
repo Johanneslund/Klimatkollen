@@ -1,7 +1,7 @@
 ﻿@model Grupp7.ViewModels.WeatherObservationViewModel
 
 @{
-    ViewData["Title"] = "Djur observation";
+    ViewData["Title"] = "Väder Observation";
 }
 <h3>Mitt Hem</h3>
 <h4>Observations detaljer</h4>
@@ -25,7 +25,8 @@
         </div>
     </div>
     <div>
-        @Html.ActionLink("Ändra på observation", "EditAnimal", "Home", new { id = Model.Weather.WeatherId })
+        @Html.ActionLink("Ändra på observation", "EditWeather", "Home", new { id = Model.Weather.WeatherId })
+    </div>
     </div>
     <br />
     <hr />
