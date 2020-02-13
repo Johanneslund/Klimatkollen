@@ -78,26 +78,31 @@ namespace Grupp7.Helpers
             return sortedList;
         }
          */
-        /*Christoffers
-       public static void getCoatColors(ObservationViewModel model)
-       {
-           List<string> coatColor = new List<string>();
-           foreach (var item in sortedAnimals)
-           {
-               if (item.Coat == "Sommar")
-               {
-                   model.Summer++;
-               }
-               if (item.Coat == "Vinter")
-               {
-                   model.Winter++;
-               }
-               if (item.Coat == "Spräcklig")
-               {
-                   model.Mixed++;
-               }
-           }
-       }*/
+
+        public static int[] GetAnimalsByYear(ObservationViewModel model, int specieId)
+        {
+            int[] animalsByYear = new int[] {0,0,0,0,0,0,0,0,0};
+            DateTime year = new DateTime(2009, 01, 01);
+            int count = 0;
+            int arrPosition = 0;
+
+            while (arrPosition < 9)
+            {
+                foreach (var item in model.AnimalList.Where(x => x.SpecieId == specieId))
+                {
+                    if (item.Datetime.Year == year.Year)
+                    {
+                        count++;
+                    }
+                }
+                animalsByYear[arrPosition] = count;
+                arrPosition++;
+                count = 0;
+                year = year.AddYears(1);
+            }
+            return animalsByYear;
+        }
+
         public static void getCoatColors(ObservationViewModel model, List<Animal> sortedList, int period)
         {
 

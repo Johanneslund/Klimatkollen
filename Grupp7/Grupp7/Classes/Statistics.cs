@@ -13,5 +13,13 @@ namespace Grupp7.Classes
         public int SecondSummer { get; set; }
         public int SecondWinter { get; set; }
         public int SecondMixed { get; set; }
+
+        public int [] GrouseByYear { get; set; }
+        public int[] FrogByYear { get; set; }
+        public int[] FoxByYear { get; set; }
+        public int[] SwineByYear { get; set; }
+        public int[] HareByYear { get; set; }
+
+
     }
 }

@@ -150,25 +150,28 @@
 
 <script>
     var myChart1 = document.getElementById('myChart1').getContext('2d');
-
     var ClimatChart = new Chart(myChart1, {
         type: 'line',
         data: {
             labels: ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
             datasets: [{
                 label: 'Fjällrävar',
-                data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
+                data: [@Model.Statistics.FoxByYear[0], @Model.Statistics.FoxByYear[1], @Model.Statistics.FoxByYear[2],
+                    @Model.Statistics.FoxByYear[3], @Model.Statistics.FoxByYear[4], @Model.Statistics.FoxByYear[5],
+                    @Model.Statistics.FoxByYear[6], @Model.Statistics.FoxByYear[7], @Model.Statistics.FoxByYear[8]],
                 backgroundColor: '#aeaaa8',
                 borderColor: '#aeaaa8',
                 borderWidth: 1,
                 hoverBorderWidth: 3,
                 hoverBorderColor: '#000',
                 fill: false
+                
             },
             {
-
-                label: 'Grodar',
-                data: [2, 10, 20, 30, 30, 20, 15, 10, 1],
+                label: 'Grodor',
+                data:[@Model.Statistics.FrogByYear[0], @Model.Statistics.FrogByYear[1], @Model.Statistics.FrogByYear[2],
+                    @Model.Statistics.FrogByYear[3], @Model.Statistics.FrogByYear[4], @Model.Statistics.FrogByYear[5],
+                    @Model.Statistics.FrogByYear[6], @Model.Statistics.FrogByYear[7], @Model.Statistics.FrogByYear[8]],
                 backgroundColor: '#2b8f36',
                 borderColor: '#2b8f36',
                 borderWidth: 1,
@@ -179,7 +182,9 @@
             {
 
                 label: 'Ripa',
-                data: [70, 78, 90, 93, 89, 78, 71, 83, 81],
+                data: [@Model.Statistics.GrouseByYear[0], @Model.Statistics.GrouseByYear[1], @Model.Statistics.GrouseByYear[2],
+                    @Model.Statistics.GrouseByYear[3], @Model.Statistics.GrouseByYear[4], @Model.Statistics.GrouseByYear[5],
+                    @Model.Statistics.GrouseByYear[6], @Model.Statistics.GrouseByYear[7], @Model.Statistics.GrouseByYear[8]],
                 backgroundColor: '#dfbf9f',
                 borderColor: '#dfbf9f',
                 borderWidth: 1,
@@ -190,7 +195,9 @@
             {
 
                 label: 'Vildsvin',
-                data: [24, 10, 20, 30, 21, 25, 23, 12, 19],
+                data: [@Model.Statistics.SwineByYear[0], @Model.Statistics.SwineByYear[1], @Model.Statistics.SwineByYear[2],
+                    @Model.Statistics.SwineByYear[3], @Model.Statistics.SwineByYear[4], @Model.Statistics.SwineByYear[5],
+                    @Model.Statistics.SwineByYear[6], @Model.Statistics.SwineByYear[7], @Model.Statistics.SwineByYear[8]],
                 backgroundColor: '#642607',
                 borderColor: '#642607',
                 borderWidth: 1,
@@ -201,7 +208,9 @@
             {
 
                 label: 'Harar',
-                data: [65, 80, 100, 70, 60, 35, 86, 82],
+                data: [@Model.Statistics.HareByYear[0], @Model.Statistics.HareByYear[1], @Model.Statistics.HareByYear[2],
+                    @Model.Statistics.HareByYear[3], @Model.Statistics.HareByYear[4], @Model.Statistics.HareByYear[5],
+                    @Model.Statistics.HareByYear[6], @Model.Statistics.HareByYear[7], @Model.Statistics.HareByYear[8]],
                 backgroundColor: '#bd4b12',
                 borderColor: '#bd4b12',
                 borderWidth: 1,
