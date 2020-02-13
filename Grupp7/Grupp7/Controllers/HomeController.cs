@@ -148,16 +148,32 @@ namespace Grupp7.Controllers
             AddAnimalViewModel model = new AddAnimalViewModel();
             model.Animal = new Animal();
             model.Species = dbContext.getSpeciesItemList();
-            Helper.setCurrentTime(model.Animal);
+            Helper.setCurrentTimeAnimal(model.Animal);
             model.Coat = Helper.getCoats();
 
+            return View(model);
+        }
+        public IActionResult AddWeather()
+        {
+            AddWeatherViewModel model = new AddWeatherViewModel();
+            model.Weather = new Weather();
+            Helper.setCurrentTimeWeather(model.Weather);
             return View(model);
         }
         public IActionResult AddAnimalToUser(AddAnimalViewModel model)
         {
             AddAnimalViewModel Model = model;
             Model.User = dbContext.GetUserFromIdentity(userManager.GetUserId(HttpContext.User));
-            dbContext.AddAnimalToUser(model);
+            dbContext.AddAnimalToUser(Model);
+            
+            return RedirectToAction("UserHome");
+        }
+        public IActionResult AddWeatherToUser(AddWeatherViewModel model)
+        {
+            AddWeatherViewModel Model = model;
+            Model.User = dbContext.GetUserFromIdentity(userManager.GetUserId(HttpContext.User));
+            dbContext.AddWeatherToUser(model);
+
             return RedirectToAction("UserHome");
         }
         public IActionResult Contact()
@@ -222,28 +238,44 @@ namespace Grupp7.Controllers
         public IActionResult EditAnimal(int id)
         {
             Animal animal = dbContext.getAnimal(id);
-            Specie specie = dbContext.getAnimalSpecie(animal);
-
-            return View(dbContext.setAnimalSpecie(animal, specie));
+            List <SelectListItem> speciesList = dbContext.getSpeciesItemList();
+            List<SelectListItem> coatList = Helper.getCoats();
+            EditAnimalViewModel model = new EditAnimalViewModel();
+            model.Animal = animal;
+            model.Coats = coatList;
+            model.Species = speciesList;
+            return View(model);
         }
         public IActionResult EditAnimalFromId(Animal animal)
         {
 
             dbContext.updateAimal(animal);
-            return RedirectToAction("Map");
+            return RedirectToAction("Observation");
         }
 
-        public IActionResult UserHome()
+        public IActionResult UserHome(double radius=50, int daysBeforeToday=3)
         {
             UserHomeViewModel model = new UserHomeViewModel();
+            List<Animal> nearbyAnimals = new List<Animal>();
+            List<Weather> nearbyWeathers = new List<Weather>();
+            List<Observation> nearbyObservations = new List<Observation>();
+            model.radius = (radius / 111111) * 1000;
+            model.daysBeforeToday = daysBeforeToday;
+            DateTime today = DateTime.Now;
+            DateTime before = today.AddDays(daysBeforeToday *-1);
+
             var userId = userManager.GetUserId(HttpContext.User);
             model.User = dbContext.GetUserFromIdentity(userId);
-            model.Animals = dbContext.getUserAnimals(model.User.UserId);
-            model.Weathers = dbContext.getUserWeathers(model.User.UserId);
 
+            nearbyAnimals = dbContext.GetNearbyAnimals(model.User.Latitude, model.User.Longitude, model.radius);
+            nearbyWeathers = dbContext.GetNearbyWeathers(model.User.Latitude, model.User.Longitude, model.radius);
+
+            nearbyObservations = (Helper.PopulateObservationList(nearbyAnimals, nearbyWeathers));
+            model.NearbyObservation = Helper.filterByDateUserHome(nearbyObservations, before, today);
+            
 
             return View(model);
-        }
+            }
         //public IActionResult Map()
        // {
           //  MapViewModel model = new MapViewModel();

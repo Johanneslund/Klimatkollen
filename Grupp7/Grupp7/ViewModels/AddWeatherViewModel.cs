@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Grupp7.ViewModels
 {
-    public class UserHomeViewModel
+    public class AddWeatherViewModel
     {
+        public Weather Weather { get; set; }
         public User User { get; set; }
-        public List<Observation> NearbyObservation {get; set;}
-        public double radius { get; set; }
-        public int daysBeforeToday { get; set; }
-
     }
 }
