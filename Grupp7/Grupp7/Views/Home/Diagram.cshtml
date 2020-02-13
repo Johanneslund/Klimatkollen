@@ -27,31 +27,19 @@
 <div class="col-md-5">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <canvas id="myChart1" width="400" height="400"></canvas>
-    <div class=" space"> <p> Du kan ta bort arterna genom att klicka på djurartens namn </p> </div>
+    <div class=" space"> <p> Diagram kan anpassas genom att klicka på djurartens namn </p> </div>
 </div>
 
 <div class="container">
     <div class="col-md-5">
-
-        @*<div>
-            <img src="~/images/ph_Svavelnedfall.png" alt="Card image" class="img-responsive">*@
-        @*</div>
-            <p align="right"> Svavelnedfallet har minskat kraftigt under de senaste 20 åren, framför allt i södra Sverige. Källa: EMEP </p>
-            <div>*@
         <canvas id="myChart" width="400" height="400"></canvas>
-
-        @*<img src="~/images/Fjallrävar.png" alt="Card image" class="img-responsive">*@
+        <div class=" space"> <p> Innan 2010 SHMI historiska data, efter 2010 Klimatkollens observationer </p> </div>
     </div>
 
 
     @*<div>
             <img src="~/images/shmi_havsnivå.png" alt="Card image" class="responsive">
         </div>*@
-
-
-    @*<div>
-        <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
-    </div>*@
 
 </div>
 
@@ -65,26 +53,39 @@
     var ClimatChart = new Chart(myChart, {
         type: 'bar',
         data: {
-            labels: ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
+            labels: ['1860', '1870', '1880','1890', '1900','1910', '1920','1930', '1940','1950', '1960','1970', '1980','1990', '2000','2010', '2020'],
             datasets: [{
-                label: 'Antal kullar',
-                data: [2, 26, 14, 0, 20, 50, 88, 8, 31],
-                backgroundColor: '#13429e5',
+                label: 'Vatten-nivå ökning in cm',
+                data: [-5,-3,-2, 0.1, 4, 4, 6, 7, 6, 11, 10, 11, 13, 18,16,22,],
+                backgroundColor: '#103b90',
                 borderColor: '#13429e5',
                 borderWidth: 1,
                 hoverBorderWidth: 3,
                 hoverBorderColor: '#000',
-            }]
+            },
+               {
+                label: 'Trendlinje',
+                   data: [-5, -3, -2, 0.1, 4, 4, 6, 7, 6, 11, 10, 11, 13, 18, 16, 22, 21.6],
+                type: 'line',
+                //backgroundColor: '#13429e5',
+                borderColor: '#3372ee',
+                borderWidth: 4,
+                hoverBorderWidth: 3,
+                   hoverBorderColor: '#000',
+                fill: false,
+            },
+
+            ]
         },
         options: {
             title: {
                 display: true,
-                text: 'inte färdigt ',
-                fontsize: 25
+                text: 'Havsnivåhöjning 1860-2020 ',
+                fontSize: 15
             },
             legend: {
-                display: true,
-                text: 'Antal kullar'
+                display: true
+               
             },
 
         }
@@ -230,7 +231,7 @@
             title: {
                 display: true,
                 text: 'Observerade djur 2009-2017 ',
-                fontsize: 25
+               fontSize: 15
             },
             legend: {
                 display: true,
