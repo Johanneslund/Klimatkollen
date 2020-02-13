@@ -27,34 +27,39 @@
         width: 90%;
     }
 </style>
+
 <div class="container">
     <div id="map" class="observationCard"></div><br />
+
+    <div class="ObservationHeader">
+        <span>Djurart</span>
+        <span>Datum</span>
+        <span>Stad</span>
+        <span>Läs mer</span>
+    </div>
     @foreach (var item in Model.ObservationsList)
     {
         if (item.Animal != null)
         {
-            <div class="card flex-row flex-wrap">
-                <div class="card-block px-4">
-                    <p class="card-text">
-                        @item.Animal.Specie.Speciename " " Päls: @item.Animal.Coat " " Tid och Datum: @item.Datetime <br>
-                    </p>
+            <a href=" @Url.Action("AnimalObservation", "Home", new { id = item.Animal.AnimalId })">
+                <div class="observationLink">
+                    <span>@item.Animal.Specie.Speciename</span>
+                    <span>@item.Datetime</span>
+                    <span> Stockholm</span>
+                    <span>Läs mer</span> @*Eller observatörens namn*@
                 </div>
-                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.Animal.AnimalId }, new { @class = "btn button" })
-            </div>
-            <br />
+            </a>
         }
         else if (item.Weather != null)
         {
-            <div class="card flex-row flex-wrap">
-                <div class="card-block px-4">
-                    <p class="card-text">
-                        @item.Weather.Type
-                        Datum och tid: @item.Datetime <br>
-                    </p>
+            <a href=" @Url.Action("AnimalObservation", "Home", new { id = item.Weather.WeatherId })">
+                <div class="observationLink">
+                    <span> @item.Weather.Type</span>
+                    <span>@item.Datetime</span>
+                    <span> Stockholm</span>
+                    <span>Läs mer</span> @*Eller observatörens namn*@
                 </div>
-                @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.Weather.WeatherId }, new { @class = "btn button" })
-            </div>
-            <br />
+            </a>
         }
     }
 </div>
@@ -90,7 +95,7 @@
         }
                 @foreach (var item in Model.ObservationsList.Where(a => a.Animal is Animal))
 
-                    { 
+                    {
                 <text>addMarker(@item.Animal.Latitude, @item.Animal.Longitude, '@item.Animal.Specie.Speciename',
             '@item.Animal.Datetime', 'Päls: @item.Animal.Coat',
             '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.Animal.AnimalId })',
