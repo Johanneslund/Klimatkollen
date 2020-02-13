@@ -34,14 +34,9 @@
         if (item.Animal != null)
         {
             <div class="card flex-row flex-wrap">
-                <img src="~/images/three-brown-bunnies.jpg" alt="images" style="width:300px; height:200px;">
                 <div class="card-block px-4">
-                    <h4 class="card-title">@item.Animal.Specie.Speciename </h4>
                     <p class="card-text">
-                        Päls: @item.Animal.Coat <br>
-                        Tid och Datum: @item.Datetime <br>
-                        Longitude: @item.Animal.Longitude <br>
-                        Latitude: @item.Animal.Latitude <br><br>
+                        @item.Animal.Specie.Speciename " " Päls: @item.Animal.Coat " " Tid och Datum: @item.Datetime <br>
                     </p>
                 </div>
                 @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.Animal.AnimalId }, new { @class = "btn button" })
@@ -51,18 +46,10 @@
         else if (item.Weather != null)
         {
             <div class="card flex-row flex-wrap">
-                <img src="~/images/icebergs-2574987.jpg" alt="images" style="width:300px; height:200px;">
                 <div class="card-block px-4">
-                    <h4 class="card-title">@item.Weather.Type</h4>
                     <p class="card-text">
+                        @item.Weather.Type
                         Datum och tid: @item.Datetime <br>
-                        Longitude @item.Weather.Longitude <br>
-                        Latitude: @item.Weather.Latitude <br>
-                        PH halt: @item.Weather.PH <br>
-                        Fuktighet: @item.Weather.Humidity <br>
-                        Temperatur: @item.Weather.Temperature <br>
-                        Carbon: @item.Weather.Carbon <br><br>
-
                     </p>
                 </div>
                 @Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.Weather.WeatherId }, new { @class = "btn button" })
