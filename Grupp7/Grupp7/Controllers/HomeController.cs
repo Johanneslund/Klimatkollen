@@ -123,17 +123,22 @@ namespace Grupp7.Controllers
         public IActionResult Diagram()
         {
             ObservationViewModel model = new ObservationViewModel();
+            model.Statistics = new Statistics();
             model.AnimalList = dbContext.GetAnimals();
+
             DateTime FirstStartDate = new DateTime(2010, 11, 1);
             DateTime FirstEndDate = new DateTime(2010, 12, 31);
             DateTime SecondStartDate = new DateTime(2019, 11, 1);
             DateTime SecondEndDate = new DateTime(2019, 12, 31);
-            model.Statistics = new Statistics();
-
             int specieID = 3;// ripa
-
             Helper.getCoatColors(model, Helper.filterByDate(model, FirstStartDate, FirstEndDate, specieID), 1);
             Helper.getCoatColors(model, Helper.filterByDate(model, SecondStartDate, SecondEndDate, specieID), 2);
+
+            model.Statistics.GrouseByYear = Helper.GetAnimalsByYear(model,3); // hårdkodat species. 
+            model.Statistics.FoxByYear = Helper.GetAnimalsByYear(model,2);
+            model.Statistics.SwineByYear = Helper.GetAnimalsByYear(model,4);
+            model.Statistics.FrogByYear = Helper.GetAnimalsByYear(model, 5);
+            model.Statistics.HareByYear = Helper.GetAnimalsByYear(model, 1);
 
             return View(model);
         }
