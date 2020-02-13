@@ -117,9 +117,8 @@ namespace Grupp7.Helpers
             int[] animalsByYear = new int[] {0,0,0,0,0,0,0,0,0,0,0};
             DateTime year = new DateTime(2010, 01, 01);
             int count = 0;
-            int arrPosition = 0;
-
-            while (arrPosition < 11)
+            
+            for(int i = 0; i < animalsByYear.Length; i++)
             {
                 foreach (var item in model.AnimalList.Where(x => x.SpecieId == specieId))
                 {
@@ -128,12 +127,12 @@ namespace Grupp7.Helpers
                         count++;
                     }
                 }
-                animalsByYear[arrPosition] = count;
-                arrPosition++;
+                animalsByYear[i] = count;
                 count = 0;
                 year = year.AddYears(1);
             }
             return animalsByYear;
+
         }
 
         public static void getCoatColors(ObservationViewModel model, List<Animal> sortedList, int period)
