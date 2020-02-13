@@ -1,4 +1,5 @@
-﻿using Grupp7.Models;
+﻿using Grupp7.Classes;
+using Grupp7.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,7 @@ namespace Grupp7.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                var user = new IdentityUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true };
                 var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)

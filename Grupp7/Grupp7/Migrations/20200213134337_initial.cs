@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Grupp7.Migrations
 {
-    public partial class AddingIdentity : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,38 @@ namespace Grupp7.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Species",
+                columns: table => new
+                {
+                    SpecieId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Speciename = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Species", x => x.SpecieId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Firstname = table.Column<string>(nullable: false),
+                    Lastname = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: true),
+                    Latitude = table.Column<string>(nullable: false),
+                    Longitude = table.Column<string>(nullable: false),
+                    Username = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,33 +185,114 @@ namespace Grupp7.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.UpdateData(
+            migrationBuilder.CreateTable(
+                name: "Animals",
+                columns: table => new
+                {
+                    AnimalId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Datetime = table.Column<DateTime>(nullable: false),
+                    Coat = table.Column<string>(maxLength: 64, nullable: false),
+                    Longitude = table.Column<string>(maxLength: 128, nullable: false),
+                    Latitude = table.Column<string>(maxLength: 128, nullable: false),
+                    City = table.Column<string>(maxLength: 128, nullable: true),
+                    SpecieId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Animals", x => x.AnimalId);
+                    table.ForeignKey(
+                        name: "FK_Animals_Species_SpecieId",
+                        column: x => x.SpecieId,
+                        principalTable: "Species",
+                        principalColumn: "SpecieId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Animals_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Weathers",
+                columns: table => new
+                {
+                    WeatherId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Datetime = table.Column<DateTime>(nullable: false),
+                    Type = table.Column<string>(maxLength: 128, nullable: false),
+                    Longitude = table.Column<string>(maxLength: 128, nullable: false),
+                    Latitude = table.Column<string>(maxLength: 128, nullable: false),
+                    Temperature = table.Column<string>(maxLength: 128, nullable: false),
+                    PH = table.Column<string>(nullable: true),
+                    Humidity = table.Column<string>(nullable: true),
+                    Carbon = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Weathers", x => x.WeatherId);
+                    table.ForeignKey(
+                        name: "FK_Weathers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Species",
+                columns: new[] { "SpecieId", "Speciename" },
+                values: new object[,]
+                {
+                    { 1, "Hare" },
+                    { 2, "Fjällräv" },
+                    { 3, "Ripa" },
+                    { 4, "Vildsvin" },
+                    { 5, "Groda" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "City", "Firstname", "Id", "Lastname", "Latitude", "Longitude", "Username" },
+                values: new object[,]
+                {
+                    { 1, "Östersund", "Johannes", "21a529ea-f6fd-4f35-ae77-afc54aa83fe5", "Lundkvist", "16.321", "56.321", "Jossieri" },
+                    { 2, "Östersund", "Björn", "c85d4906-25ec-4e8d-9ebd-9f4b74b506f0", "Bertilsson", "16.321", "56.321", "BB" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Animals",
-                keyColumn: "AnimalId",
-                keyValue: 1,
-                column: "Datetime",
-                value: new DateTime(2020, 1, 29, 19, 58, 19, 463, DateTimeKind.Local));
+                columns: new[] { "AnimalId", "City", "Coat", "Datetime", "Latitude", "Longitude", "SpecieId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, null, "Vinter", new DateTime(2020, 2, 13, 14, 43, 37, 553, DateTimeKind.Local), "14.662298", "63.247951", 1, 1 },
+                    { 2, null, "Vinter", new DateTime(2020, 2, 13, 14, 43, 37, 555, DateTimeKind.Local), "14.662298", "63.247231", 2, 1 },
+                    { 3, null, "Vinter", new DateTime(2020, 2, 13, 14, 43, 37, 555, DateTimeKind.Local), "14.445399", "63.119802", 3, 2 }
+                });
 
-            migrationBuilder.UpdateData(
+            migrationBuilder.InsertData(
+                table: "Weathers",
+                columns: new[] { "WeatherId", "Carbon", "City", "Datetime", "Humidity", "Latitude", "Longitude", "PH", "Temperature", "Type", "UserId" },
+                values: new object[,]
+                {
+                    { 1, null, null, new DateTime(2020, 2, 13, 14, 43, 37, 555, DateTimeKind.Local), "87,2", "14.662298", "63.247231", null, "22", "Regn", 2 },
+                    { 2, "10 mg", null, new DateTime(2020, 2, 13, 14, 43, 37, 555, DateTimeKind.Local), "87,2", "14.662298", "63.247231", null, "16", "Storsjön", 2 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Animals_SpecieId",
                 table: "Animals",
-                keyColumn: "AnimalId",
-                keyValue: 2,
-                column: "Datetime",
-                value: new DateTime(2020, 1, 29, 19, 58, 19, 464, DateTimeKind.Local));
+                column: "SpecieId");
 
-            migrationBuilder.UpdateData(
-                table: "Weathers",
-                keyColumn: "WeatherId",
-                keyValue: 1,
-                column: "Datetime",
-                value: new DateTime(2020, 1, 29, 19, 58, 19, 464, DateTimeKind.Local));
-
-            migrationBuilder.UpdateData(
-                table: "Weathers",
-                keyColumn: "WeatherId",
-                keyValue: 2,
-                column: "Datetime",
-                value: new DateTime(2020, 1, 29, 19, 58, 19, 464, DateTimeKind.Local));
+            migrationBuilder.CreateIndex(
+                name: "IX_Animals_UserId",
+                table: "Animals",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -219,10 +332,18 @@ namespace Grupp7.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Weathers_UserId",
+                table: "Weathers",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Animals");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -239,38 +360,19 @@ namespace Grupp7.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Weathers");
+
+            migrationBuilder.DropTable(
+                name: "Species");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
-            migrationBuilder.UpdateData(
-                table: "Animals",
-                keyColumn: "AnimalId",
-                keyValue: 1,
-                column: "Datetime",
-                value: new DateTime(2020, 1, 29, 10, 56, 4, 637, DateTimeKind.Local));
-
-            migrationBuilder.UpdateData(
-                table: "Animals",
-                keyColumn: "AnimalId",
-                keyValue: 2,
-                column: "Datetime",
-                value: new DateTime(2020, 1, 29, 10, 56, 4, 638, DateTimeKind.Local));
-
-            migrationBuilder.UpdateData(
-                table: "Weathers",
-                keyColumn: "WeatherId",
-                keyValue: 1,
-                column: "Datetime",
-                value: new DateTime(2020, 1, 29, 10, 56, 4, 639, DateTimeKind.Local));
-
-            migrationBuilder.UpdateData(
-                table: "Weathers",
-                keyColumn: "WeatherId",
-                keyValue: 2,
-                column: "Datetime",
-                value: new DateTime(2020, 1, 29, 10, 56, 4, 639, DateTimeKind.Local));
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

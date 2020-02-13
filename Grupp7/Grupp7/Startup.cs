@@ -31,11 +31,11 @@ namespace Grupp7
         {
 
             //Här bestäms vilken DB som ska användas
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Skarp")));
             services.AddDbContext<IdDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdDbContext>();
             services.AddTransient<IRepository, Repository>();
-            services.AddTransient<IIdRepository, IdRepository>();
+            //services.AddTransient<IIdRepository, IdRepository>();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.

@@ -55,9 +55,9 @@ namespace Grupp7.Migrations
                     b.ToTable("Animals");
 
                     b.HasData(
-                        new { AnimalId = 1, Coat = "Vinter", Datetime = new DateTime(2020, 2, 13, 12, 55, 14, 766, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247951", SpecieId = 1, UserId = 1 },
-                        new { AnimalId = 2, Coat = "Vinter", Datetime = new DateTime(2020, 2, 13, 12, 55, 14, 768, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247231", SpecieId = 2, UserId = 1 },
-                        new { AnimalId = 3, Coat = "Vinter", Datetime = new DateTime(2020, 2, 13, 12, 55, 14, 768, DateTimeKind.Local), Latitude = "14.445399", Longitude = "63.119802", SpecieId = 3, UserId = 2 }
+                        new { AnimalId = 1, Coat = "Vinter", Datetime = new DateTime(2020, 2, 13, 14, 43, 37, 553, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247951", SpecieId = 1, UserId = 1 },
+                        new { AnimalId = 2, Coat = "Vinter", Datetime = new DateTime(2020, 2, 13, 14, 43, 37, 555, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247231", SpecieId = 2, UserId = 1 },
+                        new { AnimalId = 3, Coat = "Vinter", Datetime = new DateTime(2020, 2, 13, 14, 43, 37, 555, DateTimeKind.Local), Latitude = "14.445399", Longitude = "63.119802", SpecieId = 3, UserId = 2 }
                     );
                 });
 
@@ -157,8 +157,8 @@ namespace Grupp7.Migrations
                     b.ToTable("Weathers");
 
                     b.HasData(
-                        new { WeatherId = 1, Datetime = new DateTime(2020, 2, 13, 12, 55, 14, 768, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "22", Type = "Regn", UserId = 2 },
-                        new { WeatherId = 2, Carbon = "10 mg", Datetime = new DateTime(2020, 2, 13, 12, 55, 14, 768, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "16", Type = "Storsjön", UserId = 2 }
+                        new { WeatherId = 1, Datetime = new DateTime(2020, 2, 13, 14, 43, 37, 555, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "22", Type = "Regn", UserId = 2 },
+                        new { WeatherId = 2, Carbon = "10 mg", Datetime = new DateTime(2020, 2, 13, 14, 43, 37, 555, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "16", Type = "Storsjön", UserId = 2 }
                     );
                 });
 
