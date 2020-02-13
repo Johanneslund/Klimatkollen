@@ -27,7 +27,7 @@ namespace Grupp7.Classes
         }
         public Animal getAnimal(int id)
         {
-            return context.Animals.Where(x => x.AnimalId.Equals(id)).FirstOrDefault();
+            return context.Animals.Where(x => x.AnimalId.Equals(id)).Include(x => x.Specie).FirstOrDefault();
         }
         public Weather GetWeather(int id)
         {
@@ -41,12 +41,22 @@ namespace Grupp7.Classes
 
             return context.Animals.Where(
                 x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
-                double.Parse(x.Latitude.Replace('.',',')) > userLat - radius &&
-                double.Parse(x.Longitude.Replace('.',',')) < userLng + radius &&
-                double.Parse(x.Longitude.Replace('.',',')) > userLng - radius).Include(x => x.Specie)
+                double.Parse(x.Latitude.Replace('.', ',')) > userLat - radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) < userLng + radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius).Include(x => x.Specie)
                 .ToList();
-            
-            
+        }
+        public List<Weather> GetNearbyWeathers(string lat, string lng, double radius)
+        {
+            var userLat = double.Parse(lat.Replace('.', ','));
+            var userLng = double.Parse(lng.Replace('.', ','));
+
+            return context.Weathers.Where(
+                x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
+                double.Parse(x.Latitude.Replace('.', ',')) > userLat - radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) < userLng + radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius)
+                .ToList();
         }
 
         public void AddUser(UserModel user)
@@ -197,18 +207,39 @@ namespace Grupp7.Classes
         }
         public void AddAnimalToUser(AddAnimalViewModel model)
         {
-            Animal animal = new Animal()
+            context.Animals.Add(new Animal()
             {
                 Coat = model.Animal.Coat,
                 SpecieId = model.Animal.SpecieId,
                 Latitude = model.Animal.Latitude,
                 Longitude = model.Animal.Longitude,
                 Datetime = model.Animal.Datetime,
-                User = model.User
-            };
-            setAnimalSpecie(animal, getAnimalSpecie(animal));
-            context.Add(animal);
+                User = model.User,
+                City = model.Animal.City,
+                Specie = getSpecieFromSpecieId(model.Animal.SpecieId)
+            });
             context.SaveChanges();
+        }
+        public void AddWeatherToUser(AddWeatherViewModel model)
+        {
+            context.Weathers.Add(new Weather()
+            {
+                Carbon = model.Weather.Carbon,
+                Datetime = model.Weather.Datetime,
+                Humidity = model.Weather.Humidity,
+                Latitude = model.Weather.Latitude,
+                Longitude = model.Weather.Longitude,
+                PH = model.Weather.PH,
+                Temperature = model.Weather.Temperature,
+                Type = model.Weather.Type,
+                User = model.User,
+                UserId = model.Weather.UserId
+            });
+            context.SaveChanges();
+        }
+        public Specie getSpecieFromSpecieId(int specieId)
+        {   
+            return context.Species.Where(x => x.SpecieId.Equals(specieId)).FirstOrDefault();
         }
     }
 }

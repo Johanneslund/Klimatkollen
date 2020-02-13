@@ -30,5 +30,8 @@ namespace Grupp7.Interfaces
         Animal setAnimalSpecie(Animal animal, Specie specie);
         void AddAnimalToUser(AddAnimalViewModel model);
         List<Animal> GetNearbyAnimals(string lat, string lng, double radius);
+        List<Weather> GetNearbyWeathers(string lat, string lng, double radius);
+        void AddWeatherToUser(AddWeatherViewModel model);
+
     }
 }

@@ -32,11 +32,17 @@ namespace Grupp7.Helpers
             return model;
         }
 
-        public static Animal setCurrentTime(Animal animal)
+        public static Animal setCurrentTimeAnimal(Animal animal)
         {
             Animal _animal = animal;
             _animal.Datetime = DateTime.Now;
             return _animal;
+        }
+        public static Weather setCurrentTimeWeather(Weather weather)
+        {
+            Weather _weather = weather;
+            _weather.Datetime = DateTime.Now;
+            return _weather;
         }
         public static List<SelectListItem> getCoats()
         {
@@ -74,6 +80,19 @@ namespace Grupp7.Helpers
 
             }
             return sortedList;
+        }
+        public static List<Observation> PopulateObservationList(List<Animal> Animals, List<Weather> Weathers)
+        {
+            List<Observation> nearbyObservations = new List<Observation>();
+            foreach (var item in Animals)
+            {
+                nearbyObservations.Add(new Observation() { Animal = item, Datetime = item.Datetime });
+            }
+            foreach (var item in Weathers)
+            {
+                nearbyObservations.Add(new Observation() { Weather = item, Datetime = item.Datetime });
+            }
+            return nearbyObservations;
         }
         /* before the changes 
          * public static List<Animal> filterByDate(ObservationViewModel model, Animal specie, DateTime startdate, DateTime Enddate)

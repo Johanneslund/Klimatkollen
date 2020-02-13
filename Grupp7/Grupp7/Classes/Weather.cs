@@ -30,6 +30,7 @@ namespace Grupp7.Classes
         public string Humidity { get; set; }
 
         public string Carbon { get; set; }
+        public string City { get; set; }
 
         [ForeignKey("UserId")]
         public int UserId { get; set; }
