@@ -86,6 +86,7 @@ namespace Grupp7.Controllers
                     model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
                 }
             }
+            Helper.getCentralPosition(model);
             return model;
         }
 
