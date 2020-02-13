@@ -55,7 +55,7 @@ namespace Grupp7.Classes
             throw new NotImplementedException();
         }
 
-        public void updateAimal(Animal animal)
+        public void updateAnimal(Animal animal)
         {
             throw new NotImplementedException();
         }
@@ -124,6 +124,11 @@ namespace Grupp7.Classes
         }
 
         public void AddWeatherToUser(AddWeatherViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateWeather(Weather weather)
         {
             throw new NotImplementedException();
         }

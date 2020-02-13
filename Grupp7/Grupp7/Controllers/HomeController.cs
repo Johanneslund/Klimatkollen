@@ -112,6 +112,11 @@ namespace Grupp7.Controllers
         public IActionResult Observation(string searchTerm, string observationType)
         {
             var observation = Observations(searchTerm, observationType);
+            var t = TempData["success"];
+            if (t != null)
+            {
+                ViewData["success"] = t;
+            }
 
             return View(observation);
         }
@@ -139,37 +144,58 @@ namespace Grupp7.Controllers
             return View();
         }
         public IActionResult AddAnimal()
-        {
+        { 
             AddAnimalViewModel model = new AddAnimalViewModel();
             model.Animal = new Animal();
             model.Species = dbContext.getSpeciesItemList();
             Helper.setCurrentTimeAnimal(model.Animal);
             model.Coat = Helper.getCoats();
-
+            var t = TempData["errorMessage"];
+            if (t != null)
+            {
+                ViewData["errorMessage"] = t;
+            }
             return View(model);
         }
         public IActionResult AddWeather()
         {
             AddWeatherViewModel model = new AddWeatherViewModel();
             model.Weather = new Weather();
+            var t = TempData["errorMessage"];
+            if (t != null)
+            {
+                ViewData["errorMessage"] = t;
+            }
             Helper.setCurrentTimeWeather(model.Weather);
             return View(model);
         }
         public IActionResult AddAnimalToUser(AddAnimalViewModel model)
         {
             AddAnimalViewModel Model = model;
-            Model.User = dbContext.GetUserFromIdentity(userManager.GetUserId(HttpContext.User));
-            dbContext.AddAnimalToUser(Model);
-            
-            return RedirectToAction("UserHome");
+            if (ModelState.IsValid)
+            {
+                Model.User = dbContext.GetUserFromIdentity(userManager.GetUserId(HttpContext.User));
+                dbContext.AddAnimalToUser(Model);
+                TempData["Success"] = "Din Djurobservation har registrerats";
+                return RedirectToAction("UserHome");
+            }
+            TempData["errorMessage"] = "Något gick fel, använde du kartan?";
+            return RedirectToAction("AddAnimal");
         }
         public IActionResult AddWeatherToUser(AddWeatherViewModel model)
         {
             AddWeatherViewModel Model = model;
-            Model.User = dbContext.GetUserFromIdentity(userManager.GetUserId(HttpContext.User));
-            dbContext.AddWeatherToUser(model);
+            if(ModelState.IsValid)
+            { 
+                Model.User = dbContext.GetUserFromIdentity(userManager.GetUserId(HttpContext.User));
+                dbContext.AddWeatherToUser(model);
+                TempData["Success"] = "Din Väderobservation har registrerats";
+                return RedirectToAction("UserHome");
+            }
+            TempData["errorMessage"] = "Något gick fel, använde du kartan?";
+            return RedirectToAction("AddAnimal");
 
-            return RedirectToAction("UserHome");
+
         }
         public IActionResult Contact()
         {
@@ -239,13 +265,56 @@ namespace Grupp7.Controllers
             model.Animal = animal;
             model.Coats = coatList;
             model.Species = speciesList;
+
+            var t = TempData["error"];
+            if (t != null)
+            {
+                ViewData["error"] = t;
+            }
+
+            return View(model);
+        }
+        public IActionResult EditWeather(int id)
+        {
+            EditWeatherViewModel model = new EditWeatherViewModel();
+            model.Weather = dbContext.GetWeather(id);
+
+            var t = TempData["error"];
+            if (t != null)
+            {
+                ViewData["error"] = t;
+            }
+
             return View(model);
         }
         public IActionResult EditAnimalFromId(Animal animal)
         {
+            if(ModelState.IsValid)
+            { 
+            dbContext.updateAnimal(animal);
+                TempData["success"] = "Djurobservation uppdaterad";
+                return RedirectToAction("Observation");
+            }
+            else
+            {
+                TempData["error"] = "Något gick fel";
+                return RedirectToAction("EditAnimal",new { id = animal.AnimalId });
+            }
+        }
 
-            dbContext.updateAimal(animal);
-            return RedirectToAction("Observation");
+        public IActionResult EditWeatherFromId(Weather weather)
+        {
+            if (ModelState.IsValid)
+            {
+                dbContext.updateWeather(weather);
+                TempData["success"] = "Väderobservation uppdaterad";
+                return RedirectToAction("Observation");
+            }
+            else
+            {
+                TempData["error"] = "Något gick fel";
+                return RedirectToAction("EditWeather", new { id=weather.WeatherId });
+            }
         }
 
         public IActionResult UserHome(double radius=50, int daysBeforeToday=3)
@@ -258,16 +327,27 @@ namespace Grupp7.Controllers
             model.daysBeforeToday = daysBeforeToday;
             DateTime today = DateTime.Now;
             DateTime before = today.AddDays(daysBeforeToday *-1);
-
+            model.NearbyObservation = nearbyObservations;
             var userId = userManager.GetUserId(HttpContext.User);
             model.User = dbContext.GetUserFromIdentity(userId);
+            if(model.User.Latitude == null || model.User.Longitude == null)
+            {
+                return View(model);
+            }
+
+            var t = TempData["Success"];
+            if (t != null)
+            {
+                ViewData["Success"] = t;
+            }
 
             nearbyAnimals = dbContext.GetNearbyAnimals(model.User.Latitude, model.User.Longitude, model.radius);
             nearbyWeathers = dbContext.GetNearbyWeathers(model.User.Latitude, model.User.Longitude, model.radius);
-
+            { 
             nearbyObservations = (Helper.PopulateObservationList(nearbyAnimals, nearbyWeathers));
             model.NearbyObservation = Helper.filterByDateUserHome(nearbyObservations, before, today);
-            
+            }
+
 
             return View(model);
             }
