@@ -108,6 +108,17 @@ namespace Grupp7.Controllers
             dbContext.AddUser(user);
             return RedirectToAction("Index");
         }
+        public IActionResult AddNotCompleteUserInfo(User model)
+        {
+            model.Id = userManager.GetUserId(HttpContext.User);
+            if (ModelState.IsValid)
+            { 
+            dbContext.AddOldUserToDb(model);
+            return RedirectToAction("Index");
+            }
+            TempData["ErrorMessage"] = "Var god fyll i formuläret, använde du kartan?";
+            return RedirectToAction("AddUserInfo");
+        }
 
         public IActionResult Observation(string searchTerm, string observationType)
         {
@@ -334,10 +345,15 @@ namespace Grupp7.Controllers
             DateTime before = today.AddDays(daysBeforeToday *-1);
             model.NearbyObservation = nearbyObservations;
             var userId = userManager.GetUserId(HttpContext.User);
+            dbContext.ClearCache(dbContext.GetUserFromIdentity(userId));
             model.User = dbContext.GetUserFromIdentity(userId);
-            if(model.User.Latitude == null || model.User.Longitude == null)
+            model.User = dbContext.GetUser(model.User.UserId);
+
+            if (model.User.Latitude == null || model.User.Longitude == null ||
+                model.User.Latitude== "" || model.User.Longitude=="")
             {
-                return View(model);
+                TempData["noUser"] = "För att ta del av profilsidan behöver du fylla i formuläret";
+                return RedirectToAction("AddUserInfo");
             }
 
             var t = TempData["Success"];
@@ -356,6 +372,25 @@ namespace Grupp7.Controllers
 
             return View(model);
             }
+        public IActionResult AddUserInfo()
+        {
+            User model = new User();
+            var userId = userManager.GetUserId(HttpContext.User);
+            model.Id = userId;
+            var t = TempData["noUser"];
+            if(t != null)
+            {
+                ViewData["noUser"] = t;
+                ViewData["ErrorMessage"] = null;
+            }
+            var d = TempData["ErrorMessage"];
+            if(d != null)
+            {
+                ViewData["ErrorMessage"] = d;
+                ViewData["NoUser"] = null;
+            }
+            return View(model);
+        }
         //public IActionResult Map()
        // {
           //  MapViewModel model = new MapViewModel();

@@ -132,5 +132,20 @@ namespace Grupp7.Classes
         {
             throw new NotImplementedException();
         }
+
+        public void AddOldUserToDb(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearCache(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveUser(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
