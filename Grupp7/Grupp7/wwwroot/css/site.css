@@ -74,6 +74,37 @@ body {
     clear: right
 }
 
+div.ObservationHeader {
+    display: table;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    table-layout: fixed; /* For cells of equal size */
+    background-color: #222;
+    color: white;
+}
+
+    div.ObservationHeader span {
+        display: table-cell;
+        text-align: center;
+    }
+
+.observationLink {
+    background-color: white;
+    display: table;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    table-layout: fixed; /* For cells of equal size */
+}
+
+    .observationLink span {
+        display: table-cell;
+        text-align: center;
+    }
+
+    .observationLink:hover {
+        background-color: #F3F1ED;
+    }
+
 
 
 /* Hide/rearrange for smaller screens */
