@@ -33,7 +33,8 @@ namespace Grupp7.Data
                 Username = "Jossieri",
                 Id = "21a529ea-f6fd-4f35-ae77-afc54aa83fe5",
                 Latitude = "16.321",
-                Longitude = "56.321"
+                Longitude = "56.321",
+                City = "Östersund"
             },
 
             new User()
@@ -44,7 +45,8 @@ namespace Grupp7.Data
                 Username = "BB",
                 Id = "c85d4906-25ec-4e8d-9ebd-9f4b74b506f0",
                 Latitude = "16.321",
-                Longitude = "56.321"
+                Longitude = "56.321",
+                City = "Östersund"
             }
 
             );
