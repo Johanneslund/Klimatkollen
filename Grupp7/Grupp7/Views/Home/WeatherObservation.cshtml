@@ -1,0 +1,68 @@
+﻿@model Grupp7.ViewModels.WeatherObservationViewModel
+
+@{
+    ViewData["Title"] = "Djur observation";
+}
+<h3>Mitt Hem</h3>
+<h4>Observations detaljer</h4>
+
+<style>
+    #map {
+        height: 250px;
+        width: 60%;
+    }
+</style>
+<div class="row">
+    <hr />
+    <div class="col-md-4">
+        <div class="card flex-row flex-wrap">
+            <img src="~/images/AnimalSymbol.png" alt="images" title="Bild: Dogo Argentino Wildcat Zampa di Clip art - zampa">
+            <p> </p>
+            <p><strong>@Html.DisplayFor(model => model.Weather.Datetime)</strong></p>
+            <p><strong>Observatör: </strong>  @Html.DisplayFor(model => model.User.Firstname) @Html.DisplayFor(model => model.User.Lastname) </p>
+            <p><strong>Typ av observation: </strong> @Html.DisplayFor(model => model.Weather.Type) </p>
+            <p><strong>Tempratur: </strong> @Html.DisplayFor(model => model.Weather.Temperature)</p>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Ändra på observation", "EditAnimal", "Home", new { id = Model.Weather.WeatherId })
+    </div>
+    <br />
+    <hr />
+    <div id="map"></div>
+    <script>
+        var marker;
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 7,
+                center: { lat: @Model.Weather.Latitude, lng: @Model.Weather.Longitude}
+            });
+
+            function addMarker(latitude, longitude, title, description, map) {
+                var latLng = new google.maps.LatLng(latitude, longitude);
+                var contentString = '<h3>' + title + '</h3>' + '<p>' + description + '</p>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    title: title,
+                    map: map,
+                    draggable: false
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+
+                addMarker(@Model.Weather.Latitude, @Model.Weather.Longitude, '@Model.Weather.Type', 'Tempratur: @Model.Weather.Temperature', map);
+    }
+
+
+    </script>
+    <br />
+    <br />

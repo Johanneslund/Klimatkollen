@@ -21,7 +21,6 @@ namespace Grupp7.Controllers
     public class HomeController : Controller
     {
         private readonly IRepository dbContext;
-        private readonly IdRepository idDbContext;
         private readonly UserManager<IdentityUser> userManager;
 
         // The observations page with search functionality. 
@@ -97,7 +96,6 @@ namespace Grupp7.Controllers
         {
             this.dbContext = repository;
             this.userManager = userManager;
-            //this.idDbContext = idRepository;
         }
 
         [HttpGet]

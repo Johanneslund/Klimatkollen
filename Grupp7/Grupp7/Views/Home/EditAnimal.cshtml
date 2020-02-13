@@ -1,61 +1,47 @@
-﻿@model Grupp7.Classes.Animal
+﻿@model Grupp7.ViewModels.EditAnimalViewModel
 
 @{
     ViewData["Title"] = "EditAnimal";
 }
+<h3>Mitt hem</h3>
+<h4>Ändra Observation</h4>
 
-<h2>Ändra Observation</h2>
 
-<h4>Animal</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditAnimalFromId">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Datetime" class="control-label"></label>
-                <input asp-for="Datetime" class="form-control" />
-                <span asp-validation-for="Datetime" class="text-danger"></span>
+                <label asp-for="Animal.Datetime" class="control-label"></label>
+                <input asp-for="Animal.Datetime" class="form-control" />
+                <span asp-validation-for="Animal.Datetime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Coat" class="control-label"></label>
-                <input asp-for="Coat" class="form-control" />
-                <span asp-validation-for="Coat" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Longitude" class="control-label"></label>
-                <input asp-for="Longitude" class="form-control" />
-                <span asp-validation-for="Longitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Latitude" class="control-label"></label>
-                <input asp-for="Latitude" class="form-control" />
-                <span asp-validation-for="Latitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Coat" class="control-label"></label>
-                <input asp-for="Coat" class="form-control" />
-                <span asp-validation-for="Coat" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SpeciesId" class="control-label"></label>
-                <input asp-for="SpeciesId" class="form-control" />
-                <span asp-validation-for="SpeciesId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+            <label>Djur</label>
+            <select asp-for="Animal.SpecieId" asp-items="Model.Species" class="form-control"></select>
     </div>
+        <div class="form-group">
+        <label>Päls</label>
+        <select asp-for="Animal.Coat" asp-items="Model.Coats" class="form-control"></select>
+        <span asp-validation-for="Animal.Coat" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Animal.Longitude" class="control-label"></label>
+        <input asp-for="Animal.Longitude" class="form-control" />
+        <span asp-validation-for="Animal.Longitude" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Animal.Latitude" class="control-label"></label>
+        <input asp-for="Animal.Latitude" class="form-control" />
+        <span asp-validation-for="Animal.Latitude" class="text-danger"></span>
+    </div>
+            <input asp-for="Animal.UserId" class="form-control hidden collapse" />
+            <input asp-for="Animal.AnimalId" class="form-control hidden collapse" />
+    <div class="form-group">
+        <input type="submit" value="Spara" class="btn btn-default" />
+    </div>
+    </form>
+</div>
 </div>
 

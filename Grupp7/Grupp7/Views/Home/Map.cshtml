@@ -13,13 +13,13 @@
 
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 6,
-                center: { lat: @Model.CenterLongitude, lng: @Model.CenterLatitude}
+                zoom: 5.5,
+                center: { lat: @Model.CenterLatitude, lng: @Model.CenterLongitude}
             });
 
-            function addMarker(latitude, longitude, title, description, map) {
+            function addMarker(latitude, longitude, title, date,coat, link, map, Image) {
                 var latLng = new google.maps.LatLng(latitude, longitude);
-                var contentString = '<h3>' + title + '</h3>' + '<p>' + description + '</p>';
+                var contentString = '<h4>' + title + '</h4>' +  '<p>Observerad: '+ date + '</p>' + '<p>Päls: ' + coat + '</p>' + '<p>' + link + '</p>';
 
                 var infowindow = new google.maps.InfoWindow({
                     content: contentString
@@ -29,7 +29,8 @@
                     position: latLng,
                     title: title,
                     map: map,
-                    draggable: false
+                    draggable: false,
+                    icon: Image
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {
@@ -37,9 +38,22 @@
                 });
             }
                 @foreach (var item in Model.Animals) {
-                <text>addMarker(@item.Longitude, @item.Latitude, '@item.Name', '@Html.ActionLink("Läs mer","AnimalObservation","Home", new { id = item.AnimalId })', map);</text>
-        }
-    }
+                    if (item.Specie.Speciename is "Fjällräv")
+                    {
+                <text>addMarker(@item.Latitude, @item.Longitude, '@item.Specie.Speciename',
+                '@item.Datetime', '@item.Coat',
+                '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId })',
+                map, 'http://maps.google.com/mapfiles/ms/icons/blue.png');</text>
+                    }
+                    else
+                    {
+                                        <text>addMarker(@item.Latitude, @item.Longitude, '@item.Specie.Speciename',
+                '@item.Datetime', '@item.Coat',
+                '@Html.ActionLink("Läs mer", "AnimalObservation", "Home", new { id = item.AnimalId })',
+                map, 'http://maps.google.com/mapfiles/ms/icons/green.png');</text>
+                    }
+                }
+            }
 
-</script>
+    </script>
 

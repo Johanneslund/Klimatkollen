@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<IdentityUser> signInManager;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Grupp7 Klimatkollen  </title>
-
+    <title>@ViewBag.Title = "Grupp7 Klimatkollen"  </title>
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -30,14 +31,34 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Hem</a></li>
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Hem</a></li>*@
                     <li><a asp-area="" asp-controller="Home" asp-action="Observation">Observationer</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">Om oss</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Register">Registrera</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Login">Logga in</a></li>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form method="post" asp-action="logout" asp-controller="account">
+                                <button type="submit" class"nav-link btn btn-link py-0" style="width:auto">
+                                    logout @User.Identity.Name
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="UserHome">Mitt Hem</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="Account" asp-action="Register">Registera</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Account" asp-action="Login">Logga in</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -47,17 +68,28 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer class="second">
-            <p>&copy; Copyright Grupp7 - 2020</p>
-        </footer>
+
     </div>
+    <footer class="second">
+        <section>
+            <h4>Följ oss på sociala medier</h4>
+            <ul class="social">
+                <li><a href="https://www.facebook.com"> <img src="~/images/facebook1.png" /></a></li>
+                <li><a href="https://www.instagram.com"> <img src="~/images/instagram.png" />  </a></li>
+                <li><a href="https://twitter.com"> <img src="~/images/twitter1.png" /></a></li>
+                <li><a href="https://www.youtube.com"> <img src="~/images/youtube1.png" /></a></li>
+            </ul>
+        </section>
+        <p>
+            &copy; Grupp7 - 2020
+        </p>
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9UwW11tMu3_ya1O7nvSjSwFWh-pY_YP8&callback=initMap">
-        </script>"
+        </script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/MapScript.js" asp-append-version="true"></script>
 
@@ -77,7 +109,6 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>

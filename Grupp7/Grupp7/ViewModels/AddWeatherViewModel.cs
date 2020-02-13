@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Grupp7.ViewModels
 {
-    public class RegisterUserViewModel
+    public class AddWeatherViewModel
     {
+        public Weather Weather { get; set; }
         public User User { get; set; }
-        public string ConfirmPassword { get; set; }
     }
 }
