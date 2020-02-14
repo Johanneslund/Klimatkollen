@@ -13,14 +13,16 @@ namespace Grupp7.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly ILogger logger;
 
         public AccountController(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger)
+            SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
+            this.roleManager = roleManager;
         }
 
         // Register User
@@ -37,9 +39,13 @@ namespace Grupp7.Controllers
             {
                 var user = new IdentityUser { UserName = model.Email, Email = model.Email };
                 var result = await userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
+                var role = await userManager.AddToRoleAsync(user, "Klimatobservatör");
+                if (result.Succeeded && role.Succeeded)
                 {
+                    if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListUsers", "Administration");
+                    }
                     await signInManager.SignInAsync(user, isPersistent: true);
                     UserModel userToDb = new UserModel(){
                         Firstname = model.Firstname,
@@ -156,6 +162,12 @@ namespace Grupp7.Controllers
                 return View("ResetPasswordConfirmation");
             }
             return View(model);
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
