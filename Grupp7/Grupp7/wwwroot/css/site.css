@@ -36,7 +36,7 @@ body {
 
 .cardContent {
     background-color: white;
-    padding-top: 5px;
+    padding-top: 15px;
 }
 
 div.ObservationHeader {
@@ -104,12 +104,9 @@ section ul{
 ul.social li img {
     height: 50px;
 }
-/*article {
+/*nav navbar-nav.ul {
     float: left;
-    line-height: 120%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    list-style: none;
 }*/
 
 .responsive {
@@ -123,6 +120,12 @@ ul.social li img {
     font-size: 13px;
 
     padding: 25px;
+}
+
+.divider {
+    width: 5px;
+    height: auto;
+    display: inline-block;
 }
 footer.second {
     background-color: #222;
