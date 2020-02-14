@@ -88,8 +88,8 @@ namespace Grupp7.Data
             {
                 AnimalId = 1,
                 Datetime = DateTime.Now,
-                Longitude = "63.247951",
-                Latitude = "14.662298",
+                Longitude = "14.662298",
+                Latitude = "63.247951",
                 Coat = "Vinter",
                 UserId = 1,
                 SpecieId = 1
@@ -99,8 +99,8 @@ namespace Grupp7.Data
             {
                 AnimalId = 2,
                 Datetime = DateTime.Now,
-                Longitude = "63.247231",
-                Latitude = "14.662298",
+                Longitude = "14.6298",
+                Latitude = "63.247",
                 Coat = "Vinter",
                 UserId = 1,
                 SpecieId = 2
@@ -110,8 +110,8 @@ namespace Grupp7.Data
             {
                 AnimalId = 3,
                 Datetime = DateTime.Now,
-                Longitude = "63.119802",
-                Latitude = "14.445399",
+                Longitude = "14.6653",
+                Latitude = "63.247222",
                 Coat = "Vinter",
                 UserId = 2,
                 SpecieId = 3
