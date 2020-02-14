@@ -60,6 +60,7 @@ namespace Grupp7.Controllers
                     return RedirectToAction("AddUserFromRegister", "Home", userToDb);
                 }
 
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
