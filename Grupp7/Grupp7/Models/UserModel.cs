@@ -43,8 +43,9 @@ namespace Grupp7.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Konfirmera lösenord")]
-        //[Compare("Password", ErrorMessage = "Password and confirmation password do not match")]
+        [Compare("Password", ErrorMessage = "Lösenorden matchar inte")]
         public string ConfirmPassword { get; set; }
+
         [Required(ErrorMessage = "Ange ett korrekt telefonnummer")]
         [DisplayName("Telefonnummer")]
         public int Phone { get; set; }
