@@ -61,24 +61,20 @@
             Flera forskningsprojekt har redan framgångsrikt använt denna metod i sitt arbete. Crowdsourcing gör det möjligt att samla in data i mycket större skala på ett kosteffekt sätt.
             På klimatkollen kan du bidra med dina observationer så att klimatförändringarna i Sverige bli mer synlig.
         </p>
-        <a class="btn btn-default" href=@Url.Action("Register", "Home")>
+        <a class="btn btn-primary" href=@Url.Action("Register", "Home")>
             Registrera
         </a>
-        @*@Html.ActionLink("Google Map", "Map");*@
     </div>
     <div class="col-md-6">
         <h2>Klimatförändringar över tid</h2>
-        <p>
-            Visualering av större klimatförändringar över tid med hjälp av statistik.
-            <a class="btn btn-default" href=@Url.Action("Observation", "Home")>
-                Läs mer
-            </a>
-        </p>
-
-        <div>
-            <img src="~/images/diagram_avvikelse_temp.png" alt="Card image" class="img-responsive">
-        </div>
-        <p> Avvikelserna i figuren är i förhållande till temperaturgenomsnittet för perioden 1850−1900. Källa: Climatic Research Unit, University of East Anglia. </p>
-    </div>
+            <div>
+                <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
+            </div>
+            <p>Visualering av större klimatförändringar över tid med hjälp av statistik.
+                <a class="btn btn-primary" href=@Url.Action("Diagram", "Home") >
+                    Läs mer
+                </a>
+            </p>
+     </div>
 </div>
 

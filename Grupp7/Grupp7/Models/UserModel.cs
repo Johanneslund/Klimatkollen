@@ -33,8 +33,13 @@ namespace Grupp7.Models
         [Required(ErrorMessage = "Ange ett säkert lösenord, Det krävs minst 1: Stor bokstav, liten bokstav, siffra, tecken, längden måste vara minst 6")]
         [DataType(DataType.Password)]
         [DisplayName("Lösenord")]
-
         public string Password { get; set; }
+        public string City { get; set; }
+        [Required(ErrorMessage = "Välj punkt på kartan")]
+        public string Latitude { get; set; }
+        [Required(ErrorMessage = "Välj punkt på kartan")]
+        public string Longitude { get; set; }
+
 
         [DataType(DataType.Password)]
         [Display(Name = "Konfirmera lösenord")]
@@ -49,5 +54,6 @@ namespace Grupp7.Models
         public bool RememberMe { get; set; }
 
         public string Message { get; set; }
+        public string Subject { get; set; }
     }
 }

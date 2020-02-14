@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Grupp7.Classes
 {
-    public class Weather
+    public class Weather 
     {
         public int WeatherId { get; set; }
         [Required]
@@ -30,6 +30,7 @@ namespace Grupp7.Classes
         public string Humidity { get; set; }
 
         public string Carbon { get; set; }
+        public string City { get; set; }
 
         [ForeignKey("UserId")]
         public int UserId { get; set; }

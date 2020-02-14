@@ -1,4 +1,5 @@
 ﻿using Grupp7.Classes;
+using Grupp7.Models;
 using Grupp7.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -14,10 +15,11 @@ namespace Grupp7.Interfaces
         User GetUserFromIdentity(string id);
         void Save(User user);
         List<User> GetUsers();
-        void AddUser(string firstname, string lastname, string id, string username);
+        void AddUser(UserModel user);
         List<Animal> GetAnimals();
         Animal getAnimal(int id);
-        void updateAimal(Animal animal);
+        void updateAnimal(Animal animal);
+        void updateWeather(Weather weather);
         List<Animal> getUserAnimals(int id);
         List<Weather> getUserWeathers(int id);
         Weather GetWeather(int id);
@@ -28,5 +30,15 @@ namespace Grupp7.Interfaces
         Specie getAnimalSpecie(Animal animal);
         Animal setAnimalSpecie(Animal animal, Specie specie);
         void AddAnimalToUser(AddAnimalViewModel model);
+        List<Animal> GetNearbyAnimals(string lat, string lng, double radius);
+        List<Weather> GetNearbyWeathers(string lat, string lng, double radius);
+        List<Animal> GetNearbyUserAnimals(string lat, string lng, double radius, int userId);
+        List<Weather> GetNearbyUserWeathers(string lat, string lng, double radius, int userId);
+
+        void AddWeatherToUser(AddWeatherViewModel model);
+        void AddOldUserToDb(User user);
+        void ClearCache(User user);
+        void RemoveUser(User user);
+        void EditUser(User user);
     }
 }

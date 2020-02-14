@@ -11,12 +11,15 @@ namespace Grupp7.Classes
     {
         [Key]
         public int UserId { get; set; }
-
-        public string Firstname { get; set; }
         [Required(ErrorMessage = "Ange förnamn")]
-
-        public string Lastname { get; set; }
+        public string Firstname { get; set; }
         [Required(ErrorMessage = "Ange efternamn")]
+        public string Lastname { get; set; }
+        public string City { get; set; }
+        [Required(ErrorMessage = "Välj punkt på kartan")]
+        public string Latitude { get; set; }
+        [Required(ErrorMessage = "Välj punkt på kartan")]
+        public string Longitude { get; set; }
 
         public string Username { get; set; }
 
