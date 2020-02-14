@@ -4,12 +4,12 @@
 @{
     ViewData["Title"] = "View";
 }
-@{ 
+@{
     Model.radius = Math.Round(Model.radius * 111111 / 1000);
 }
 <style>
     .slidecontainer {
-        width: 100%; 
+        width: 100%;
         display: inline-block;
     }
 
@@ -18,13 +18,14 @@
         border: none;
         max-width: 25px;
     }
+
     #map {
         width: 100%;
     }
 
     .slider {
         margin-top: 20px;
-        -webkit-appearance: none; 
+        -webkit-appearance: none;
         width: 100%;
         height: 25px;
         background: #d3d3d3;
@@ -52,7 +53,32 @@
             background: #4CAF50;
             cursor: pointer;
         }
+
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        margin: 10px 0px 10px 200px;
+
+    }
+
+    .button1:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        text-decoration: none;
+        color: white;
+    }
+
 </style>
+
 <h3>Mitt hem</h3>
 <h4>@ViewData["observationList"]</h4>
 <div id="map"></div>
@@ -99,40 +125,40 @@
 
         <div class="container">
 
-            <div class="ObservationHeader">
-                <span>Observation</span>
-                <span>Datum</span>
-                <span>Stad</span>
-                <span>Observatör</span>
-            </div>
-            @foreach (var item in Model.NearbyObservation)
-            {
-                if (item.Animal != null)
-                {
-                    <a href=" @Url.Action("AnimalObservation", "Home", new { id = item.Animal.AnimalId })">
-                        <div class="observationLink">
-                            <span>@item.Animal.Specie.Speciename</span>
-                            <span>@item.Datetime</span>
-                            <span>@item.Animal.City</span>
-                            <span>@item.Animal.User.Firstname @item.Animal.User.Lastname</span> @*Eller observatörens namn*@
-                        </div>
-                    </a>
-                }
-                else if (item.Weather != null)
-                {
-                    <a href=" @Url.Action("WeatherObservation", "Home", new { id = item.Weather.WeatherId })">
-                        <div class="observationLink">
-                            <span> @item.Weather.Type</span>
-                            <span>@item.Datetime</span>
-                            <span>@item.Weather.City</span>
-                            <span>@item.Weather.User.Firstname @item.Weather.User.Lastname</span> @*Eller observatörens namn*@
-                        </div>
-                    </a>
-                }
-            }
+        <div class="ObservationHeader">
+            <span>Observation</span>
+            <span>Datum</span>
+            <span>Stad</span>
+            <span>Observatör</span>
         </div>
+        @foreach (var item in Model.NearbyObservation)
+        {
+            if (item.Animal != null)
+            {
+                <a href=" @Url.Action("AnimalObservation", "Home", new { id = item.Animal.AnimalId })">
+                    <div class="observationLink">
+                        <span>@item.Animal.Specie.Speciename</span>
+                        <span>@item.Datetime</span>
+                        <span>@item.Animal.City</span>
+                        <span>@item.Animal.User.Firstname @item.Animal.User.Lastname</span> @*Eller observatörens namn*@
+                    </div>
+                </a>
+            }
+            else if (item.Weather != null)
+            {
+                <a href=" @Url.Action("WeatherObservation", "Home", new { id = item.Weather.WeatherId })">
+                    <div class="observationLink">
+                        <span> @item.Weather.Type</span>
+                        <span>@item.Datetime</span>
+                        <span>@item.Weather.City</span>
+                        <span>@item.Weather.User.Firstname @item.Weather.User.Lastname</span> @*Eller observatörens namn*@
+                    </div>
+                </a>
+            }
+        }
     </div>
-    <script>
+</div>
+<script>
             var marker;
 
     function initMap() {
@@ -182,20 +208,20 @@
             '@Model.User.City', '', map, 'http://maps.google.com/mapfiles/ms/icons/homegardenbusiness.png')
     }
 
-    </script>
-    <script>
-        function updateRadiusInput(val) {
-            var radius = val
-            var value = document.getElementById('sliderRadius').value = Math.round(radius);
-            document.getElementById('radiusShow').value = Math.round(radius);
-            console.log(value)
-        }
-        function updateDaysInput(val) {
-            document.getElementById('sliderDays').value = val;
-            document.getElementById('daysShow').value = val;
-            console.log(document.getElementById('daysShow').value)
-        }
-    </script>
+</script>
+<script>
+    function updateRadiusInput(val) {
+        var radius = val
+        var value = document.getElementById('sliderRadius').value = Math.round(radius);
+        document.getElementById('radiusShow').value = Math.round(radius);
+        console.log(value)
+    }
+    function updateDaysInput(val) {
+        document.getElementById('sliderDays').value = val;
+        document.getElementById('daysShow').value = val;
+        console.log(document.getElementById('daysShow').value)
+    }
+</script>
 
 
 
