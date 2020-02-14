@@ -124,6 +124,12 @@ ul.social li img {
 
     padding: 25px;
 }
+
+.divider {
+    width: 5px;
+    height: auto;
+    display: inline-block;
+}
 footer.second {
     background-color: #222;
     margin: auto;
