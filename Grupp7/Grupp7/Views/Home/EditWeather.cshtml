@@ -1,0 +1,161 @@
+﻿@model Grupp7.ViewModels.EditWeatherViewModel
+
+@{
+    ViewData["Title"] = "Ändra väder";
+}
+<h3>Väder</h3>
+<h4>Ändra Observation</h4>
+<style>
+    #map {
+        margin-top: 20px;
+        max-height: 300px;
+        width: 100%;
+    }
+</style>
+
+<hr />
+<h4 class="text-danger">@ViewData["error"]</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditWeatherFromId">
+            <div class="form-group">
+                <label asp-for="Weather.Datetime" class="control-label"></label>
+                <input asp-for="Weather.Datetime" class="form-control" />
+                <span asp-validation-for="Weather.Datetime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Väder</label>
+                <input asp-for="Weather.Type" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Päls</label>
+                <input asp-for="Weather.Temperature" class="form-control" />
+                <span asp-validation-for="Weather.Temperature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Weather.Longitude" class="text-danger hidden collapse" />
+            </div>
+            <div class="form-group">
+                <input asp-for="Weather.Latitude" class="text-danger hidden collapse" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Weather.Humidity" class="control-label"></label>
+                <input asp-for="Weather.Humidity" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Weather.Carbon" class="control-label"></label>
+                <input asp-for="Weather.Carbon" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Weather.City" class="control-label"></label>
+                <input asp-for="Weather.City" class="form-control" id="city"/>
+            </div>
+            <input asp-for="Weather.UserId" class="form-control hidden collapse" />
+            <input asp-for="Weather.UserId" class="form-control hidden collapse" />
+            <div class="form-group">
+                <input asp-for="Weather.WeatherId" class="form-control hidden collapse" />
+                <input asp-for="Weather.WeatherId" class="form-control hidden collapse" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Spara" class="btn btn-default" />
+                </div>
+</form>
+    </div>
+    <div class="col-md-8">
+        <div id="map">
+        </div>
+    </div>
+</div>
+
+
+<script>
+            function initMap()
+{
+    var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 6,
+            center: { lat: @Model.Weather.Latitude, lng: @Model.Weather.Longitude }
+});
+
+            var marker;
+function placeMarker(location)
+{
+    var positionLatInt = parseFloat(location.lat())
+            var positionLngInt = parseFloat(location.lng());
+    if (positionLatInt > 55.349 && positionLatInt < 69.721 && positionLngInt > 12.401 && positionLngInt < 23.931)
+    {
+
+        if (marker)
+        {
+            marker.setPosition(location);
+        }
+        else
+        {
+
+            marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP
+            });
+            google.maps.event.addListener(marker, 'dragend', function() {
+                if (markerIsInSweden(marker))
+                {
+                    getCordsFromMarker();
+                }
+                else
+                {
+                    marker.setPosition(google.maps.LatLng(58.321, 18.456));
+                    removeCordsFromBox();
+                    errorMessage();
+                }
+            });
+        }
+        getCordsFromMarker();
+    }
+    else
+    {
+        errorMessage()
+            }
+
+}
+function markerIsInSweden(marker)
+{
+    if (parseFloat(marker.getPosition().lat()) > 55.349 && parseFloat(marker.getPosition().lat()) < 69.721 &&
+    parseFloat(marker.getPosition().lng()) > 12.401 && parseFloat(marker.getPosition().lng()) < 23.931)
+    {
+        return true;
+    }
+    return false;
+}
+
+function errorMessage()
+{
+    alert("För tillfället accepterar vi enbart observationer i sverige");
+}
+function getCordsFromMarker()
+{
+    document.getElementById('Weather_Longitude').value = marker.getPosition().lng();
+    document.getElementById('Weather_Latitude').value = marker.getPosition().lat();
+    var query = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${document.getElementById('Weather_Latitude').value},${document.getElementById('Weather_Longitude').value}&key=AIzaSyB9UwW11tMu3_ya1O7nvSjSwFWh-pY_YP8`
+    var getLocation = async () => {
+        var response = await fetch(query);
+        console.log(response);
+        var jsonResponse = await response.json();
+        var city = await jsonResponse.results[1].address_components[1].short_name;
+        document.getElementById('city').value = city
+            }
+            getLocation();
+}
+
+function removeCordsFromBox()
+{
+    document.getElementById('Weather_Longitude').value = "";
+    document.getElementById('Weather_Latitude').value = "";
+}
+
+
+google.maps.event.addListener(map, 'click', function (event) {
+    placeMarker(event.latLng);
+});
+}
+</script>

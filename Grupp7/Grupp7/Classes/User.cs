@@ -25,12 +25,5 @@ namespace Grupp7.Classes
 
         [ForeignKey("Id")]
         public string Id { get; set; }
-
-        
-
-
-
-
-
     }
 }
