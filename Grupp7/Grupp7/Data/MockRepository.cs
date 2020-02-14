@@ -55,7 +55,7 @@ namespace Grupp7.Classes
             throw new NotImplementedException();
         }
 
-        public void updateAimal(Animal animal)
+        public void updateAnimal(Animal animal)
         {
             throw new NotImplementedException();
         }
@@ -124,6 +124,41 @@ namespace Grupp7.Classes
         }
 
         public void AddWeatherToUser(AddWeatherViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateWeather(Weather weather)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddOldUserToDb(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearCache(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Animal> GetNearbyUserAnimals(string lat, string lng, double radius, int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Weather> GetNearbyUserWeathers(string lat, string lng, double radius, int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditUser(User user)
         {
             throw new NotImplementedException();
         }

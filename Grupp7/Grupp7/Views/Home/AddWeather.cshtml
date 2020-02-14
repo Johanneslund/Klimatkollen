@@ -1,9 +1,5 @@
 ﻿@model Grupp7.ViewModels.AddWeatherViewModel
 
-@{
-    ViewData["Title"] = "View";
-}
-
 <style>
     #map {
         margin-top: 20px;
@@ -18,7 +14,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-
+        <h4 class="text-danger">@ViewData["errorMessage"]</h4>
         <form asp-action="AddWeatherToUser">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">

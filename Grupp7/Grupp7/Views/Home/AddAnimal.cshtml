@@ -1,8 +1,6 @@
 ﻿@model Grupp7.ViewModels.AddAnimalViewModel
 
-@{
-    ViewData["Title"] = "View";
-}
+
 
 <style>
     #map {
@@ -18,9 +16,9 @@
     <hr />
     <div class="row">
     <div class="col-md-4">
-
+        <h4 class="text-danger">@ViewData["errorMessage"]</h4>
         <form asp-action="AddAnimalToUser">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
             <div class="form-group">
 
                 <label>Djur</label>
@@ -37,18 +35,19 @@
                 <span asp-validation-for="Animal.Datetime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.Longitude" class="control-label" id="lng"></label>
-                <input asp-for="Animal.Longitude" class="form-control" />
+                <label asp-for="Animal.Longitude" class="control-label  collapse" id="lng"></label>
+                <input asp-for="Animal.Longitude" class="form-control collapse" required/>
                 <span asp-validation-for="Animal.Longitude" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.Latitude" class="control-label" id="lat"></label>
-                <input asp-for="Animal.Latitude" class="form-control" />
-                <span asp-validation-for="Animal.Latitude" class="text-danger"></span>
+                <label asp-for="Animal.Latitude" class="control-label collapse " id="lat"></label>
+                <input asp-for="Animal.Latitude" class="form-control collapse " required/>
+                <span asp-validation-for="Animal.Latitude" class="text-"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.City"></label>
-                <input asp-for="Animal.City" class="form-control"  id="city" />
+                <label asp-for="Animal.City">Stad(Välj på kartan)</label>
+                <input asp-for="Animal.City" class="form-control" id="city" required  />
+                <span asp-validation-for="Animal.City" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Skapa" class="btn btn-default" />

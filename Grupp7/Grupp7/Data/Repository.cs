@@ -21,7 +21,7 @@ namespace Grupp7.Classes
             this.context = context;
         }
 
-        public User GetUser(int id) 
+        public User GetUser(int id)
         {
             return context.Users.Where(x => x.UserId == id).FirstOrDefault();
         }
@@ -43,7 +43,7 @@ namespace Grupp7.Classes
                 x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
                 double.Parse(x.Latitude.Replace('.', ',')) > userLat - radius &&
                 double.Parse(x.Longitude.Replace('.', ',')) < userLng + radius &&
-                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius).Include(x => x.Specie)
+                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius).Include(x => x.Specie).Include( x=> x.User)
                 .ToList();
         }
         public List<Weather> GetNearbyWeathers(string lat, string lng, double radius)
@@ -55,10 +55,33 @@ namespace Grupp7.Classes
                 x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
                 double.Parse(x.Latitude.Replace('.', ',')) > userLat - radius &&
                 double.Parse(x.Longitude.Replace('.', ',')) < userLng + radius &&
-                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius)
+                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius).Include(x => x.User)
                 .ToList();
         }
+        public List<Animal> GetNearbyUserAnimals(string lat, string lng, double radius, int userId)
+        {
+            var userLat = double.Parse(lat.Replace('.', ','));
+            var userLng = double.Parse(lng.Replace('.', ','));
 
+            return context.Animals.Where(
+                x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
+                double.Parse(x.Latitude.Replace('.', ',')) > userLat - radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) < userLng + radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius && x.UserId == userId).Include(x => x.Specie).Include(x => x.User)
+                .ToList();
+        }
+        public List<Weather> GetNearbyUserWeathers(string lat, string lng, double radius, int userId)
+        {
+            var userLat = double.Parse(lat.Replace('.', ','));
+            var userLng = double.Parse(lng.Replace('.', ','));
+
+            return context.Weathers.Where(
+                x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
+                double.Parse(x.Latitude.Replace('.', ',')) > userLat - radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) < userLng + radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius && x.UserId == userId).Include(x => x.User)
+                .ToList();
+        }
         public void AddUser(UserModel user)
         {
             context.Add(new User()
@@ -71,6 +94,32 @@ namespace Grupp7.Classes
                 Latitude = user.Latitude,
                 City = user.City
             });
+            context.SaveChanges();
+        }
+        public void AddOldUserToDb(User user)
+        {
+            context.Add(new User()
+            {
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                Username = user.Username,
+                Id = user.Id,
+                Longitude = user.Longitude,
+                Latitude = user.Latitude,
+                City = user.City
+            });
+            context.SaveChanges();
+        }
+        public void EditUser(User user)
+        {
+            User tempUser = GetUser(user.UserId);
+
+            tempUser.Latitude = user.Latitude;
+            tempUser.Longitude = user.Longitude;
+            tempUser.Username = user.Username;
+            tempUser.City = user.City;
+
+            context.Update(tempUser);
             context.SaveChanges();
         }
         public List<Animal> GetAnimals()
@@ -95,18 +144,24 @@ namespace Grupp7.Classes
                         }
 
                     }
-                }               
+                }
             }
             return Animals;
         }
-        public void updateAimal(Animal animal)
+        public void updateAnimal(Animal animal)
         {
             context.Animals.Update(animal);
             context.Entry(animal).State = EntityState.Modified;
             context.SaveChanges();
         }
+        public void updateWeather(Weather weather)
+        {
+            context.Weathers.Update(weather);
+            context.Entry(weather).State = EntityState.Modified;
+            context.SaveChanges();
+        }
 
-        public List<User> GetUsers() 
+        public List<User> GetUsers()
         {
             List<User> Users = new List<User>();
             foreach (var user in context.Users)
@@ -153,7 +208,7 @@ namespace Grupp7.Classes
             {
                 foreach (var specie in species)
                 {
-                    if(animal.SpecieId == specie.SpecieId)
+                    if (animal.SpecieId == specie.SpecieId)
                     {
                         animal.Specie = specie;
                     }
@@ -191,7 +246,7 @@ namespace Grupp7.Classes
         }
         public void getTopListAnimals()
         {
-           // context.Animals.GroupBy(userId => userId).OrderByDescending(userId => userId.Count()).Select(g => new { Id = g.Key, Count = g.Count() });
+            // context.Animals.GroupBy(userId => userId).OrderByDescending(userId => userId.Count()).Select(g => new { Id = g.Key, Count = g.Count() });
         }
 
         public List<SelectListItem> getSpeciesItemList()
@@ -238,8 +293,16 @@ namespace Grupp7.Classes
             context.SaveChanges();
         }
         public Specie getSpecieFromSpecieId(int specieId)
-        {   
+        {
             return context.Species.Where(x => x.SpecieId.Equals(specieId)).FirstOrDefault();
+        }
+        public void ClearCache(User user)
+            {
+            context.Entry(user).Reload();
+            }
+        public void RemoveUser(User user)
+        {
+            context.Remove(user);
         }
     }
 }
