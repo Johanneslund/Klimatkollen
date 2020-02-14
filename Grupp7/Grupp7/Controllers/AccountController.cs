@@ -54,7 +54,8 @@ namespace Grupp7.Controllers
                         Username = model.Username,
                         Longitude = model.Longitude,
                         Latitude = model.Latitude,
-                        City = model.City
+                        City = model.City,
+                        Id = user.Id
                     };
                     return RedirectToAction("AddUserFromRegister", "Home", userToDb);
                 }

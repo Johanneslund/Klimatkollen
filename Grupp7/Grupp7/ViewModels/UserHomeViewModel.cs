@@ -12,6 +12,7 @@ namespace Grupp7.ViewModels
         public List<Observation> NearbyObservation {get; set;}
         public double radius { get; set; }
         public int daysBeforeToday { get; set; }
+        public bool IsUserObservation { get; set; }
 
     }
 }
