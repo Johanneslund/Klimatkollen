@@ -25,7 +25,7 @@
 <h4 class="text-success">@ViewData["success"]</h4>
 <style>
     #map {
-        width: 90%;
+        width: 100%;
     }
 </style>
 
@@ -36,7 +36,7 @@
         <span>Observation</span>
         <span>Datum</span>
         <span>Stad</span>
-        <span>Läs mer</span>
+        <span>Observatör</span>
     </div>
     @foreach (var item in Model.ObservationsList)
     {
@@ -46,8 +46,8 @@
                 <div class="observationLink">
                     <span>@item.Animal.Specie.Speciename</span>
                     <span>@item.Datetime</span>
-                    <span> Stockholm</span>
-                    <span>Läs mer</span> @*Eller observatörens namn*@
+                    <span>@item.Animal.City</span>
+                    <span>@item.Animal.User.Firstname @item.Animal.User.Lastname</span> @*Eller observatörens namn*@
                 </div>
             </a>
         }
@@ -57,7 +57,7 @@
                 <div class="observationLink">
                     <span> @item.Weather.Type</span>
                     <span>@item.Datetime</span>
-                    <span> Stockholm</span>
+                    <span>@item.Weather.City</span>
                     <span>Läs mer</span> @*Eller observatörens namn*@
                 </div>
             </a>
