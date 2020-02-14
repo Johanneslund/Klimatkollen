@@ -32,9 +32,13 @@ namespace Grupp7.Interfaces
         void AddAnimalToUser(AddAnimalViewModel model);
         List<Animal> GetNearbyAnimals(string lat, string lng, double radius);
         List<Weather> GetNearbyWeathers(string lat, string lng, double radius);
+        List<Animal> GetNearbyUserAnimals(string lat, string lng, double radius, int userId);
+        List<Weather> GetNearbyUserWeathers(string lat, string lng, double radius, int userId);
+
         void AddWeatherToUser(AddWeatherViewModel model);
         void AddOldUserToDb(User user);
         void ClearCache(User user);
         void RemoveUser(User user);
+        void EditUser(User user);
     }
 }

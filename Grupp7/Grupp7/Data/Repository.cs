@@ -58,7 +58,30 @@ namespace Grupp7.Classes
                 double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius).Include(x => x.User)
                 .ToList();
         }
+        public List<Animal> GetNearbyUserAnimals(string lat, string lng, double radius, int userId)
+        {
+            var userLat = double.Parse(lat.Replace('.', ','));
+            var userLng = double.Parse(lng.Replace('.', ','));
 
+            return context.Animals.Where(
+                x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
+                double.Parse(x.Latitude.Replace('.', ',')) > userLat - radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) < userLng + radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius && x.UserId == userId).Include(x => x.Specie).Include(x => x.User)
+                .ToList();
+        }
+        public List<Weather> GetNearbyUserWeathers(string lat, string lng, double radius, int userId)
+        {
+            var userLat = double.Parse(lat.Replace('.', ','));
+            var userLng = double.Parse(lng.Replace('.', ','));
+
+            return context.Weathers.Where(
+                x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
+                double.Parse(x.Latitude.Replace('.', ',')) > userLat - radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) < userLng + radius &&
+                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius && x.UserId == userId).Include(x => x.User)
+                .ToList();
+        }
         public void AddUser(UserModel user)
         {
             context.Add(new User()
@@ -85,6 +108,18 @@ namespace Grupp7.Classes
                 Latitude = user.Latitude,
                 City = user.City
             });
+            context.SaveChanges();
+        }
+        public void EditUser(User user)
+        {
+            User tempUser = GetUser(user.UserId);
+
+            tempUser.Latitude = user.Latitude;
+            tempUser.Longitude = user.Longitude;
+            tempUser.Username = user.Username;
+            tempUser.City = user.City;
+
+            context.Update(tempUser);
             context.SaveChanges();
         }
         public List<Animal> GetAnimals()

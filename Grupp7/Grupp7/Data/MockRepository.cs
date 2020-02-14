@@ -147,5 +147,20 @@ namespace Grupp7.Classes
         {
             throw new NotImplementedException();
         }
+
+        public List<Animal> GetNearbyUserAnimals(string lat, string lng, double radius, int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Weather> GetNearbyUserWeathers(string lat, string lng, double radius, int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditUser(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -54,7 +54,7 @@
         }
 </style>
 <h3>Mitt hem</h3>
-<h4>Här visas dina observationer</h4>
+<h4>@ViewData["observationList"]</h4>
 <div id="map"></div>
 <div class="row">
     <div class="col-md-12">
@@ -64,7 +64,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="slidecontainer">
-                <input type="range" min="11" max="222" value="@Model.radius" class="slider" id="radius" step="3" onchange="updateRadiusInput(this.value)">
+                <input type="range" min="11" max="1000" value="@Model.radius" class="slider" id="radius" step="3" onchange="updateRadiusInput(this.value)">
             </div>
             <div id="distance" class="text-center">Avstånd(km): <input type="text" id="radiusShow" class="hiddenInput" disabled value="@Model.radius" /></div>
         </div>
@@ -95,6 +95,7 @@
 
         @Html.ActionLink("Lägg till nytt djur", "AddAnimal", "Home")
         @Html.ActionLink("Lägg till nytt väder", "AddWeather", "Home")
+        @Html.ActionLink("Ändra profil info", "EditUser", "Home", new { id = Model.User.UserId });
 
         <div class="container">
 

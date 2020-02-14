@@ -333,7 +333,7 @@ namespace Grupp7.Controllers
             }
         }
 
-        public IActionResult UserHome(double radius=50, int daysBeforeToday=3)
+        public IActionResult UserHome(double radius = 50, int daysBeforeToday = 3, bool userObservations = false)
         {
             UserHomeViewModel model = new UserHomeViewModel();
             List<Animal> nearbyAnimals = new List<Animal>();
@@ -347,7 +347,6 @@ namespace Grupp7.Controllers
             var userId = userManager.GetUserId(HttpContext.User);
             dbContext.ClearCache(dbContext.GetUserFromIdentity(userId));
             model.User = dbContext.GetUserFromIdentity(userId);
-            model.User = dbContext.GetUser(model.User.UserId);
 
             if (model.User.Latitude == null || model.User.Longitude == null ||
                 model.User.Latitude== "" || model.User.Longitude=="")
@@ -361,14 +360,20 @@ namespace Grupp7.Controllers
             {
                 ViewData["Success"] = t;
             }
-
-            nearbyAnimals = dbContext.GetNearbyAnimals(model.User.Latitude, model.User.Longitude, model.radius);
-            nearbyWeathers = dbContext.GetNearbyWeathers(model.User.Latitude, model.User.Longitude, model.radius);
-            { 
+            if (userObservations)
+            {
+                ViewData["observationList"] = "Här syns dina närliggande observationer";
+                nearbyAnimals = dbContext.GetNearbyUserAnimals(model.User.Latitude, model.User.Longitude, model.radius, model.User.UserId);
+                nearbyWeathers = dbContext.GetNearbyUserWeathers(model.User.Latitude, model.User.Longitude, model.radius, model.User.UserId);
+            }
+            else
+            {
+                ViewData["observationList"] = "Här syns observationer i närheten";
+                nearbyAnimals = dbContext.GetNearbyAnimals(model.User.Latitude, model.User.Longitude, model.radius);
+                nearbyWeathers = dbContext.GetNearbyWeathers(model.User.Latitude, model.User.Longitude, model.radius);
+            }
             nearbyObservations = (Helper.PopulateObservationList(nearbyAnimals, nearbyWeathers));
             model.NearbyObservation = Helper.filterByDateUserHome(nearbyObservations, before, today);
-            }
-
 
             return View(model);
             }
@@ -391,13 +396,42 @@ namespace Grupp7.Controllers
             }
             return View(model);
         }
+        public IActionResult EditUser(int id)
+        {
+            User tempUser = new User();
+            tempUser = dbContext.GetUser(id);
+            var t = TempData["noUser"];
+            if (t != null)
+            {
+                ViewData["noUser"] = t;
+                ViewData["ErrorMessage"] = null;
+            }
+            var d = TempData["ErrorMessage"];
+            if (d != null)
+            {
+                ViewData["ErrorMessage"] = d;
+                ViewData["NoUser"] = null;
+            }
+            return View(tempUser);
+        }
+        public IActionResult EditUserInfo(User model)
+        {
+            if (model?.UserId != null && model.Latitude != null && model.Longitude != null)
+            {
+                dbContext.EditUser(model);
+                TempData["Success"] = "Användarinformation uppdaterad";
+                return RedirectToAction("UserHome",model.UserId);
+            }
+            TempData["ErrorMessage"] = "Var god fyll i formuläret, använde du kartan?";
+            return RedirectToAction("EditUser", new { id = model.UserId});
+        }
         //public IActionResult Map()
-       // {
-          //  MapViewModel model = new MapViewModel();
-           // model.Animals = dbContext.GetAnimals();
+        // {
+        //  MapViewModel model = new MapViewModel();
+        // model.Animals = dbContext.GetAnimals();
 
-           // return View(Helper.getCentralPosition(model));
-       // }
+        // return View(Helper.getCentralPosition(model));
+        // }
 
         public IActionResult Privacy()
         {
