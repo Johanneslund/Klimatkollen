@@ -18,6 +18,7 @@ namespace Grupp7.Data
         public DbSet<Animal> Animals { get; set; }
         public DbSet<Weather> Weathers { get; set; }
         public DbSet<Specie> Species { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -142,6 +143,27 @@ namespace Grupp7.Data
                     Temperature = "16",
                     Carbon = "10 mg",
                     UserId = 2
+                }
+                );
+                modelBuilder.Entity<Equipment>().HasData(
+
+                new Equipment()
+                {
+                    Id = 1,
+                    Type = "Vindmätare",
+                    IsAvaliable = true
+                },
+                new Equipment()
+                {
+                    Id = 2,
+                    Type = "Vindmätare",
+                    IsAvaliable = true
+                },
+                new Equipment()
+                {
+                    Id = 3,
+                    Type = "Vindmätare",
+                    IsAvaliable = true
                 }
                 );
         }
