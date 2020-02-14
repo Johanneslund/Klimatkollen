@@ -92,61 +92,45 @@
         </form>
     </div>
     <div class="row">
-        <div class="=col-md-4" >
-    </div>
-    </div>
-        <h3>Djur</h3>
-
-        <div>
-            <img src="~/images/AnimalSymbol.png" alt="Card image" align="middle" title="Bild: Dogo Argentino Wildcat Zampa di Clip art - zampa" />
-        </div>
-        <p> </p>
-
-
 
         @Html.ActionLink("Lägg till nytt djur", "AddAnimal", "Home")
         @Html.ActionLink("Lägg till nytt väder", "AddWeather", "Home")
-        <hr />
-        {
-        @foreach (var item in Model.NearbyObservation)
-        {
-            if (item.Animal is Animal)
-            {
 
-                <p>@item.Datetime </p>
-                <p>Djur @item.Animal.Specie.Speciename</p>
-                <p>Long @item.Animal.Longitude </p>
-                <p>Lat @item.Animal.Latitude </p>
-                <p>Päls @item.Animal.Coat </p>
-                @Html.ActionLink("Detaljer", "AnimalObservation", "Home", new { id = item.Animal.AnimalId })
-                <hr />
+        <div class="container">
+
+            <div class="ObservationHeader">
+                <span>Observation</span>
+                <span>Datum</span>
+                <span>Stad</span>
+                <span>Observatör</span>
+            </div>
+            @foreach (var item in Model.NearbyObservation)
+            {
+                if (item.Animal != null)
+                {
+                    <a href=" @Url.Action("AnimalObservation", "Home", new { id = item.Animal.AnimalId })">
+                        <div class="observationLink">
+                            <span>@item.Animal.Specie.Speciename</span>
+                            <span>@item.Datetime</span>
+                            <span>@item.Animal.City</span>
+                            <span>@item.Animal.User.Firstname @item.Animal.User.Lastname</span> @*Eller observatörens namn*@
+                        </div>
+                    </a>
+                }
+                else if (item.Weather != null)
+                {
+                    <a href=" @Url.Action("WeatherObservation", "Home", new { id = item.Weather.WeatherId })">
+                        <div class="observationLink">
+                            <span> @item.Weather.Type</span>
+                            <span>@item.Datetime</span>
+                            <span>@item.Weather.City</span>
+                            <span>@item.Weather.User.Firstname @item.Weather.User.Lastname</span> @*Eller observatörens namn*@
+                        </div>
+                    </a>
+                }
             }
-        }
-        }
-        <h3>Väder</h3>
-        <div>
-            <img src="~/images/weather_small1.jpg" alt="Card image" align="middle" />
         </div>
-        <p> </p>
-        <hr />
-
-        @foreach (var item in Model.NearbyObservation)
-        {
-            if (item.Weather is Weather)
-            {
-
-                <p>@item.Weather.Datetime </p>
-                <p>Fukt @item.Weather.Humidity </p>
-                <p>Ph @item.Weather.PH</p>
-                <p>Kol @item.Weather.Carbon </p>
-                <p>Tempratur @item.Weather.Temperature </p>
-                <p>Long @item.Weather.Longitude </p>
-                <p>Lat @item.Weather.Latitude </p>
-                <hr />
-            }
-        }
     </div>
-
     <script>
             var marker;
 

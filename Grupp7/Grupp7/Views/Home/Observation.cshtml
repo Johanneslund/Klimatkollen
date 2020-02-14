@@ -53,7 +53,7 @@
         }
         else if (item.Weather != null)
         {
-            <a href=" @Url.Action("AnimalObservation", "Home", new { id = item.Weather.WeatherId })">
+            <a href=" @Url.Action("WeatherObservation", "Home", new { id = item.Weather.WeatherId })">
                 <div class="observationLink">
                     <span> @item.Weather.Type</span>
                     <span>@item.Datetime</span>

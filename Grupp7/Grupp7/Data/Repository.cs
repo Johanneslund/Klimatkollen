@@ -43,7 +43,7 @@ namespace Grupp7.Classes
                 x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
                 double.Parse(x.Latitude.Replace('.', ',')) > userLat - radius &&
                 double.Parse(x.Longitude.Replace('.', ',')) < userLng + radius &&
-                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius).Include(x => x.Specie)
+                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius).Include(x => x.Specie).Include( x=> x.User)
                 .ToList();
         }
         public List<Weather> GetNearbyWeathers(string lat, string lng, double radius)
@@ -55,7 +55,7 @@ namespace Grupp7.Classes
                 x => double.Parse(x.Latitude.Replace('.', ',')) < userLat + radius &&
                 double.Parse(x.Latitude.Replace('.', ',')) > userLat - radius &&
                 double.Parse(x.Longitude.Replace('.', ',')) < userLng + radius &&
-                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius)
+                double.Parse(x.Longitude.Replace('.', ',')) > userLng - radius).Include(x => x.User)
                 .ToList();
         }
 
