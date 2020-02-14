@@ -333,7 +333,7 @@ namespace Grupp7.Controllers
             }
         }
 
-        public IActionResult UserHome(double radius = 50, int daysBeforeToday = 3, bool userObservations = false)
+        public IActionResult UserHome(double radius = 50, int daysBeforeToday = 3, bool IsUserObservation = true)
         {
             UserHomeViewModel model = new UserHomeViewModel();
             List<Animal> nearbyAnimals = new List<Animal>();
@@ -347,7 +347,7 @@ namespace Grupp7.Controllers
             var userId = userManager.GetUserId(HttpContext.User);
             dbContext.ClearCache(dbContext.GetUserFromIdentity(userId));
             model.User = dbContext.GetUserFromIdentity(userId);
-
+            model.IsUserObservation = IsUserObservation;
             if (model.User.Latitude == null || model.User.Longitude == null ||
                 model.User.Latitude== "" || model.User.Longitude=="")
             {
@@ -360,7 +360,7 @@ namespace Grupp7.Controllers
             {
                 ViewData["Success"] = t;
             }
-            if (userObservations)
+            if (IsUserObservation)
             {
                 ViewData["observationList"] = "Här syns dina närliggande observationer";
                 nearbyAnimals = dbContext.GetNearbyUserAnimals(model.User.Latitude, model.User.Longitude, model.radius, model.User.UserId);
