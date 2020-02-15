@@ -25,5 +25,6 @@ namespace Grupp7.Classes
 
         [ForeignKey("Id")]
         public string Id { get; set; }
+        public int ObservationNum { get; set; }
     }
 }

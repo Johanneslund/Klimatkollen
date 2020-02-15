@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Grupp7.ViewModels.IndexViewModel;
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -67,14 +68,28 @@
     </div>
     <div class="col-md-6">
         <h2>Klimatförändringar över tid</h2>
-            <div>
-                <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
-            </div>
-            <p>Visualering av större klimatförändringar över tid med hjälp av statistik.
-                <a class="btn btn-primary" href=@Url.Action("Diagram", "Home") >
-                    Läs mer
-                </a>
-            </p>
-     </div>
+        <div>
+            <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
+        </div>
+        <p>
+            Visualering av större klimatförändringar över tid med hjälp av statistik.
+            <a class="btn btn-primary" href=@Url.Action("Diagram", "Home")>
+                Läs mer
+            </a>
+        </p>
+    </div>
 </div>
 
+<div>
+    <div class="ObservationHeader">
+        <span>Användarnamn</span>
+        <span>Antalet observationer</span>
+        <span>Någonting</span>
+    </div>
+    @foreach (var item in Model.UsersRankList)
+    {
+        <span>Observatörens användarnamn</span>
+        <span>Observatörens antal observationer </span>
+        <span>annat</span>
+    }
+</div>

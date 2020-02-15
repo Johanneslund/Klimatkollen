@@ -101,7 +101,12 @@ namespace Grupp7.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            IndexViewModel model = new IndexViewModel();
+            model.AnimalList = dbContext.GetAnimals();
+            model.WeatherList = dbContext.GetWeathers();
+            model.UserList = dbContext.GetUsers();
+            model.UsersRankList = Helper.CountObservations(model);
+            return View(model);
         }
         public IActionResult AddUserFromRegister(UserModel user)
         {
