@@ -30,8 +30,8 @@
 </style>
 
 <div class="container">
-    <div id="map" class="observationCard"></div><br />
-
+    <div id="map"></div><br />
+    <h3 style=" text-align:center;">Observationer</h3>
     <div class="ObservationHeader">
         <span>Observation</span>
         <span>Datum</span>
@@ -58,7 +58,7 @@
                     <span> @item.Weather.Type</span>
                     <span>@item.Datetime</span>
                     <span>@item.Weather.City</span>
-                    <span>Läs mer</span> @*Eller observatörens namn*@
+                    <span>@item.Weather.User.Firstname @item.Weather.User.Lastname</span> @*Eller observatörens namn*@
                 </div>
             </a>
         }

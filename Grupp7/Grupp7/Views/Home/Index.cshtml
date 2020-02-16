@@ -56,35 +56,37 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6">
-        <h2> Crowdsourcing <img src="~/images/crowdsourcing.jpg" alt="Card image" class="img-responsive" style="width: 10%; display: inline;" />  </h2>
-        <p>
-            Crowdsourcing är en bra forskningsmetod som gör det möjligt för allmänheten att bidra med idéer, data och tid till projekt trots att de inte är formellt utbildade experter.
-            Flera forskningsprojekt har redan framgångsrikt använt denna metod i sitt arbete. Crowdsourcing gör det möjligt att samla in data i mycket större skala på ett kosteffekt sätt.
-            På klimatkollen kan du bidra med dina observationer så att klimatförändringarna i Sverige bli mer synlig.
-        </p>
-        <a class="btn btn-primary" href=@Url.Action("Register", "Home")>
-            Registrera
-        </a>
+    <div class="col-md-5 indexitem">
+            <h2> Crowdsourcing <img src="~/images/crowdsourcing.jpg" alt="Card image" class="img-responsive" style="width: 10%; display: inline;" />  </h2>
+            <p>
+                Crowdsourcing är en bra forskningsmetod som gör det möjligt för allmänheten att bidra med idéer, data och tid till projekt trots att de inte är formellt utbildade experter.
+                Flera forskningsprojekt har redan framgångsrikt använt denna metod i sitt arbete. Crowdsourcing gör det möjligt att samla in data i mycket större skala på ett kosteffekt sätt.
+                På klimatkollen kan du bidra med dina observationer så att klimatförändringarna i Sverige bli mer synlig.
+            </p>
+            <br />
+            <a class="btn btn-primary" href=@Url.Action("Register", "Home")>
+                Registrera
+            </a> 
     </div>
-    <div class="col-md-6">
-        <h2>Klimatförändringar över tid</h2>
-        <div>
-            <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
-        </div>
-        <p>
-            Visualering av större klimatförändringar över tid med hjälp av statistik.
-            <a class="btn btn-primary" href=@Url.Action("Diagram", "Home")>
-                Läs mer
-            </a>
-        </p>
+    <div class="col-md-6 pull-right indexitem">
+            <h2>Klimatförändringar över tid</h2>
+            <div>
+                <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
+            </div>
+            <p>
+                Visualering av större klimatförändringar över tid med hjälp av statistik.
+                <a class="btn btn-primary" href=@Url.Action("Diagram", "Home")>
+                    Läs mer
+                </a>
+            </p>
     </div>
 </div>
 
-<div>
+<div class="leaderboard">
+    <h3>TOPPLISTA</h3>
     <div class="LeaderboardHeader">
         <span>Position</span>
-        <span>Användarnamn</span>
+        <span>Observatör</span>
         <span>Antalet observationer</span>
     </div>
     @foreach (var item in Model.UserRankList)
@@ -98,21 +100,41 @@
 </div>
 
 <style>
+    .indexitem {
+        border-style: solid;
+        border-color: #F3F1ED;
+        height: 400px;
+        padding: 3%;
+        margin: 2%
+    }
+    .leaderboard {
+        border-style: solid;
+        border-color: #F3F1ED;
+        margin: 2% 0% 2% 0%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+    }
+        .leaderboard h3 {
+            text-align: center;
+            margin: 0;
+            padding: 1%;
+            background-color:darkolivegreen;
+            color:white;
+        }
     .LeaderboardHeader {
         display: table;
         width: 100%;
         padding: 10px 0px 10px 0px;
         table-layout: fixed; /* For cells of equal size */
-        background-color: #222;
-        color: white;
+        color: Black;
+        background-color: #F3F1ED;
+        font-weight:bold;
     }
-
         .LeaderboardHeader span {
             display: table-cell;
-            text-align: center;
+            text-align: left;
+            padding-left:5%;
         }
     .LeaderboardRow {
-        background-color: white;
         display: table;
         width: 100%;
         padding: 10px 0px 20px 0px;
@@ -120,6 +142,7 @@
     }
         .LeaderboardRow span {
             display: table-cell;
-            text-align: center;
+            text-align: left;
+            padding-left: 5%;
         }
 </style>

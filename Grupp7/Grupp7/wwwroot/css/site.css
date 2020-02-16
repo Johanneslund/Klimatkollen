@@ -2,7 +2,8 @@
 for details on configuring this project to bundle and minify static web assets. */
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Wrapping element */
@@ -46,11 +47,13 @@ div.ObservationHeader {
     table-layout: fixed; /* For cells of equal size */
     background-color: #222;
     color: white;
+    margin-top:2%;
 }
 
     div.ObservationHeader span {
         display: table-cell;
-        text-align: center;
+        text-align: left;
+        padding-left:4%;
     }
 
 .observationLink {
@@ -63,7 +66,8 @@ div.ObservationHeader {
 
     .observationLink span {
         display: table-cell;
-        text-align: center;
+        text-align: left;
+        padding-left: 4%;
     }
 
     .observationLink:hover {

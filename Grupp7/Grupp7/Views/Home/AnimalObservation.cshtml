@@ -22,14 +22,19 @@
             <p><strong>Observatör: </strong>  @Html.DisplayFor(model => model.User.Firstname) @Html.DisplayFor(model => model.User.Lastname) </p>
             <p><strong>Djur:</strong> @Html.DisplayFor(model => model.Animal.Specie.Speciename) </p>
             <p><strong>Päls:</strong> @Html.DisplayFor(model => model.Animal.Coat)</p>
+            <br />
+            <p><strong>Kontakt:</strong> "Observatörens e-post"</p>
         </div>
     </div>
-<div>
-    @Html.ActionLink("Ändra på observation", "EditAnimal", "Home", new { id = Model.Animal.AnimalId })
+    <div>
+        @Html.ActionLink("Ändra på observation", "EditAnimal", "Home", new { id = Model.Animal.AnimalId })
+    </div>
+    <br />
+    <hr />
+    <div id="map"></div>
+    <div style=" height:71px"> </div>
 </div>
-<br />
-<hr />
-<div id="map"></div>
+
 <script>
         var marker;
 

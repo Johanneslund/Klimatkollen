@@ -110,7 +110,8 @@ namespace Grupp7.Controllers
             animals = dbContext.GetAnimals();
             weathers = dbContext.GetWeathers();
             users = dbContext.GetUsers();
-            
+
+            // räknar antalet observationer till varje användare
             int observationCounter = 0;
             foreach (var user in users)
             {
@@ -135,14 +136,18 @@ namespace Grupp7.Controllers
                 };
                 model.UserRankList.Add(urvm);
                 observationCounter = 0;
-            } // räknar antalet observationer till varje användare
+            } 
+
+            //sorterar listan i descending order
             model.UserRankList = model.UserRankList.OrderByDescending(x => x.observationNum).ToList();
+
+            //sätter position property
             int position = 1;
             foreach (var user in model.UserRankList) 
             {
                 user.position = position;
                 position++;
-            } //sätter position property
+            } 
             return View(model);
         }
         public IActionResult AddUserFromRegister(UserModel user)
