@@ -101,7 +101,49 @@ namespace Grupp7.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            UserRankViewModel urvm = new UserRankViewModel();
+            IndexViewModel model = new IndexViewModel();
+            List<Animal> animals = new List<Animal>();
+            List<Weather> weathers = new List<Weather>();
+            List<User> users = new List<User>();
+
+            animals = dbContext.GetAnimals();
+            weathers = dbContext.GetWeathers();
+            users = dbContext.GetUsers();
+            
+            int observationCounter = 0;
+            foreach (var user in users)
+            {
+                foreach (var item in animals)
+                {
+                    if (item.UserId == user.UserId)
+                    {
+                        observationCounter++;
+                    }
+                }
+                foreach (var item in weathers)
+                {
+                    if (item.UserId == user.UserId)
+                    {
+                        observationCounter++;
+                    }
+                }
+                urvm = new UserRankViewModel()
+                {
+                    User = user,
+                    observationNum = observationCounter
+                };
+                model.UserRankList.Add(urvm);
+                observationCounter = 0;
+            } // räknar antalet observationer till varje användare
+            model.UserRankList = model.UserRankList.OrderByDescending(x => x.observationNum).ToList();
+            int position = 1;
+            foreach (var user in model.UserRankList) 
+            {
+                user.position = position;
+                position++;
+            } //sätter position property
+            return View(model);
         }
         public IActionResult AddUserFromRegister(UserModel user)
         {

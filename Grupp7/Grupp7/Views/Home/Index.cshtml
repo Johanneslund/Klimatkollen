@@ -1,5 +1,7 @@
-﻿@{
+﻿@model Grupp7.ViewModels.IndexViewModel;
+@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
@@ -67,14 +69,57 @@
     </div>
     <div class="col-md-6">
         <h2>Klimatförändringar över tid</h2>
-            <div>
-                <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
-            </div>
-            <p>Visualering av större klimatförändringar över tid med hjälp av statistik.
-                <a class="btn btn-primary" href=@Url.Action("Diagram", "Home") >
-                    Läs mer
-                </a>
-            </p>
-     </div>
+        <div>
+            <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
+        </div>
+        <p>
+            Visualering av större klimatförändringar över tid med hjälp av statistik.
+            <a class="btn btn-primary" href=@Url.Action("Diagram", "Home")>
+                Läs mer
+            </a>
+        </p>
+    </div>
 </div>
 
+<div>
+    <div class="LeaderboardHeader">
+        <span>Position</span>
+        <span>Användarnamn</span>
+        <span>Antalet observationer</span>
+    </div>
+    @foreach (var item in Model.UserRankList)
+    {
+        <div class="LeaderboardRow">
+            <span>@item.position</span>
+            <span>@item.User.Username</span>
+            <span>@item.observationNum </span>
+        </div>
+    }
+</div>
+
+<style>
+    .LeaderboardHeader {
+        display: table;
+        width: 100%;
+        padding: 10px 0px 10px 0px;
+        table-layout: fixed; /* For cells of equal size */
+        background-color: #222;
+        color: white;
+    }
+
+        .LeaderboardHeader span {
+            display: table-cell;
+            text-align: center;
+        }
+    .LeaderboardRow {
+        background-color: white;
+        display: table;
+        width: 100%;
+        padding: 10px 0px 20px 0px;
+        table-layout: fixed; /* For cells of equal size */
+    }
+        .LeaderboardRow span {
+            display: table-cell;
+            text-align: center;
+        }
+</style>
