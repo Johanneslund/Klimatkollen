@@ -47,10 +47,21 @@ namespace Grupp7.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult ListRoles()
+        public IActionResult ListRoles(string searchFor)
         {
+            ViewData["CurrentSearch"] = searchFor;
             var roles = roleManager.Roles;
+
+            #region Search and SearchBox
+            if (!String.IsNullOrEmpty(searchFor))
+            {
+                roles = roles.Where(x => x.NormalizedName.Contains(searchFor) || x.Name.Contains(searchFor));
+            }
+            else
+            {
+                roles = roles.OrderBy(x => x.Name);
+            }
+            #endregion
             return View(roles);
         }
 
@@ -109,6 +120,7 @@ namespace Grupp7.Controllers
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
             ViewBag.roleId = roleId;
+
 
             var role = await roleManager.FindByIdAsync(roleId);
             if (role == null)
@@ -182,9 +194,21 @@ namespace Grupp7.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, SubAdmin")]
-        public IActionResult ListUsers()
+        public IActionResult ListUsers(string SearchTerm)
         {
             var users = userManager.Users;
+
+            ViewData["CurrentFilter"] = SearchTerm;
+
+            if (!String.IsNullOrEmpty(SearchTerm))
+            {
+                users = users.Where(x => x.Email.Contains(SearchTerm) || x.UserName.Contains(SearchTerm) || x.PhoneNumber.Contains(SearchTerm));
+            }
+            else
+            {
+                users = users.OrderBy(x => x.Email);
+            }
+
             return View(users);
         }
 

@@ -23,74 +23,90 @@ namespace Grupp7.Controllers
         private readonly IRepository dbContext;
         private readonly UserManager<IdentityUser> userManager;
 
-        // The observations page with search functionality. 
-        public object Observations(string searchTerm, string observationType)
+        public IActionResult Observation(string sortBy, string searchTerm)
         {
+
             ObservationViewModel model = new ObservationViewModel();
             Animal animal = new Animal();
             Weather weather = new Weather();
+            Observation obs = new Observation();
             List<Animal> animals = new List<Animal>();
             List<Weather> weathers = new List<Weather>();
-            //var users = userManager.Users;
             animals = dbContext.GetAnimals();
             weathers = dbContext.GetWeathers();
             model.ObservationsList = new List<Observation>();
 
-            // Selected List dropdown
-            model.ObservationTypes = new List<SelectListItem>
+            // Populate the lists
+            foreach (var item in animals)
             {
-                new SelectListItem {Text = "Animal", Value = "1"},
-                new SelectListItem {Text = "Weather", Value = "2"}
-            };
+                model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime, ObservationTypes = item.Specie.Speciename, Cities = item.City,
+                                                            Names = item.User.Lastname, FirstNames = item.User.Firstname });
+            }
+            foreach (var item in weathers)
+            {
+                model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime, ObservationTypes = item.Type, Cities = item.City,
+                                                            Names = item.User.Lastname, FirstNames = item.User.Firstname});
+            }
 
-            // Populate ObservationsList with Animals and Weathers based on conditions
-            if (!string.IsNullOrEmpty(searchTerm) && observationType == "1")
+            #region // SortBy
+            ViewData["ObservationSortParameter"] = String.IsNullOrEmpty(sortBy) ? "observationDesc" : "";
+            ViewData["DatetimeSortParameter"] = sortBy == "datetime" ? "datetimeDesc" : "datetime";
+            ViewData["CitySortParameter"] = sortBy == "city" ? "cityDesc" : "city";
+            ViewData["NameSortParameter"] = sortBy == "name" ? "nameDesc" : "name";
+            ViewData["CurrentFilter"] = searchTerm;
+            #endregion
+
+            #region Sortering
+            switch (sortBy)
             {
-                foreach (var item in animals)
-                {
-                    model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
-                }
-                model.ObservationsList = model.ObservationsList.Where(x => x.Animal.Specie.Speciename.Contains(searchTerm)).ToList();
+                case "observationDesc":
+                    model.ObservationsList = model.ObservationsList.OrderByDescending(x => x.ObservationTypes).ToList();
+                    break;
+                case "datetime":
+                    model.ObservationsList = model.ObservationsList.OrderBy(x => x.Datetime).ToList();
+                    break;
+                case "datetimeDesc":
+                    model.ObservationsList = model.ObservationsList.OrderByDescending(x => x.Datetime).ToList();
+                    break;
+                case "city":
+                    model.ObservationsList = model.ObservationsList.OrderBy(x => x.Cities).ToList();
+                    break;
+                case "cityDesc":
+                    model.ObservationsList = model.ObservationsList.OrderByDescending(x => x.Cities).ToList();
+                    break;
+                case "name":
+                    model.ObservationsList = model.ObservationsList.OrderBy(x => x.Names).ToList();
+                    break;
+                case "nameDesc":
+                    model.ObservationsList = model.ObservationsList.OrderByDescending(x => x.Names).ToList();
+                    break;
+                default:
+                    model.ObservationsList = model.ObservationsList.OrderBy(x => x.ObservationTypes).ToList();
+                    break;
             }
-            else if (string.IsNullOrEmpty(searchTerm) && observationType == "1")
+            #endregion
+
+            #region Search and SearchBox
+            if (!String.IsNullOrEmpty(searchTerm))
             {
-                foreach (var item in animals)
-                {
-                    model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
-                }
-                model.ObservationsList = model.ObservationsList.OrderBy(o => o.Datetime).ToList();
-            }
-            else if (!string.IsNullOrEmpty(searchTerm) && observationType == "2")
-            {
-                foreach (var item in weathers)
-                {
-                    model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
-                }
-                model.ObservationsList = model.ObservationsList.Where(x => x.Weather.Type.Contains(searchTerm)).ToList();
-            }
-            else if (string.IsNullOrEmpty(searchTerm) && observationType == "2")
-            {
-                foreach (var item in weathers)
-                {
-                    model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
-                }
-                model.ObservationsList = model.ObservationsList.OrderBy(o => o.Datetime).ToList();
+                model.ObservationsList = model.ObservationsList.Where(x => x.Names.Contains(searchTerm) || x.ObservationTypes.Contains(searchTerm) || x.FirstNames.Contains(searchTerm)).ToList();
             }
             else
             {
-                foreach (var item in animals)
-                {
-                    model.ObservationsList.Add(new Observation { Animal = item, Datetime = item.Datetime });
-                }
-                foreach (var item in weathers)
-                {
-                    model.ObservationsList.Add(new Observation { Weather = item, Datetime = item.Datetime });
-                }
+                model.ObservationsList = model.ObservationsList.OrderBy(x => x.ObservationTypes).ToList();
             }
-            Helper.getCentralPosition(model);
-            return model;
-        }
+            #endregion
 
+            Helper.getCentralPosition(model);
+
+            var t = TempData["success"];
+            if (t != null)
+            {
+                ViewData["success"] = t;
+            }
+
+            return View(model);
+        }
 
         public HomeController(IRepository repository, UserManager<IdentityUser> userManager)
         {
@@ -120,17 +136,6 @@ namespace Grupp7.Controllers
             return RedirectToAction("AddUserInfo");
         }
 
-        public IActionResult Observation(string searchTerm, string observationType)
-        {
-            var observation = Observations(searchTerm, observationType);
-            var t = TempData["success"];
-            if (t != null)
-            {
-                ViewData["success"] = t;
-            }
-
-            return View(observation);
-        }
         public IActionResult Diagram()
         {
             ObservationViewModel model = new ObservationViewModel();
