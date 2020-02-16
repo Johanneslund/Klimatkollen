@@ -179,42 +179,5 @@ namespace Grupp7.Helpers
                 }
             }
         }
-
-        public static List<User> CountObservations(IndexViewModel model)  // döp om metoden
-        {
-            List<User> SortedList = new List<User>();
-
-            // en metod som löper igenom weather och animal list, räknar o sätter ObservationsNum till varje user och returnera en lista
-            // skapa en annan metod för att DENSE RANK OVER  den returnerade listan 
-
-            int observationCounter = 0;
-
-            foreach(var user in model.UserList)
-            {
-                foreach (var item in model.AnimalList)
-                {
-                    if (item.UserId == user.UserId)
-                    {
-                        observationCounter++;
-                    }
-                }
-                foreach (var item in model.WeatherList)
-                {
-                    if (item.UserId == user.UserId)
-                    {
-                        observationCounter++;
-                    }
-                }
-                user.ObservationNum = observationCounter;
-                SortedList.Add(user);
-            }
-            //anropa metod som rankar listan och returnerar en ny ;
-            return SortedList;
-        }
-
-       /* public static List<User> RankUsersObservations()
-        {
-
-        }*/
     }
 }

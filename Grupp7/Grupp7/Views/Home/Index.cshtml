@@ -1,6 +1,7 @@
 ﻿@model Grupp7.ViewModels.IndexViewModel;
 @{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
@@ -81,15 +82,44 @@
 </div>
 
 <div>
-    <div class="ObservationHeader">
+    <div class="LeaderboardHeader">
+        <span>Position</span>
         <span>Användarnamn</span>
         <span>Antalet observationer</span>
-        <span>Någonting</span>
     </div>
-    @foreach (var item in Model.UsersRankList)
+    @foreach (var item in Model.UserRankList)
     {
-        <span>Observatörens användarnamn</span>
-        <span>Observatörens antal observationer </span>
-        <span>annat</span>
+        <div class="LeaderboardRow">
+            <span>@item.position</span>
+            <span>@item.User.Username</span>
+            <span>@item.observationNum </span>
+        </div>
     }
 </div>
+
+<style>
+    .LeaderboardHeader {
+        display: table;
+        width: 100%;
+        padding: 10px 0px 10px 0px;
+        table-layout: fixed; /* For cells of equal size */
+        background-color: #222;
+        color: white;
+    }
+
+        .LeaderboardHeader span {
+            display: table-cell;
+            text-align: center;
+        }
+    .LeaderboardRow {
+        background-color: white;
+        display: table;
+        width: 100%;
+        padding: 10px 0px 20px 0px;
+        table-layout: fixed; /* For cells of equal size */
+    }
+        .LeaderboardRow span {
+            display: table-cell;
+            text-align: center;
+        }
+</style>
