@@ -15,6 +15,7 @@ namespace Grupp7.ViewModels
         public string Names { get; set; }
         public string FirstNames { get; set; }
         public List<Observation> ObservationsList { get; set; }
+        public List<SelectListItem> ObservationTypes { set; get; }
         public List<Weather> WeatherList { get; set; }
         public List<Animal> AnimalList { get; set; }
         public string CentralLatitude { get; set; }
