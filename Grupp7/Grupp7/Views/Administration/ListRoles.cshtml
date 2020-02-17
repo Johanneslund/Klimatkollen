@@ -6,6 +6,16 @@
 
 <h2>Roller</h2>
 
+
+<div class="container-fluid py-4">
+    <form asp-controller="Administration" asp-action="ListRoles" method="get">
+        <p>
+            Sökning: <input type="text" name="searchFor" placeholder="Sök efter Roller..." value="@ViewData["CurrentSearch"]">
+            <input type="submit" value="Sök" />
+        </p>
+    </form>
+</div>
+<br />
 @if (Model.Any())
 {
     <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole" asp-controller="Administration">Skapa ny Roll</a>

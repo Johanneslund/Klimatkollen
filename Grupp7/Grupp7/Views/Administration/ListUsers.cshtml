@@ -5,6 +5,14 @@
 }
 
 <h2>Användare</h2>
+<br />
+<form asp-controller="Administration" asp-action="ListUsers" method="get">
+    <p>
+        Sökning: <input type="text" name="SearchTerm" placeholder="Namn eller Observation..." value="@ViewData["CurrentFilter"]">
+        <input type="submit" value="Sök" />
+    </p>
+</form>
+
 
 @if (Model.Any())
 {
@@ -19,6 +27,9 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Email: @user.Email</h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Användarnamn: @user.UserName</h5>
             </div>
             <div class="card-footer">
 

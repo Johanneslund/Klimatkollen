@@ -4,14 +4,16 @@ using Grupp7.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Grupp7.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200215093752_New Seed")]
+    partial class NewSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,8 +92,6 @@ namespace Grupp7.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<string>("Email");
-
                     b.Property<string>("Firstname")
                         .IsRequired();
 
@@ -159,8 +159,8 @@ namespace Grupp7.Migrations
                     b.ToTable("Weathers");
 
                     b.HasData(
-                        new { WeatherId = 1, Datetime = new DateTime(2020, 2, 17, 14, 43, 59, 14, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "22", Type = "Regn", UserId = 2 },
-                        new { WeatherId = 2, Carbon = "10 mg", Datetime = new DateTime(2020, 2, 17, 14, 43, 59, 14, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "16", Type = "Storsjön", UserId = 2 }
+                        new { WeatherId = 1, Datetime = new DateTime(2020, 2, 15, 10, 37, 52, 403, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "22", Type = "Regn", UserId = 2 },
+                        new { WeatherId = 2, Carbon = "10 mg", Datetime = new DateTime(2020, 2, 15, 10, 37, 52, 403, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "16", Type = "Storsjön", UserId = 2 }
                     );
                 });
 
