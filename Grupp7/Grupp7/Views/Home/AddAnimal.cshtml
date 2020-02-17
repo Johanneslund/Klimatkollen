@@ -18,9 +18,7 @@
     <div class="col-md-4">
         <h4 class="text-danger">@ViewData["errorMessage"]</h4>
         <form asp-action="AddAnimalToUser">
-            
-            <div class="form-group">
-
+          <div class="container">
                 <label>Djur</label>
                 <select asp-for="Animal.SpecieId" asp-items="Model.Species" class="form-control"></select>
             </div>
@@ -59,7 +57,6 @@
         </div>
     </div>
     </div>
-
 
 
     

@@ -238,6 +238,7 @@ namespace Grupp7.Controllers
         {
             AddWeatherViewModel model = new AddWeatherViewModel();
             model.Weather = new Weather();
+            model.WeatherTypes = Helper.getWeatherTypes();
             var t = TempData["errorMessage"];
             if (t != null)
             {
@@ -355,6 +356,7 @@ namespace Grupp7.Controllers
         {
             EditWeatherViewModel model = new EditWeatherViewModel();
             model.Weather = dbContext.GetWeather(id);
+            model.WeatherTypes = Helper.getWeatherTypes();
 
             var t = TempData["error"];
             if (t != null)

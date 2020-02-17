@@ -53,6 +53,14 @@ namespace Grupp7.Helpers
 
             return coatList;
         }
+        public static List<SelectListItem> getWeatherTypes()
+        {
+            List<SelectListItem> weatherTypeList = new List<SelectListItem>();
+            weatherTypeList.Add(new SelectListItem { Value = "Vatten", Text = "Vatten" });
+            weatherTypeList.Add(new SelectListItem { Value = "Luft", Text = "Luft" });
+
+            return weatherTypeList;
+        }
         public static List<Animal> filterByDate(ObservationViewModel model, DateTime startDate, DateTime endDate, int aSpecie)// Specie
         {
 
