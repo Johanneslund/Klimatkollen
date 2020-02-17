@@ -93,7 +93,6 @@ namespace Grupp7.Classes
                 Longitude = user.Longitude,
                 Latitude = user.Latitude,
                 City = user.City,
-                Email = user.Email
             });
             context.SaveChanges();
         }
