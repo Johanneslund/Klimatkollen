@@ -88,18 +88,39 @@
 
     </div>
     <footer class="second">
-        <section>
-            <h4>Följ oss på sociala medier</h4>
-            <ul class="social">
-                <li><a href="https://www.facebook.com"> <img src="~/images/facebook1.png" /></a></li>
-                <li><a href="https://www.instagram.com"> <img src="~/images/instagram.png" />  </a></li>
-                <li><a href="https://twitter.com"> <img src="~/images/twitter1.png" /></a></li>
-                <li><a href="https://www.youtube.com"> <img src="~/images/youtube1.png" /></a></li>
-            </ul>
-        </section>
-        <p>
+        <div class="row">
+            <section class="col-md-4 col-xs-6">
+                <h5>Klimatkollen</h5><br />
+                <a href="@Url.Action("About", "Home")">Om oss</a> <br />
+                <a href="@Url.Action("Contact", "Home")">Kontakta oss</a><br />
+                <a href="@Url.Action("Register", "Account")">Registrera</a><br>
+                @* <h5>Mitt konto</h5><br />
+            <a href="@Url.Action("UserHome", "Home")">Mitt hem</a><br>
+            <a href="@Url.Action("EditUser", "Home")">Redigera uppgifter</a><br><br>
+            <a href="@Url.Action("Login", "Account")">Logga in</a><br>
+            <a href="@Url.Action("Register", "Account")">Registrera</a><br>*@
+            </section>
+            <section class="col-md-4 col-xs-6">
+                <h5>Länkar:</h5><br />
+                <a href="@Url.Action("Index", "Home")">Hem</a><br />
+                <a href="@Url.Action("Observation", "Home")">Observation</a><br />
+                <a href="@Url.Action("Diagram", "Home")">Statistik</a><br />
+                <a href="@Url.Action("Index", "Home")#leaderboard1">Topplista</a><br />
+            </section>
+            <section class="col-md-4  col-xs-10">
+                <h5>Följ oss på sociala medier</h5> <br />
+                <p>Håll dig uppdaterad om de senaste klimatförändringarna genom att följa oss på sociala medier!</p><br />
+                <ul class="social">
+                    <li><a href="https://www.facebook.com"> <img src="~/images/FacebookIcon2.png" /></a></li>
+                    <li><a href="https://www.instagram.com"> <img src="~/images/InstagramIcon.png" />  </a></li>
+                    <li><a href="https://twitter.com"> <img src="~/images/TwitterIcon.png" /></a></li>
+                    <li><a href="https://www.youtube.com"> <img src="~/images/YoutubeIcon.png" /></a></li>
+                </ul>
+            </section>
+        </div>
+        <h6>
             &copy; Grupp7 - 2020
-        </p>
+        </h6>
     </footer>
 
     <environment include="Staging, Production,Development">

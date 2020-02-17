@@ -169,7 +169,7 @@ namespace Grupp7.Controllers
             } 
 
             //sorterar listan i descending order
-            model.UserRankList = model.UserRankList.OrderByDescending(x => x.observationNum).ThenBy(x => x.lastObservation).ToList();
+            model.UserRankList = model.UserRankList.OrderByDescending(x => x.observationNum).ThenBy(x => x.lastObservation).Take(20).ToList();
 
             //sätter position property
             int position = 1;
