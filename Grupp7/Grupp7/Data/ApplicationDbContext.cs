@@ -89,7 +89,8 @@ namespace Grupp7.Data
                 Latitude = "14.662298",
                 Coat = "Vinter",
                 UserId = 1,
-                SpecieId = 1
+                SpecieId = 1,
+                City = "stockholm"
             },
 
             new Animal()
@@ -100,7 +101,8 @@ namespace Grupp7.Data
                 Latitude = "14.662298",
                 Coat = "Vinter",
                 UserId = 1,
-                SpecieId = 2
+                SpecieId = 2,
+                City = "Hudiksvall"
             },
 
             new Animal()
@@ -111,7 +113,8 @@ namespace Grupp7.Data
                 Latitude = "14.445399",
                 Coat = "Vinter",
                 UserId = 2,
-                SpecieId = 3
+                SpecieId = 3,
+                City = "Sundsvall"
             }
 
             );
@@ -127,7 +130,8 @@ namespace Grupp7.Data
                     Latitude = "14.662298",
                     Humidity = "87,2",
                     UserId = 2,
-                    Temperature = "22"
+                    Temperature = "22",
+                    City = "Umeå"
                 },
                 new Weather()
                 {
@@ -139,7 +143,8 @@ namespace Grupp7.Data
                     Humidity = "87,2",
                     Temperature = "16",
                     Carbon = "10 mg",
-                    UserId = 2
+                    UserId = 2,
+                    City = "Sundsvall"
                 }
                 );
         }
