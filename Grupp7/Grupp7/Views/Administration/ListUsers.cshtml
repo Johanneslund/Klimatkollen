@@ -5,6 +5,7 @@
 }
 
 <h2>Användare</h2>
+<hr />
 
 @if (Model.Any())
 {
@@ -14,21 +15,13 @@
     {
         <br />
         <div class="leaderboard">
-
-            <div class="">
-
-            </div>
             <div class="LeaderboardHeader">
                 <span>Användare ID</span>
-                <span>E-post adress</span>
-               
+                <span>E-post adress</span>             
             </div>
             <div class="LeaderboardRow ">
-
                 <span>@user.Id </span>
-                <span>@user.Email</span>
-                
-                
+                <span>@user.Email</span>              
             </div>
             <div class="LeaderboardFooter">
                 <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
