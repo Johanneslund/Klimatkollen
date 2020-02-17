@@ -23,7 +23,8 @@
             <p><strong>Djur:</strong> @Html.DisplayFor(model => model.Animal.Specie.Speciename) </p>
             <p><strong>Päls:</strong> @Html.DisplayFor(model => model.Animal.Coat)</p>
             <br />
-            <p><strong>Kontakt:</strong> "Observatörens e-post"</p>
+            <span><strong>Kontakt:</strong></span>
+            <a href="mailto:@Html.DisplayFor(model => model.User.Email)">@Html.DisplayFor(model => model.User.Email)</a>
         </div>
     </div>
     <div>
