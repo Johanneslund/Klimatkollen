@@ -20,7 +20,7 @@ namespace Grupp7.Classes
         public string Latitude { get; set; }
         [Required(ErrorMessage = "Välj punkt på kartan")]
         public string Longitude { get; set; }
-
+        public string Email { get; set; }
         public string Username { get; set; }
 
         [ForeignKey("Id")]
