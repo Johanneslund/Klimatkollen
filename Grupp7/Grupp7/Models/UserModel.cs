@@ -11,21 +11,18 @@ namespace Grupp7.Models
     {
         public string Id { get; set; }
 
-        
-        [DisplayName("Förnamn")]
-        [Required]
+        [Required(ErrorMessage = "Ange ett förnamn")]
+        [DisplayName("Förnamn")] 
         public string Firstname { get; set; }
 
-        [Required]
-       
+        [Required(ErrorMessage = "Ange ett efternamn")]
         [DisplayName("Efternamn")]
 
         public string Lastname { get; set; }
         [DisplayName("Användarnamn")]
-
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "Ange en korrekt E-post adress")]
+        [Required(ErrorMessage = "Ange en korrekt e-post adress")]
         [EmailAddress]
         [MaxLength(256)]
         public string Email { get; set; }
@@ -34,10 +31,11 @@ namespace Grupp7.Models
         [DataType(DataType.Password)]
         [DisplayName("Lösenord")]
         public string Password { get; set; }
+        [Required(ErrorMessage = "Välj punkt på kartan")]
         public string City { get; set; }
-        [Required(ErrorMessage = "Välj punkt på kartan")]
+        
         public string Latitude { get; set; }
-        [Required(ErrorMessage = "Välj punkt på kartan")]
+        
         public string Longitude { get; set; }
 
 
@@ -50,10 +48,10 @@ namespace Grupp7.Models
         [DisplayName("Telefonnummer")]
         public int Phone { get; set; }
 
-        [Display(Name = "Remember Me")]
+        [Display(Name = "Kom ihåg mig")]
         public bool RememberMe { get; set; }
 
-        public string Message { get; set; } // kan ta bort  ?
+        public string Message { get; set; } 
         public string Subject { get; set; }
         public int ObservationNum { get; set; }
     }
