@@ -334,6 +334,7 @@ namespace Grupp7.Controllers
             if (tempUser != null)
                 model.Email = tempUser.Email;
             return View(model);
+
         }
         public IActionResult WeatherObservation(int id)
         {
