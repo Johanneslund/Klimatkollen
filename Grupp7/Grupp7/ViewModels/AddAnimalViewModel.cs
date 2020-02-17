@@ -10,7 +10,7 @@ namespace Grupp7.ViewModels
 {
     public class AddAnimalViewModel
     {
-        [Required]
+        
         public Animal Animal { get; set; }
         public List<SelectListItem> Species { get; set; }
         public User User { get; set; }
