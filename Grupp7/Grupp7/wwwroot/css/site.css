@@ -131,6 +131,63 @@ ul.social li img {
     height: auto;
     display: inline-block;
 }
+.indexitem {
+    border-style: solid;
+    border-color: #F3F1ED;
+    height: 200px;
+    padding: 3%;
+    margin: 2%
+}
+
+.leaderboard {
+    border-style: solid;
+    border-color: #F3F1ED;
+    margin: 2% 0% 2% 0%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+}
+
+    .leaderboard h3 {
+        text-align: center;
+        margin: 0;
+        padding: 1%;
+        background-color: darkolivegreen;
+        color: white;
+    }
+
+.LeaderboardHeader {
+    display: table;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    table-layout: fixed; /* For cells of equal size */
+    color: Black;
+    background-color: #F3F1ED;
+    font-weight: bold;
+}
+
+    .LeaderboardHeader span {
+        display: table-cell;
+        text-align: left;
+        padding-left: 5%;
+    }
+
+.LeaderboardRow {
+    display: table;
+    width: 100%;
+    padding: 10px 0px 20px 0px;
+    table-layout: fixed;
+    For cells of equal size text-wrap: normal
+}
+
+    .LeaderboardRow span {
+        display: table-cell;
+        text-align: left;
+        padding-left: 5%;
+        text-wrap: inherit
+    }
+.LeaderboardFooter {
+    text-align: right;
+    margin-right: 15px;
+}
 footer.second {
     background-color: #222;
     margin: auto;
