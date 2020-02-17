@@ -330,15 +330,22 @@ namespace Grupp7.Controllers
             model.Animal = dbContext.getAnimal(id);
             model.User = dbContext.GetUser(model.Animal.UserId);
             model.Animal.Specie = dbContext.getAnimalSpecie(model.Animal);
+            var tempUser = userManager.Users.Where(x => x.Id == model.User.Id).FirstOrDefault();
+            if (tempUser != null)
+                model.Email = tempUser.Email;
             return View(model);
         }
         public IActionResult WeatherObservation(int id)
         {
             WeatherObservationViewModel model = new WeatherObservationViewModel();
             model.Weather = dbContext.GetWeather(id);
-            model.User = dbContext.GetUser(model.Weather.UserId);
+            model.User = dbContext.GetUser(model.Weather.UserId);           
+            var tempUser = userManager.Users.Where(x => x.Id == model.User.Id).FirstOrDefault();
+            if (tempUser != null)
+                model.Email = tempUser.Email;
             return View(model);
         }
+
         public IActionResult EditAnimal(int id)
         {
             Animal animal = dbContext.getAnimal(id);
