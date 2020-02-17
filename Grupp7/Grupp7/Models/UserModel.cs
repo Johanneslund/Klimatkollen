@@ -53,7 +53,8 @@ namespace Grupp7.Models
         [Display(Name = "Remember Me")]
         public bool RememberMe { get; set; }
 
-        public string Message { get; set; }
+        public string Message { get; set; } // kan ta bort  ?
         public string Subject { get; set; }
+        public int ObservationNum { get; set; }
     }
 }
