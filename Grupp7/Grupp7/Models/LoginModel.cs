@@ -10,15 +10,15 @@ namespace Grupp7.Models
     {
         public string Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ange en korrekt E-post adress")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ange korrekt lösenord")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Remember Me")]
+        [Display(Name = "Kom ihåg mig")]
         public bool RememberMe { get; set; }
     }
 }
