@@ -85,9 +85,10 @@
 <div class="leaderboard">
     <h3>TOPPLISTA</h3>
     <div class="LeaderboardHeader">
-        <span>Position</span>
+        <span>Rank</span>
         <span>Observatör</span>
-        <span>Antalet observationer</span>
+        <span>Antal observationer</span>
+        <span>Senaste observation</span>
     </div>
     @foreach (var item in Model.UserRankList)
     {
@@ -95,6 +96,7 @@
             <span>@item.position</span>
             <span>@item.User.Username</span>
             <span>@item.observationNum </span>
+            <span>@item.lastObservation</span>
         </div>
     }
 </div>
@@ -133,16 +135,19 @@
             display: table-cell;
             text-align: left;
             padding-left:5%;
+           
         }
     .LeaderboardRow {
         display: table;
         width: 100%;
         padding: 10px 0px 20px 0px;
         table-layout: fixed; /* For cells of equal size */
+        text-wrap: normal
     }
         .LeaderboardRow span {
             display: table-cell;
             text-align: left;
             padding-left: 5%;
+            text-wrap:inherit
         }
 </style>

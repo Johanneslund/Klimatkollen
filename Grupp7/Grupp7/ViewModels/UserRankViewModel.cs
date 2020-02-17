@@ -11,6 +11,7 @@ namespace Grupp7.ViewModels
         public User User { get; set; }
         public int observationNum { get; set; }
         public int position { get; set; }
+        public DateTime lastObservation { get; set; }
 
         public UserRankViewModel()
         {

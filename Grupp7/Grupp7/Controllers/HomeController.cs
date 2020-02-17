@@ -113,6 +113,7 @@ namespace Grupp7.Controllers
 
             // räknar antalet observationer till varje användare
             int observationCounter = 0;
+            DateTime mostRecentObservation = new DateTime(1900,1,1);
             foreach (var user in users)
             {
                 foreach (var item in animals)
@@ -120,6 +121,10 @@ namespace Grupp7.Controllers
                     if (item.UserId == user.UserId)
                     {
                         observationCounter++;
+                        if (item.Datetime > mostRecentObservation)
+                        {
+                            mostRecentObservation = item.Datetime;
+                        }
                     }
                 }
                 foreach (var item in weathers)
@@ -127,19 +132,28 @@ namespace Grupp7.Controllers
                     if (item.UserId == user.UserId)
                     {
                         observationCounter++;
+                        if (item.Datetime > mostRecentObservation)
+                        {
+                            mostRecentObservation = item.Datetime;
+                        }
                     }
+
                 }
-                urvm = new UserRankViewModel()
+                if(observationCounter > 0)
                 {
-                    User = user,
-                    observationNum = observationCounter
-                };
-                model.UserRankList.Add(urvm);
+                    model.UserRankList.Add(new UserRankViewModel()
+                    {
+                        User = user,
+                        observationNum = observationCounter,
+                        lastObservation = mostRecentObservation
+                    });
+                }
                 observationCounter = 0;
+                mostRecentObservation = new DateTime(1900,1,1);
             } 
 
             //sorterar listan i descending order
-            model.UserRankList = model.UserRankList.OrderByDescending(x => x.observationNum).ToList();
+            model.UserRankList = model.UserRankList.OrderByDescending(x => x.observationNum).ThenBy(x => x.lastObservation).ToList();
 
             //sätter position property
             int position = 1;
