@@ -9,19 +9,6 @@
 <h3>Observationer</h3>
 <br />
 <br />
-
-<form asp-controller="Home" asp-action="Observation" method="get">
-    <p>
-        <select asp-for="ObservationType" asp-items="Model.ObservationTypes">
-            <option value="">All</option>
-        </select>
-
-        Sökning: <input type="text" name="SearchTerm">
-        <input type="submit" value="Sök" />
-    </p>
-</form>
-<br />
-<br />
 <h4 class="text-success">@ViewData["success"]</h4>
 <style>
     #map {
