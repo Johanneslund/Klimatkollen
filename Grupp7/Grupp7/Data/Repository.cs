@@ -232,6 +232,7 @@ namespace Grupp7.Classes
             }
 
             return Species;
+
         }
         public Specie getAnimalSpecie(Animal animal)
         {
