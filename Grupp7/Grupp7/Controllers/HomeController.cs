@@ -298,31 +298,31 @@ namespace Grupp7.Controllers
                     return View();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ModelState.Clear();
-                ViewBag.Message = $" Något gick fel. {ex.Message}";
+                ViewBag.Message = $" Något gick fel.";
             }
             return View();
         }
         private void SendEmailContactPage(string firstname, string lastname, string sender, string subject, string message)
         {
             MailMessage mm = new MailMessage();
-            mm.From = new MailAddress(sender, "Klimatkollens kontaktformulär"); // eller mejlen i formuläret 
+            mm.From = new MailAddress(sender, "Klimatkollens kontaktformulär"); 
             mm.To.Add("sabrinthao@gmail.com");//Jörgens mail 
             mm.Subject = subject;
             string customerSender = "From: " + sender + " " + firstname + " " + lastname + "\n";
-            mm.Body = customerSender + message;
+            mm.Body = customerSender + "\n" + message;
 
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("ADMINMAIL", "ADMINPASSWORD"); //admin //try model.Email, model.Password
+            smtp.Credentials = new System.Net.NetworkCredential("klimatkollen1@gmail.com", "Klimatkollen123"); 
             smtp.EnableSsl = true;
             smtp.Send(mm);
             ModelState.Clear();
-            ViewBag.Message = "Thank you for Contacting us ";
+            ViewBag.Message = "Thank you for Contacting us!";
         }
         public IActionResult AnimalObservation(int id)
         {

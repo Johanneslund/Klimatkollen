@@ -220,9 +220,7 @@ section a{
 section a:hover{
     color:white;
     text-decoration:none;
-    font-weight:bolder;
     cursor:pointer;
-
 }
 footer h6{
     color:white;
