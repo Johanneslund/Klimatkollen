@@ -38,7 +38,7 @@
             <div class="carousel-caption" role="option">
                 <p>
                     Hjälp till med att göra folk mer medvetna om klimatförändringen genom att samla in observationer. Bli en klimatobservatör idag!
-                    <a class="btn btn-default" href=@Url.Action("Register", "Account")>
+                    <a class="btn btn-default" href=@Url.Action("Register", "Home")>
                         Registrera
                     </a>
                 </p>
@@ -55,30 +55,31 @@
     </a>
 </div>
 
+
 <div class="row">
     <div class="col-md-5 indexitem">
-            <h2> Crowdsourcing <img src="~/images/crowdsourcing.jpg" alt="Card image" class="img-responsive" style="width: 10%; display: inline;" />  </h2>
-            <p>
-                Crowdsourcing är en bra forskningsmetod som gör det möjligt för allmänheten att bidra med idéer, data och tid till projekt trots att de inte är formellt utbildade experter.
-                Flera forskningsprojekt har redan framgångsrikt använt denna metod i sitt arbete. Crowdsourcing gör det möjligt att samla in data i mycket större skala på ett kosteffekt sätt.
-                På klimatkollen kan du bidra med dina observationer så att klimatförändringarna i Sverige bli mer synlig.
-            </p>
-            <br />
-            <a class="btn btn-primary" href=@Url.Action("Register", "Account")>
-                Registrera
-            </a> 
+        <h2> Crowdsourcing <img src="~/images/crowdsourcing.jpg" alt="Card image" class="img-responsive" style="width: 10%; display: inline;" />  </h2>
+        <p>
+            Crowdsourcing är en bra forskningsmetod som gör det möjligt för allmänheten att bidra med idéer, data och tid till projekt trots att de inte är formellt utbildade experter.
+            Flera forskningsprojekt har redan framgångsrikt använt denna metod i sitt arbete. Crowdsourcing gör det möjligt att samla in data i mycket större skala på ett kosteffekt sätt.
+            På klimatkollen kan du bidra med dina observationer så att klimatförändringarna i Sverige bli mer synlig.
+        </p>
+        <br />
+        <a class="btn btn-primary" href=@Url.Action("Register", "Home")>
+            Registrera
+        </a>
     </div>
     <div class="col-md-6 pull-right indexitem">
-            <h2>Klimatförändringar över tid</h2>
-            <div>
-                <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
-            </div>
-            <p>
-                Visualering av större klimatförändringar över tid med hjälp av statistik.
-                <a class="btn btn-primary" href=@Url.Action("Diagram", "Home")>
-                    Läs mer
-                </a>
-            </p>
+        <h2>Klimatförändringar över tid</h2>
+        <div>
+            <img src="~/images/shmi_temp.png" alt="Card image" class="img-responsive">
+        </div>
+        <p>
+            Visualering av större klimatförändringar över tid med hjälp av statistik.
+            <a class="btn btn-primary" href=@Url.Action("Diagram", "Home")>
+                Läs mer
+            </a>
+        </p>
     </div>
 </div>
 
@@ -92,12 +93,12 @@
     </div>
     @foreach (var item in Model.UserRankList)
     {
-        <div class="LeaderboardRow">
-            <span>@item.position</span>
-            <span>@item.User.Username</span>
-            <span>@item.observationNum </span>
-            <span>@item.lastObservation</span>
-        </div>
+    <div class="LeaderboardRow">
+        <span>@item.position</span>
+        <span>@item.User.Username</span>
+        <span>@item.observationNum </span>
+        <span>@item.lastObservation</span>
+    </div>
     }
 </div>
 
@@ -109,19 +110,22 @@
         padding: 3%;
         margin: 2%
     }
+
     .leaderboard {
         border-style: solid;
         border-color: #F3F1ED;
         margin: 2% 0% 2% 0%;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
     }
+
         .leaderboard h3 {
             text-align: center;
             margin: 0;
             padding: 1%;
-            background-color:darkolivegreen;
-            color:white;
+            background-color: darkolivegreen;
+            color: white;
         }
+
     .LeaderboardHeader {
         display: table;
         width: 100%;
@@ -129,14 +133,15 @@
         table-layout: fixed; /* For cells of equal size */
         color: Black;
         background-color: #F3F1ED;
-        font-weight:bold;
+        font-weight: bold;
     }
+
         .LeaderboardHeader span {
             display: table-cell;
             text-align: left;
-            padding-left:5%;
-           
+            padding-left: 5%;
         }
+
     .LeaderboardRow {
         display: table;
         width: 100%;
@@ -144,10 +149,11 @@
         table-layout: fixed; /* For cells of equal size */
         text-wrap: normal
     }
+
         .LeaderboardRow span {
             display: table-cell;
             text-align: left;
             padding-left: 5%;
-            text-wrap:inherit
+            text-wrap: inherit
         }
 </style>
