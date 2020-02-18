@@ -307,7 +307,7 @@ namespace Grupp7.Controllers
             mm.To.Add("sabrinthao@gmail.com");//Jörgens mail 
             mm.Subject = subject;
             string customerSender = "From: " + sender + " " + firstname + " " + lastname + "\n";
-            mm.Body = customerSender + message;
+            mm.Body = customerSender + "\n" + message;
 
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
@@ -317,7 +317,7 @@ namespace Grupp7.Controllers
             smtp.EnableSsl = true;
             smtp.Send(mm);
             ModelState.Clear();
-            ViewBag.Message = "Thank you for Contacting us ";
+            ViewBag.Message = "Thank you for Contacting us!";
         }
         public IActionResult AnimalObservation(int id)
         {
