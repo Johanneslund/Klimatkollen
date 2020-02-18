@@ -2,7 +2,8 @@
 for details on configuring this project to bundle and minify static web assets. */
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Wrapping element */
@@ -36,7 +37,7 @@ body {
 
 .cardContent {
     background-color: white;
-    padding-top: 5px;
+    padding-top: 15px;
 }
 
 div.ObservationHeader {
@@ -46,11 +47,13 @@ div.ObservationHeader {
     table-layout: fixed; /* For cells of equal size */
     background-color: #222;
     color: white;
+    margin-top:2%;
 }
 
     div.ObservationHeader span {
         display: table-cell;
-        text-align: center;
+        text-align: left;
+        padding-left:4%;
     }
 
 .observationLink {
@@ -63,14 +66,13 @@ div.ObservationHeader {
 
     .observationLink span {
         display: table-cell;
-        text-align: center;
+        text-align: left;
+        padding-left: 4%;
     }
 
     .observationLink:hover {
         background-color: #F3F1ED;
     }
-
-
 
 
 /* Hide/rearrange for smaller screens */
@@ -80,36 +82,19 @@ div.ObservationHeader {
         display: none;
     }
     .container {
-        margin:auto;
+        margin:0;
+    }
+    footer.second div {
+        margin: auto;
+        width: 90%;
     }
     
 }
 
-h4 {
-    text-align: center;
-}
-section {
-    text-align: center;
-    padding-top:20px;
-    color:lightgrey;
-    margin:auto; 
-}
-section ul{
-    padding:0;
-    text-align:center;
-}
-.social li {
-    display: inline;   
-}
-ul.social li img {
-    height: 50px;
-}
-/*article {
+
+/*nav navbar-nav.ul {
     float: left;
-    line-height: 120%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    list-style: none;
 }*/
 
 .responsive {
@@ -124,16 +109,126 @@ ul.social li img {
 
     padding: 25px;
 }
+
+.divider {
+    width: 5px;
+    height: auto;
+    display: inline-block;
+}
+.indexitem {
+    border-style: solid;
+    border-color: #F3F1ED;
+    height: 200px;
+    padding: 3%;
+    margin: 2%
+}
+
+.leaderboard {
+    border-style: solid;
+    border-color: #F3F1ED;
+    margin: 2% 0% 2% 0%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+}
+
+    .leaderboard h3 {
+        text-align: center;
+        margin: 0;
+        padding: 1%;
+        background-color: darkolivegreen;
+        color: white;
+    }
+
+.LeaderboardHeader {
+    display: table;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    table-layout: fixed; /* For cells of equal size */
+    color: Black;
+    background-color: #F3F1ED;
+    font-weight: bold;
+}
+
+    .LeaderboardHeader span {
+        display: table-cell;
+        text-align: left;
+        padding-left: 5%;
+    }
+
+.LeaderboardRow {
+    display: table;
+    width: 100%;
+    padding: 10px 0px 20px 0px;
+    table-layout: fixed;
+    For cells of equal size text-wrap: normal
+}
+
+    .LeaderboardRow span {
+        display: table-cell;
+        text-align: left;
+        padding-left: 5%;
+        text-wrap: inherit
+    }
+.LeaderboardFooter {
+    text-align: right;
+    margin-right: 15px;
+}
 footer.second {
     background-color: #222;
     margin: auto;
     width: 100%;
-    max-height: 200px;
-    margin-top:50px;
+    margin-top: 50px;
+  
 }
 
-footer.second p{
+footer.second div{
+    margin :auto;
+    width:70%;
+}
+
+section {
+    text-align: left;
+    padding-top: 20px;
+    color: lightgrey;
+    margin: auto;
+    display: inline-block;
+    vertical-align: top;
+}
+
+    section ul {
+        padding: 0;
+        text-align:left;
+    }
+
+.social li {
+    display: inline;
+}
+
+ul.social li img {
+    height: 40px;
+    padding-right:10px;
+}
+
+section p {
+    color: lightgrey;
+    margin:0;
+}
+
+section a{
+    text-decoration:none;
+    color:lightgrey;
+}
+section a:hover{
     color:white;
-    text-align: center;
-    margin-top:50px;
+    text-decoration:none;
+    cursor:pointer;
+}
+footer h6{
+    color:white;
+    text-align:center;
+    padding-top:2%
+}
+footer h5{
+    color:white;
+    font-weight:bold;
+
 }

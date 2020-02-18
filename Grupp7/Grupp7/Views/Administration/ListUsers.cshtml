@@ -5,6 +5,7 @@
 }
 
 <h2>Användare</h2>
+<hr />
 
 @if (Model.Any())
 {
@@ -13,15 +14,16 @@
     foreach (var user in Model)
     {
         <br />
-        <div class="card mb-3">
-            <div class="card-header">
-                Användare ID: @user.Id
+        <div class="leaderboard">
+            <div class="LeaderboardHeader">
+                <span>Användare ID</span>
+                <span>E-post adress</span>             
             </div>
-            <div class="card-body">
-                <h5 class="card-title">Email: @user.Email</h5>
+            <div class="LeaderboardRow ">
+                <span>@user.Id </span>
+                <span>@user.Email</span>              
             </div>
-            <div class="card-footer">
-
+            <div class="LeaderboardFooter">
                 <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
                     <a asp-action="EditUser" asp-controller="Administration" asp-route-id="@user.Id" class="btn btn-primary">Redigera</a>
                     <span id="confirmDeleteSpan_@user.Id" style="display:none">
@@ -36,25 +38,28 @@
                 </form>
             </div>
         </div>
-    }
-}
-else
-{
-    <div class="card">
-        <div class="card-header">
-            Inga Användare ännu!
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">
-                Klicka nedanför för att registrera en ny Användare.
-            </h5>
-            <a class="btn btn-primary" style="width:auto" asp-controller="Account" asp-action="Register">
-                Registrera Användare
-            </a>
-        </div>
-    </div>
-}
-@section Scripts {
-    <script src="~/js/ConfirmationScript.js"></script>
-}
+                }
+                }
+                else
+                {
+                <div class="card">
+                    <div class="card-header">
+                        Inga Användare ännu!
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Klicka nedanför för att registrera en ny Användare.
+                        </h5>
+                        <a class="btn btn-primary" style="width:auto" asp-controller="Account" asp-action="Register">
+                            Registrera Användare
+                        </a>
+                    </div>
+                </div>
+                }
+                @section Scripts {
+                    <script src="~/js/ConfirmationScript.js"></script>
+                }
 
+<style>
+   
+</style>

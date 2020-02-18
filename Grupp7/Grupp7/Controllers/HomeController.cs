@@ -101,7 +101,68 @@ namespace Grupp7.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            UserRankViewModel urvm = new UserRankViewModel();
+            IndexViewModel model = new IndexViewModel();
+            List<Animal> animals = new List<Animal>();
+            List<Weather> weathers = new List<Weather>();
+            List<User> users = new List<User>();
+
+            animals = dbContext.GetAnimals();
+            weathers = dbContext.GetWeathers();
+            users = dbContext.GetUsers();
+
+            // räknar antalet observationer till varje användare
+            int observationCounter = 0;
+            DateTime mostRecentObservation = new DateTime(1900,1,1);
+            foreach (var user in users)
+            {
+                foreach (var item in animals)
+                {
+                    if (item.UserId == user.UserId)
+                    {
+                        observationCounter++;
+                        if (item.Datetime > mostRecentObservation)
+                        {
+                            mostRecentObservation = item.Datetime;
+                        }
+                    }
+                }
+                foreach (var item in weathers)
+                {
+                    if (item.UserId == user.UserId)
+                    {
+                        observationCounter++;
+                        if (item.Datetime > mostRecentObservation)
+                        {
+                            mostRecentObservation = item.Datetime;
+                        }
+                    }
+
+                }
+                if(observationCounter > 0)
+                {
+                    model.UserRankList.Add(new UserRankViewModel()
+                    {
+                        User = user,
+                        observationNum = observationCounter,
+                        lastObservation = mostRecentObservation
+                    });
+                }
+                observationCounter = 0;
+                mostRecentObservation = new DateTime(1900,1,1);
+            } 
+
+            //sorterar listan i descending order
+            model.UserRankList = model.UserRankList.OrderByDescending(x => x.observationNum).ThenBy(x => x.lastObservation).Take(20).ToList();
+
+            //sätter position property
+            int position = 1;
+            foreach (var user in model.UserRankList) 
+            {
+                user.position = position;
+                position++;
+            } 
+            return View(model);
         }
         public IActionResult AddUserFromRegister(UserModel user)
         {
@@ -177,6 +238,7 @@ namespace Grupp7.Controllers
         {
             AddWeatherViewModel model = new AddWeatherViewModel();
             model.Weather = new Weather();
+            model.WeatherTypes = Helper.getWeatherTypes();
             var t = TempData["errorMessage"];
             if (t != null)
             {
@@ -231,31 +293,31 @@ namespace Grupp7.Controllers
                     return View();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ModelState.Clear();
-                ViewBag.Message = $" Något gick fel. {ex.Message}";
+                ViewBag.Message = $" Något gick fel.";
             }
             return View();
         }
         private void SendEmailContactPage(string firstname, string lastname, string sender, string subject, string message)
         {
             MailMessage mm = new MailMessage();
-            mm.From = new MailAddress(sender, "Klimatkollens kontaktformulär"); // eller mejlen i formuläret 
+            mm.From = new MailAddress(sender, "Klimatkollens kontaktformulär"); 
             mm.To.Add("sabrinthao@gmail.com");//Jörgens mail 
             mm.Subject = subject;
             string customerSender = "From: " + sender + " " + firstname + " " + lastname + "\n";
-            mm.Body = customerSender + message;
+            mm.Body = customerSender + "\n" + message;
 
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("ADMINMAIL", "ADMINPASSWORD"); //admin //try model.Email, model.Password
+            smtp.Credentials = new System.Net.NetworkCredential("klimatkollen1@gmail.com", "Klimatkollen123"); 
             smtp.EnableSsl = true;
             smtp.Send(mm);
             ModelState.Clear();
-            ViewBag.Message = "Thank you for Contacting us ";
+            ViewBag.Message = "Thank you for Contacting us!";
         }
         public IActionResult AnimalObservation(int id)
         {
@@ -263,15 +325,22 @@ namespace Grupp7.Controllers
             model.Animal = dbContext.getAnimal(id);
             model.User = dbContext.GetUser(model.Animal.UserId);
             model.Animal.Specie = dbContext.getAnimalSpecie(model.Animal);
+            var tempUser = userManager.Users.Where(x => x.Id == model.User.Id).FirstOrDefault();
+            if (tempUser != null)
+                model.Email = tempUser.Email;
             return View(model);
         }
         public IActionResult WeatherObservation(int id)
         {
             WeatherObservationViewModel model = new WeatherObservationViewModel();
             model.Weather = dbContext.GetWeather(id);
-            model.User = dbContext.GetUser(model.Weather.UserId);
+            model.User = dbContext.GetUser(model.Weather.UserId);           
+            var tempUser = userManager.Users.Where(x => x.Id == model.User.Id).FirstOrDefault();
+            if (tempUser != null)
+                model.Email = tempUser.Email;
             return View(model);
         }
+
         public IActionResult EditAnimal(int id)
         {
             Animal animal = dbContext.getAnimal(id);
@@ -294,6 +363,7 @@ namespace Grupp7.Controllers
         {
             EditWeatherViewModel model = new EditWeatherViewModel();
             model.Weather = dbContext.GetWeather(id);
+            model.WeatherTypes = Helper.getWeatherTypes();
 
             var t = TempData["error"];
             if (t != null)
