@@ -82,7 +82,7 @@ div.ObservationHeader {
         display: none;
     }
     .container {
-        margin:auto;
+        margin:0;
     }
     footer.second div {
         margin: auto;
