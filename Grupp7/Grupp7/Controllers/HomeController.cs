@@ -472,6 +472,7 @@ namespace Grupp7.Controllers
             }
             return View(model);
         }
+        [HttpGet]
         public IActionResult EditUser(int id)
         {
             User tempUser = new User();
@@ -490,11 +491,17 @@ namespace Grupp7.Controllers
             }
             return View(tempUser);
         }
-        public IActionResult EditUserInfo(User model)
+
+        [HttpPost]
+        public IActionResult EditUser(User model)
         {
+            var aspuser = userManager.Users.Where(x => x.Id == userManager.GetUserId(HttpContext.User)).FirstOrDefault();
             if (model?.UserId != null && model.Latitude != null && model.Longitude != null)
             {
                 dbContext.EditUser(model);
+                aspuser.UserName = model.Username;
+                var result = userManager.UpdateAsync(aspuser);
+
                 TempData["Success"] = "Användarinformation uppdaterad";
                 return RedirectToAction("UserHome",model.UserId);
             }
