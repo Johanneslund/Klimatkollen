@@ -38,11 +38,14 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
                     @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
-                        <li class="nav-item dropdown">
+                        <li @*class="nav-item dropdown"*@>
                             <a class="navbar-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hantera</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a asp-action="ListUsers" asp-controller="Administration" class="dropdown-item">Användare</a>
-                                <a asp-action="ListRoles" asp-controller="Administration" class="dropdown-item">Roller</a>
+                                <ul class="list-unstyled">
+                                    <li><a asp-action="ListUsers" asp-controller="Administration" class="dropdown-item">Användare</a></li>
+                                    <li><a asp-action="ListRoles" asp-controller="Administration" class="dropdown-item">Roller</a></li>
+                                </ul>
+                                
                             </div>
                         </li>
                     }
@@ -56,7 +59,7 @@
                     {
                         <li class="nav-item">
                             <form method="post" asp-action="logout" asp-controller="account">
-                                <button type="submit" class"nav-link btn btn-link py-0" style="width:auto">
+                                <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
                                     logout @User.Identity.Name
                                 </button>
                             </form>
@@ -86,18 +89,34 @@
 
     </div>
     <footer class="second">
-        <section>
-            <h4>Följ oss på sociala medier</h4>
-            <ul class="social">
-                <li><a href="https://www.facebook.com"> <img src="~/images/facebook1.png" /></a></li>
-                <li><a href="https://www.instagram.com"> <img src="~/images/instagram.png" />  </a></li>
-                <li><a href="https://twitter.com"> <img src="~/images/twitter1.png" /></a></li>
-                <li><a href="https://www.youtube.com"> <img src="~/images/youtube1.png" /></a></li>
-            </ul>
-        </section>
-        <p>
+        <div class="row">
+            <section class="col-md-4 col-xs-6">
+                <h5>Klimatkollen</h5><br />
+                <a href="@Url.Action("About", "Home")">Om oss</a> <br />
+                <a href="@Url.Action("Contact", "Home")">Kontakta oss</a><br />
+                <a href="@Url.Action("Register", "Account")">Registrera</a><br>
+            </section>
+            <section class="col-md-4 col-xs-6">
+                <h5>Länkar:</h5><br />
+                <a href="@Url.Action("Index", "Home")">Hem</a><br />
+                <a href="@Url.Action("Observation", "Home")">Observation</a><br />
+                <a href="@Url.Action("Diagram", "Home")">Statistik</a><br />
+                <a href="@Url.Action("Index", "Home")#leaderboard1">Topplista</a><br />
+            </section>
+            <section class="col-md-4  col-xs-10">
+                <h5>Följ oss på sociala medier</h5> <br />
+                <p>Håll dig uppdaterad om de senaste klimatförändringarna genom att följa oss på sociala medier!</p><br />
+                <ul class="social">
+                    <li><a href="https://www.facebook.com"> <img src="~/images/FacebookIcon2.png" /></a></li>
+                    <li><a href="https://www.instagram.com"> <img src="~/images/InstagramIcon.png" />  </a></li>
+                    <li><a href="https://twitter.com"> <img src="~/images/TwitterIcon.png" /></a></li>
+                    <li><a href="https://www.youtube.com"> <img src="~/images/YoutubeIcon.png" /></a></li>
+                </ul>
+            </section>
+        </div>
+        <h6>
             &copy; Grupp7 - 2020
-        </p>
+        </h6>
     </footer>
 
     <environment include="Staging, Production,Development">

@@ -1,4 +1,5 @@
 ﻿using Grupp7.Classes;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Grupp7.ViewModels
     {
         public Weather Weather { get; set; }
         public User User { get; set; }
+        public List<SelectListItem> WeatherTypes {get; set;}
     }
 }

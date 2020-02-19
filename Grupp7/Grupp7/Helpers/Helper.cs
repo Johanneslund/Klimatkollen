@@ -53,6 +53,14 @@ namespace Grupp7.Helpers
 
             return coatList;
         }
+        public static List<SelectListItem> getWeatherTypes()
+        {
+            List<SelectListItem> weatherTypeList = new List<SelectListItem>();
+            weatherTypeList.Add(new SelectListItem { Value = "Vatten", Text = "Vatten" });
+            weatherTypeList.Add(new SelectListItem { Value = "Luft", Text = "Luft" });
+
+            return weatherTypeList;
+        }
         public static List<Animal> filterByDate(ObservationViewModel model, DateTime startDate, DateTime endDate, int aSpecie)// Specie
         {
 
@@ -94,24 +102,6 @@ namespace Grupp7.Helpers
             }
             return nearbyObservations;
         }
-        /* before the changes 
-         * public static List<Animal> filterByDate(ObservationViewModel model, Animal specie, DateTime startdate, DateTime Enddate)
-        {
-            DateTime startDate = new DateTime(2010, 1, 1);
-            DateTime endDate = new DateTime(2019, 12, 31);
-            List<Animal> sortedList = new List<Animal>();
-            foreach (var item in model.AnimalList)
-            {
-                if(item.Datetime > startDate && endDate > item.Datetime)
-                {
-                    sortedList.Add(item);
-                }
-                
-            }
-            return sortedList;
-        }
-         */
-
         public static int[] GetAnimalsByYear(ObservationViewModel model, int specieId)
         {
             int[] animalsByYear = new int[] {0,0,0,0,0,0,0,0,0,0,0};
@@ -132,9 +122,7 @@ namespace Grupp7.Helpers
                 year = year.AddYears(1);
             }
             return animalsByYear;
-
         }
-
         public static void getCoatColors(ObservationViewModel model, List<Animal> sortedList, int period)
         {
 

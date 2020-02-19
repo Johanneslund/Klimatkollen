@@ -26,7 +26,9 @@ namespace Grupp7.Classes
         [MaxLength(128)]
         public string Latitude { get; set; }
         [MaxLength(128)]
+
         [DisplayName("Stad")]
+        [Required(ErrorMessage = "Välj punkt på kartan")]
         public string City { get; set; }
         [ForeignKey("SpecieId")]
 

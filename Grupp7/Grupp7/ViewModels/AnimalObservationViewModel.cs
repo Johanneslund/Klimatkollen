@@ -10,5 +10,6 @@ namespace Grupp7.ViewModels
     {
         public Animal Animal { get; set; }
         public User User { get; set; }
+        public string Email { get; set; }
     }
 }

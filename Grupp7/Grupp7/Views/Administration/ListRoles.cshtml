@@ -5,7 +5,18 @@
 }
 
 <h2>Roller</h2>
+<hr />
 
+
+<div class="container-fluid py-4">
+    <form asp-controller="Administration" asp-action="ListRoles" method="get">
+        <p>
+            Sökning: <input type="text" name="searchFor" placeholder="Sök efter Roller..." value="@ViewData["CurrentSearch"]">
+            <input type="submit" value="Sök" />
+        </p>
+    </form>
+</div>
+<br />
 @if (Model.Any())
 {
     <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole" asp-controller="Administration">Skapa ny Roll</a>
@@ -13,14 +24,17 @@
     foreach (var role in Model)
     {
         <br />
-        <div class="card mb-3">
-            <div class="card-header">
-                Roll ID: @role.Id
+        <div class="leaderboard">
+            <div class="LeaderboardHeader">
+                <span>Roll ID</span>
+                <span>Roll</span>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">Namn: @role.Name</h5>
+            <div class="LeaderboardRow ">
+
+                <span> @role.Id </span>
+                <span>@role.Name</span>
             </div>
-            <div class="card-footer">
+            <div class="LeaderboardFooter">
 
                 <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
                     <a class="btn btn-primary" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id">Redigera</a>

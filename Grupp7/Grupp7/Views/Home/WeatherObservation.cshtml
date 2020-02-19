@@ -22,6 +22,9 @@
             <p><strong>Observatör: </strong>  @Html.DisplayFor(model => model.User.Firstname) @Html.DisplayFor(model => model.User.Lastname) </p>
             <p><strong>Typ av observation: </strong> @Html.DisplayFor(model => model.Weather.Type) </p>
             <p><strong>Tempratur: </strong> @Html.DisplayFor(model => model.Weather.Temperature)</p>
+            <br />
+            <span><strong>Kontakt:</strong></span>
+            <a href="mailto:@Html.DisplayFor(model => model.Email)">@Html.DisplayFor(model => model.Email)</a>
         </div>
     </div>
     <div>

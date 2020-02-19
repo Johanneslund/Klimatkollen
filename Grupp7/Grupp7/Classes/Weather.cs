@@ -30,6 +30,9 @@ namespace Grupp7.Classes
         public string Humidity { get; set; }
 
         public string Carbon { get; set; }
+
+        
+        [Required(ErrorMessage = "Välj punkt på kartan")]
         public string City { get; set; }
 
         [ForeignKey("UserId")]
