@@ -92,12 +92,12 @@
     </div>
     @foreach (var item in Model.UserRankList)
     {
-        <div class="LeaderboardRow">
-            <span>@item.position</span>
-            <span>@item.User.Username</span>
-            <span>@item.observationNum </span>
-            <span>@item.lastObservation</span>
-        </div>
+    <div class="LeaderboardRow">
+        <span>@item.position</span>
+        <span>@item.User.Username</span>
+        <span>@item.observationNum </span>
+        <span>@item.lastObservation.Date.ToString("MM/dd/yyyy")</span>
+    </div>
     }
 </div>
 
