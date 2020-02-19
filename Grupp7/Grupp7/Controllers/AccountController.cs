@@ -55,11 +55,11 @@ namespace Grupp7.Controllers
                         Longitude = model.Longitude,
                         Latitude = model.Latitude,
                         City = model.City,
-                        Email = model.Email,
                         Id = user.Id
                     };
                     return RedirectToAction("AddUserFromRegister", "Home", userToDb);
                 }
+
 
                 foreach (var error in result.Errors)
                 {

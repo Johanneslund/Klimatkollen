@@ -55,9 +55,34 @@ namespace Grupp7.Migrations
                     b.ToTable("Animals");
 
                     b.HasData(
-                        new { AnimalId = 1, Coat = "Vinter", Datetime = new DateTime(2020, 2, 17, 21, 44, 9, 673, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247951", SpecieId = 1, UserId = 1 },
-                        new { AnimalId = 2, Coat = "Vinter", Datetime = new DateTime(2020, 2, 17, 21, 44, 9, 674, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247231", SpecieId = 2, UserId = 1 },
-                        new { AnimalId = 3, Coat = "Vinter", Datetime = new DateTime(2020, 2, 17, 21, 44, 9, 674, DateTimeKind.Local), Latitude = "14.445399", Longitude = "63.119802", SpecieId = 3, UserId = 2 }
+                        new { AnimalId = 1, Coat = "Vinter", Datetime = new DateTime(2020, 2, 14, 12, 38, 15, 34, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247951", SpecieId = 1, UserId = 1 },
+                        new { AnimalId = 2, Coat = "Vinter", Datetime = new DateTime(2020, 2, 14, 12, 38, 15, 36, DateTimeKind.Local), Latitude = "14.662298", Longitude = "63.247231", SpecieId = 2, UserId = 1 },
+                        new { AnimalId = 3, Coat = "Vinter", Datetime = new DateTime(2020, 2, 14, 12, 38, 15, 36, DateTimeKind.Local), Latitude = "14.445399", Longitude = "63.119802", SpecieId = 3, UserId = 2 }
+                    );
+                });
+
+            modelBuilder.Entity("Grupp7.Classes.Equipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("End");
+
+                    b.Property<bool>("IsAvaliable");
+
+                    b.Property<DateTime>("Start");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Equipments");
+
+                    b.HasData(
+                        new { Id = 1, End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), IsAvaliable = true, Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Type = "Vindmätare" },
+                        new { Id = 2, End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), IsAvaliable = true, Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Type = "Vindmätare" },
+                        new { Id = 3, End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), IsAvaliable = true, Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Type = "Vindmätare" }
                     );
                 });
 
@@ -157,8 +182,8 @@ namespace Grupp7.Migrations
                     b.ToTable("Weathers");
 
                     b.HasData(
-                        new { WeatherId = 1, Datetime = new DateTime(2020, 2, 17, 21, 44, 9, 674, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "22", Type = "Regn", UserId = 2 },
-                        new { WeatherId = 2, Carbon = "10 mg", Datetime = new DateTime(2020, 2, 17, 21, 44, 9, 674, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "16", Type = "Storsjön", UserId = 2 }
+                        new { WeatherId = 1, Datetime = new DateTime(2020, 2, 14, 12, 38, 15, 36, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "22", Type = "Regn", UserId = 2 },
+                        new { WeatherId = 2, Carbon = "10 mg", Datetime = new DateTime(2020, 2, 14, 12, 38, 15, 36, DateTimeKind.Local), Humidity = "87,2", Latitude = "14.662298", Longitude = "63.247231", Temperature = "16", Type = "Storsjön", UserId = 2 }
                     );
                 });
 
