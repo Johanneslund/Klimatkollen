@@ -48,14 +48,15 @@ namespace Grupp7.Controllers
                         return RedirectToAction("ListUsers", "Administration");
                     }
                     await signInManager.SignInAsync(user, isPersistent: true);
-                    UserModel userToDb = new UserModel(){
+                    UserModel userToDb = new UserModel() {
                         Firstname = model.Firstname,
                         Lastname = model.Lastname,
                         Username = model.Username,
                         Longitude = model.Longitude,
                         Latitude = model.Latitude,
                         City = model.City,
-                        Email = model.Email
+                        Email = model.Email,
+                        Id = user.Id
                     };
                     return RedirectToAction("AddUserFromRegister", "Home", userToDb);
                 }
