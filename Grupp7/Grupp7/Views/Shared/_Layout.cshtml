@@ -56,13 +56,13 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (signInManager.IsSignedIn(User))
                     {
-                        <li class="nav-item">
-                            <form method="post" asp-action="logout" asp-controller="account">
-                                <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
-                                    logout @User.Identity.Name
-                                </button>
-                            </form>
-                        </li>
+                    <li class="nav-item">
+                        <form method="post" asp-action="logout" asp-controller="account">
+                            <button type="submit" class="nav-link btn btn-link py-0" style="padding-top:14px">
+                                logout @User.Identity.Name
+                            </button>
+                        </form>
+                    </li>
                         <li>
                             <a asp-area="" asp-controller="Home" asp-action="UserHome">Mitt Hem</a>
                         </li>
