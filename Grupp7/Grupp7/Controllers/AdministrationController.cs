@@ -1,4 +1,5 @@
-﻿using Grupp7.ViewModels;
+﻿using Grupp7.Interfaces;
+using Grupp7.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,12 @@ namespace Grupp7.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<IdentityUser> userManager;
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        private readonly IRepository dbContext;
+        public AdministrationController(IRepository repository, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+            this.dbContext = repository;
         }
         [HttpGet]
         public IActionResult CreateRole()
@@ -121,6 +124,7 @@ namespace Grupp7.Controllers
         {
             ViewBag.roleId = roleId;
 
+            
 
             var role = await roleManager.FindByIdAsync(roleId);
             if (role == null)

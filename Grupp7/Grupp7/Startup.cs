@@ -31,9 +31,9 @@ namespace Grupp7
         {
 
             //Här bestäms vilken DB som ska användas
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Skarp")));
             services.AddDbContext<IdDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdDbContext>();
             services.AddTransient<IRepository, Repository>();
             //services.AddTransient<IIdRepository, IdRepository>();
             services.Configure<CookiePolicyOptions>(options =>

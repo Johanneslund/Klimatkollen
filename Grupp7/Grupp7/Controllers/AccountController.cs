@@ -38,7 +38,7 @@ namespace Grupp7.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true };
+                var user = new IdentityUser { UserName = model.Username, Email = model.Email, EmailConfirmed = true };
                 var result = await userManager.CreateAsync(user, model.Password);
                 var role = await userManager.AddToRoleAsync(user, "Klimatobservatör");
                 if (result.Succeeded && role.Succeeded)

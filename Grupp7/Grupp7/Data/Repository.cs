@@ -122,6 +122,15 @@ namespace Grupp7.Classes
             context.Update(tempUser);
             context.SaveChanges();
         }
+
+        public void EditUserIdentity (User user) 
+        {
+            User tempuser = GetUserFromIdentity(user.Id);
+            tempuser.Username = user.Username;
+            context.Update(tempuser);
+            context.SaveChanges();
+        
+        }
         public List<Animal> GetAnimals()
         {
             List<Specie> species = GetSpecies();
