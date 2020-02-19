@@ -11,6 +11,9 @@ namespace Grupp7.ViewModels
     {
         public string SearchTerm { get; set; }
         public string ObservationType { get; set; }
+        public string Cities { get; set; }
+        public string Names { get; set; }
+        public string FirstNames { get; set; }
         public List<Observation> ObservationsList { get; set; }
         public List<SelectListItem> ObservationTypes { set; get; }
         public List<Weather> WeatherList { get; set; }

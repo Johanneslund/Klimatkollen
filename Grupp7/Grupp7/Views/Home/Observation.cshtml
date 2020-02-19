@@ -9,19 +9,6 @@
 <h3>Observationer</h3>
 <br />
 <br />
-
-<form asp-controller="Home" asp-action="Observation" method="get">
-    <p>
-        <select asp-for="ObservationType" asp-items="Model.ObservationTypes">
-            <option value="">All</option>
-        </select>
-
-        Sökning: <input type="text" name="SearchTerm">
-        <input type="submit" value="Sök" />
-    </p>
-</form>
-<br />
-<br />
 <h4 class="text-success">@ViewData["success"]</h4>
 <style>
     #map {
@@ -30,39 +17,60 @@
 </style>
 
 <div class="container">
-    <div id="map"></div><br />
-    <h3 style=" text-align:center;">Observationer</h3>
-    <div class="ObservationHeader">
-        <span>Observation</span>
-        <span>Datum</span>
-        <span>Stad</span>
-        <span>Observatör</span>
+    <div id="map" class="observationCard"></div><br />
+
+    <div class="container-fluid py-4">
+        <form asp-controller="Home" asp-action="Observation" method="get">
+            <p>
+                Sökning: <input type="text" name="SearchTerm" placeholder="Namn eller Observation..." value="@ViewData["CurrentFilter"]">
+                <input type="submit" value="Sök"/>
+            </p>
+        </form>
+        <table class="table table-striped table-bordered">
+            <tr class="bg-dark text-white">
+                <th>
+                    <label>ID</label>
+                </th>
+                <th>
+                    <a asp-action="Observation" asp-route-sortBy="@ViewData["ObservationSortParameter"]">Observation</a>
+                </th>
+                <th>
+                    <a asp-action="Observation" asp-route-sortBy="@ViewData["DatetimeSortParameter"]">Datum</a>
+                </th>
+                <th>
+                    <a asp-action="Observation" asp-route-sortBy="@ViewData["CitySortParameter"]">Stad</a>
+                </th>
+                <th>
+                    <a asp-action="Observation" asp-route-sortBy="@ViewData["NameSortParameter"]">Namn</a>
+                </th>
+            </tr>
+            <tbody>
+                @foreach (var item in Model.ObservationsList)
+                {
+                    if (item.Animal != null)
+                    {
+                        <tr>
+                            <td><a href=" @Url.Action("AnimalObservation", "Home", new { id = item.Animal.AnimalId })">@item.Animal.AnimalId</a></td>
+                            <td>@item.Animal.Specie.Speciename</td>
+                            <td>@item.Datetime</td>
+                            <td>@item.Animal.City</td>
+                            <td>@item.Animal.User.Firstname @item.Animal.User.Lastname</td>
+                        </tr>
+                    }
+                    else if (item.Weather != null)
+                    {
+                        <tr>
+                            <td><a href=" @Url.Action("WeatherObservation", "Home", new { id = item.Weather.WeatherId })">@item.Weather.WeatherId</a></td>
+                            <td>@item.Weather.Type</td>
+                            <td>@item.Datetime</td>
+                            <td>@item.Weather.City</td>
+                            <td>@item.Weather.User.Firstname @item.Weather.User.Lastname</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
     </div>
-    @foreach (var item in Model.ObservationsList)
-    {
-        if (item.Animal != null)
-        {
-            <a href=" @Url.Action("AnimalObservation", "Home", new { id = item.Animal.AnimalId })">
-                <div class="observationLink">
-                    <span>@item.Animal.Specie.Speciename</span>
-                    <span>@item.Datetime</span>
-                    <span>@item.Animal.City</span>
-                    <span>@item.Animal.User.Firstname @item.Animal.User.Lastname</span> @*Eller observatörens namn*@
-                </div>
-            </a>
-        }
-        else if (item.Weather != null)
-        {
-            <a href=" @Url.Action("WeatherObservation", "Home", new { id = item.Weather.WeatherId })">
-                <div class="observationLink">
-                    <span> @item.Weather.Type</span>
-                    <span>@item.Datetime</span>
-                    <span>@item.Weather.City</span>
-                    <span>@item.Weather.User.Firstname @item.Weather.User.Lastname</span> @*Eller observatörens namn*@
-                </div>
-            </a>
-        }
-    }
 </div>
 
 <script>
