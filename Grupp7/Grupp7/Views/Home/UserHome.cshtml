@@ -2,7 +2,7 @@
 @model Grupp7.ViewModels.UserHomeViewModel
 
 @{
-    ViewData["Title"] = "View";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
     Model.radius = Math.Round(Model.radius * 111111 / 1000);
