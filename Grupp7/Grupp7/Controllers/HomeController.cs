@@ -225,6 +225,7 @@ namespace Grupp7.Controllers
 
             return View();
         }
+        [HttpGet]
         public IActionResult AddAnimal()
         { 
             AddAnimalViewModel model = new AddAnimalViewModel();
@@ -239,6 +240,7 @@ namespace Grupp7.Controllers
             }
             return View(model);
         }
+        [HttpGet]
         public IActionResult AddWeather()
         {
             AddWeatherViewModel model = new AddWeatherViewModel();
@@ -252,7 +254,8 @@ namespace Grupp7.Controllers
             Helper.setCurrentTimeWeather(model.Weather);
             return View(model);
         }
-        public IActionResult AddAnimalToUser(AddAnimalViewModel model)
+        [HttpPost]
+        public IActionResult AddAnimal(AddAnimalViewModel model)
         {
             AddAnimalViewModel Model = model;
             if (ModelState.IsValid)
@@ -265,7 +268,8 @@ namespace Grupp7.Controllers
             TempData["errorMessage"] = "Något gick fel, använde du kartan?";
             return RedirectToAction("AddAnimal");
         }
-        public IActionResult AddWeatherToUser(AddWeatherViewModel model)
+        [HttpPost]
+        public IActionResult AddWeather(AddWeatherViewModel model)
         {
             AddWeatherViewModel Model = model;
             if(ModelState.IsValid)
@@ -346,7 +350,7 @@ namespace Grupp7.Controllers
                 model.Email = tempUser.Email;
             return View(model);
         }
-
+        [HttpGet]
         public IActionResult EditAnimal(int id)
         {
             Animal animal = dbContext.getAnimal(id);
@@ -365,6 +369,7 @@ namespace Grupp7.Controllers
 
             return View(model);
         }
+        [HttpGet]
         public IActionResult EditWeather(int id)
         {
             EditWeatherViewModel model = new EditWeatherViewModel();
@@ -379,7 +384,8 @@ namespace Grupp7.Controllers
 
             return View(model);
         }
-        public IActionResult EditAnimalFromId(Animal animal)
+        [HttpPost]
+        public IActionResult EditAnimal(Animal animal)
         {
             if(ModelState.IsValid)
             { 
@@ -393,8 +399,8 @@ namespace Grupp7.Controllers
                 return RedirectToAction("EditAnimal",new { id = animal.AnimalId });
             }
         }
-
-        public IActionResult EditWeatherFromId(Weather weather)
+        [HttpPost]
+        public IActionResult EditWeather(Weather weather)
         {
             if (ModelState.IsValid)
             {

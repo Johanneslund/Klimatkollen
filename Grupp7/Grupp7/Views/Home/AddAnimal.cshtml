@@ -17,7 +17,7 @@
     <div class="row">
     <div class="col-md-4">
         <h4 class="text-danger">@ViewData["errorMessage"]</h4>
-        <form asp-action="AddAnimalToUser">
+        <form asp-action="AddAnimal" method="post">
           <div class="form-group">
                 <label>Djur</label>
                 <select asp-for="Animal.SpecieId" asp-items="Model.Species" class="form-control"></select>

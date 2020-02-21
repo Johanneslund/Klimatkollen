@@ -17,7 +17,7 @@
 <h4 class="text-danger">@ViewData["error"]</h4>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditWeatherFromId">
+        <form asp-action="EditWeather" method="post">
             <div class="form-group">
                 <label asp-for="Weather.Datetime" class="control-label"></label>
                 <input asp-for="Weather.Datetime" class="form-control" />
